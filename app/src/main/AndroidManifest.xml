@@ -10,17 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SetGoal"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_set_goal"
-            android:theme="@style/FullscreenTheme"></activity>
-        <activity android:name=".MainActivity">
+            android:name=".SplashScreen"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SetGoal"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_set_goal"
+            android:theme="@style/FullscreenTheme" />
+        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>

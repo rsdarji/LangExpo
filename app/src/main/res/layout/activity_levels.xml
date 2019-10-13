@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SelectLaunguage"
+    android:paddingBottom="16dp"
+    android:paddingRight="16dp"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp">
+
+
+    <ImageView
+        android:id="@+id/text"
+        android:layout_height="50dp"
+        android:layout_width="50dp"
+        android:src="@drawable/ic_keyboard_backspace_black_24dp">
+
+    </ImageView>
+
+    <ProgressBar
+        android:id="@+id/Progressbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:background="@drawable/round_gradient"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:minHeight="30dp"
+
+        android:progress="75" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="10dp"
+        android:text="Select Your Level"
+        android:textSize="25dp" />
+
+
+    <Button
+        android:layout_marginTop="650dp"
+        android:textStyle="bold"
+        android:text="Continue......."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </Button>
+    <Button
+        android:layout_marginTop="160dp"
+        android:textStyle="bold"
+        android:text="Beginner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </Button>
+    <Button
+        android:layout_marginTop="220dp"
+        android:textStyle="bold"
+        android:text="Intermediate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </Button>
+    <Button
+        android:layout_marginTop="280dp"
+        android:textStyle="bold"
+        android:text="Expert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </Button>
+
+
+
+
+</RelativeLayout>

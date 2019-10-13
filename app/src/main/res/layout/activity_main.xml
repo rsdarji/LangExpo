@@ -63,10 +63,12 @@
 
         </Button>
         <Button
+            android:id="@+id/newuser"
             android:layout_marginTop="10dp"
             android:text="New User"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:onClick="newuser">
 
         </Button>
         <TextView

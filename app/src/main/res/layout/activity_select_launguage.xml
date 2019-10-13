@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SelectLaunguage"
+    android:paddingBottom="16dp"
+    android:paddingRight="16dp"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp">
+
+
+    <ImageView
+        android:id="@+id/text"
+        android:layout_height="50dp"
+        android:layout_width="50dp"
+        android:src="@drawable/ic_keyboard_backspace_black_24dp">
+
+    </ImageView>
+
+    <ProgressBar
+        android:id="@+id/Progressbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:background="@drawable/round_gradient"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:minHeight="30dp"
+
+        android:progress="25" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Which Language You Want to Learn?"
+        android:textSize="25dp" />
+
+    <ImageView
+        android:id="@+id/flag"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:src="@drawable/frenchflag"
+        android:layout_marginTop="200dp"
+        />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="French"
+        android:textSize="30dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="130dp"/>
+    <Button
+        android:id="@+id/continue1"
+        android:layout_marginTop="650dp"
+        android:textStyle="bold"
+        android:text="Continue........"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="continue1">
+
+    </Button>
+
+</RelativeLayout>

@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Levels"></activity>
+        <activity android:name=".CreateProfile"></activity>
+        <activity android:name=".ForgotPassword" />
+        <activity android:name=".Levels" />
         <activity android:name=".DailyGoal" />
         <activity android:name=".SelectLaunguage" />
         <activity

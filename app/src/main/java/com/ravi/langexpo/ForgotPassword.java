@@ -1,28 +1,26 @@
-    package com.ravi.langexpo;
+package com.ravi.langexpo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-    public class MainActivity extends AppCompatActivity {
-    EditText uname,pass;
-    Button log,new_user;
+public class ForgotPassword extends AppCompatActivity {
+    EditText uname,email;
+    Button fpass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_forgot_password);
         uname=(EditText)findViewById(R.id.edittext_username);
-        pass=(EditText)findViewById(R.id.edittext_password);
-        log=(Button) findViewById(R.id.button_login);
-        new_user=(Button) findViewById(R.id.button_newuser);
-        pass.setEnabled(false);
-        log.setEnabled(false);
+        email=(EditText)findViewById(R.id.edittext_email);
+        fpass=(Button) findViewById(R.id.button_forget_password);
+        email.setEnabled(false);
+        fpass.setEnabled(false);
         uname.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -32,9 +30,9 @@ import android.widget.EditText;
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(charSequence.toString().equals("")){
-                    pass.setEnabled(false);
+                    email.setEnabled(false);
                 }else{
-                    pass.setEnabled(true);
+                    email.setEnabled(true);
                 }
             }
 
@@ -43,7 +41,7 @@ import android.widget.EditText;
 
             }
         });
-        pass.addTextChangedListener(new TextWatcher() {
+        email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -52,9 +50,9 @@ import android.widget.EditText;
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(charSequence.toString().equals("")){
-                    log.setEnabled(false);
+                    fpass.setEnabled(false);
                 }else{
-                    log.setEnabled(true);
+                    fpass.setEnabled(true);
                 }
             }
 
@@ -66,17 +64,4 @@ import android.widget.EditText;
 
 
     }
-
-        public void newuser(View view) {
-            Intent intent= new Intent(this,SelectLaunguage.class);
-            startActivity(intent);
-
-        }
-
-        public void forgot_password(View view) {
-            Intent intent= new Intent(this,ForgotPassword.class);
-            startActivity(intent);
-
-
-        }
-    }
+}

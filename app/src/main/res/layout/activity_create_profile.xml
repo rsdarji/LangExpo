@@ -14,6 +14,7 @@
             android:background="@drawable/background_gradient"
             android:layout_width="match_parent"
             android:layout_weight="1"
+            android:padding="20dp"
             android:layout_height="0dp"
             android:src="@drawable/logo">
 
@@ -67,25 +68,6 @@
             android:layout_height="wrap_content"
             android:text="Login"/>
 
-        <Button
-            android:id="@+id/button_newuser"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="New User"
-            android:onClick="newuser"/>
-
-        <TextView
-            android:id="@+id/tv_forgot_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:textAlignment="center"
-            android:text="Forgot Password?"
-            android:autoLink="all"
-            android:clickable="true"
-            android:layout_marginTop="10dp"
-            android:onClick="forgot_password"/>
 
     </LinearLayout>
 </RelativeLayout>

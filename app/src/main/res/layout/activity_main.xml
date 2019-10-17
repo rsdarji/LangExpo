@@ -27,7 +27,6 @@
             android:background="#cdcdca" />
     </LinearLayout>
     <LinearLayout
-        android:layout_marginTop="200dp"
         android:id="@+id/layout_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,44 +34,47 @@
         android:layout_marginLeft="20dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:gravity="center"
         android:background="#fff"
         android:orientation="vertical"
         android:padding="20dp"
         >
         <EditText
+            android:id="@+id/edittext_username"
             android:drawableRight="@drawable/ic_person"
             android:padding="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="swapnilpatel@yahoo.in"
-            >
+            android:hint="jhon@langexpo.com"
+            android:gravity="center"/>
 
-        </EditText>
         <EditText
+            android:id="@+id/edittext_password"
             android:drawableRight="@drawable/ic_person"
             android:padding="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:hint="**********"
-            >
+            android:gravity="center"/>
 
-        </EditText>
         <Button
-            android:text="Login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </Button>
-        <Button
-            android:id="@+id/newuser"
+            android:id="@+id/button_login"
             android:layout_marginTop="10dp"
-            android:text="New User"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="newuser">
+            android:text="Login"/>
 
-        </Button>
+        <Button
+            android:id="@+id/button_newuser"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New User"
+            android:onClick="newuser"/>
+
         <TextView
+            android:id="@+id/tv_forgot_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16dp"
@@ -80,7 +82,5 @@
             android:text="Forgot Password?"
             android:layout_marginTop="10dp"/>
 
-
     </LinearLayout>
-
 </RelativeLayout>

@@ -14,10 +14,10 @@
     </item>
 
     <!-- Define the progress properties like start color, end color etc -->
-    <item android:id="@android:id/progress">
+    <item android:id="@android:id/progress" >
         <clip>
             <shape>
-                <gradient
+                <gradient android:gradientRadius="100dp"
                     android:startColor="#460d1e"
                     android:centerColor="#460d1e"
                     android:centerY="1.0"

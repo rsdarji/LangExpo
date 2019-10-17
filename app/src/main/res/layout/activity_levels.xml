@@ -4,77 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SelectLaunguage"
-    android:paddingBottom="16dp"
-    android:paddingRight="16dp"
-    android:paddingLeft="16dp"
-    android:paddingTop="16dp">
+    tools:context=".Levels">
 
-
-    <ImageView
-        android:id="@+id/text"
-        android:layout_height="50dp"
-        android:layout_width="50dp"
-        android:src="@drawable/ic_keyboard_backspace_black_24dp">
-
-    </ImageView>
-
-    <ProgressBar
-        android:id="@+id/Progressbar"
-        style="?android:attr/progressBarStyleHorizontal"
+    <ScrollView
         android:layout_width="match_parent"
-        android:background="@drawable/round_gradient"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="10dp"
-        android:minHeight="30dp"
-
-        android:progress="75" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="10dp"
-        android:text="Select Your Level"
-        android:textSize="25dp" />
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="75dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp" >
 
 
+            <ImageView
+                android:id="@+id/back"
+                android:layout_height="50dp"
+                android:layout_width="50dp"
+                android:src="@drawable/ic_keyboard_backspace_black_24dp"/>
+
+            <ProgressBar
+                android:id="@+id/pb"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@+id/back"
+                android:max="100"
+                android:progress="75"
+                android:progressDrawable="@drawable/custom_progress"
+                android:visibility="visible"/>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/back"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="Select Your Level"
+                android:textSize="25dp"
+                android:textColor="@color/colorPrimary"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:layout_below="@+id/title">
+
+                <RadioButton
+                    android:id="@+id/radio_button_beginner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="25dp"
+                    android:paddingBottom="25dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/radio_button_custom_theme"
+                    android:text="Beginner" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_intermediate"
+                    android:layout_below="@id/radio_button_beginner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="25dp"
+                    android:paddingBottom="25dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/radio_button_custom_theme"
+                    android:text="Intermediate" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_expert"
+                    android:layout_below="@id/radio_button_intermediate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="25dp"
+                    android:paddingBottom="25dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/radio_button_custom_theme"
+                    android:text="Expert" />
+            </RadioGroup>
+        </RelativeLayout>
+    </ScrollView>
     <Button
+        android:id="@+id/button_level_continue"
         android:layout_marginTop="650dp"
         android:textStyle="bold"
-        android:text="Continue......."
+        android:text="Continue"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </Button>
-    <Button
-        android:layout_marginTop="160dp"
-        android:textStyle="bold"
-        android:text="Beginner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </Button>
-    <Button
-        android:layout_marginTop="220dp"
-        android:textStyle="bold"
-        android:text="Intermediate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </Button>
-    <Button
-        android:layout_marginTop="280dp"
-        android:textStyle="bold"
-        android:text="Expert"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </Button>
-
-
-
-
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="15dp"/>
 </RelativeLayout>

@@ -4,56 +4,145 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SelectLaunguage"
-    android:paddingBottom="16dp"
-    android:paddingRight="16dp"
-    android:paddingLeft="16dp"
-    android:paddingTop="16dp">
+    tools:context=".SelectLaunguage">
 
-
-    <ImageView
-        android:id="@+id/text"
-        android:layout_height="50dp"
-        android:layout_width="50dp"
-        android:src="@drawable/ic_keyboard_backspace_black_24dp">
-
-    </ImageView>
-
-    <ProgressBar
-        android:id="@+id/Progressbar"
-        style="?android:attr/progressBarStyleHorizontal"
+    <ScrollView
         android:layout_width="match_parent"
-        android:background="@drawable/round_gradient"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="10dp"
-        android:minHeight="30dp"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="75dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp">
+            <ImageView
+                android:id="@+id/back"
+                android:layout_height="50dp"
+                android:layout_width="50dp"
+                android:src="@drawable/ic_keyboard_backspace_black_24dp">
 
-        android:progress="25" />
+            </ImageView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Which Language You Want to Learn?"
-        android:textSize="25dp" />
 
-    <ImageView
-        android:id="@+id/flag"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:src="@drawable/frenchflag"
-        android:layout_marginTop="200dp"
-        />
+            <ProgressBar
+                android:id="@+id/pb"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@+id/back"
+                android:max="100"
+                android:progress="25"
+                android:progressDrawable="@drawable/custom_progress"
+                android:visibility="visible"/>
 
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="French"
-        android:textSize="30dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginLeft="130dp"/>
+            <TextView
+                android:id="@+id/tv_select_language_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/back"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="Which language you want to learn?"
+                android:textSize="25dp"
+                android:textColor="@color/colorPrimary"/>
+
+            <LinearLayout
+                android:id="@+id/layout_language_list"
+                android:layout_below="@+id/tv_select_language_title"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/layout_language_list_child"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/flag"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/frenchflag"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="French"
+                        android:textSize="30dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <!--<com.langexpo.customradiobutton.RelativeRadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:layout_below="@+id/layout_language_list">
+
+                <RadioButton
+                    android:id="@+id/start_radio_button"
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:gravity="center"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/radio_button_custom"
+                    android:layout_marginRight="5dp"
+                    android:text="Start" />
+
+                <RadioButton
+                    android:id="@+id/finish_radio_button"
+                    android:layout_toRightOf="@+id/start_radio_button"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:gravity="center"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/radio_button_custom"
+                    android:layout_marginLeft="5dp"
+                    android:text="Finish" />
+
+                <RadioButton
+                    android:id="@+id/pause_radio_button"
+                    android:layout_below="@id/start_radio_button"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:gravity="center"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/radio_button_custom"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="Pause" />
+
+                <RadioButton
+                    android:id="@+id/continue_radio_button"
+                    android:layout_below="@id/finish_radio_button"
+                    android:layout_toRightOf="@+id/pause_radio_button"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:gravity="center"
+                    android:button="@android:color/transparent"
+                    android:background="@drawable/radio_button_custom"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="Continue" />
+
+            </com.langexpo.customradiobutton.RelativeRadioGroup>-->
+
+
+        </RelativeLayout>
+    </ScrollView>
     <Button
         android:id="@+id/continue1"
         android:layout_marginTop="650dp"
@@ -61,8 +150,7 @@
         android:text="Continue........"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="continue1">
-
-    </Button>
-
+        android:layout_alignParentBottom="true"
+        android:layout_margin="15dp"
+        android:onClick="continue1"/>
 </RelativeLayout>

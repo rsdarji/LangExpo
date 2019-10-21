@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DailyGoal">
+    tools:context="com.langexpo.activity.DailyGoal">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -50,12 +50,12 @@
                 android:textSize="25dp"
                 android:textColor="#460d1e"/>
 
-            <CheckBox
+            <com.langexpo.customfunction.CustomCheckbox
                 android:id="@+id/chbx_goal_one_quiz"
                 android:layout_below="@id/tv_goal_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="25dp"
+                android:layout_height="70dp"
+                android:paddingTop="15dp"
                 android:paddingBottom="25dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
@@ -64,12 +64,12 @@
                 android:text="One quiz/day"
                 android:textColor="#460d1e"/>
 
-            <CheckBox
+            <com.langexpo.customfunction.CustomCheckbox
                 android:id="@+id/chbx_goal_one_level"
                 android:layout_below="@id/chbx_goal_one_quiz"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="25dp"
+                android:layout_height="70dp"
+                android:paddingTop="15dp"
                 android:paddingBottom="25dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
@@ -78,12 +78,12 @@
                 android:text="One level/day"
                 android:textColor="#460d1e"/>
 
-            <CheckBox
+            <com.langexpo.customfunction.CustomCheckbox
                 android:id="@+id/chbx_goal_one_lecture"
                 android:layout_below="@id/chbx_goal_one_level"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="25dp"
+                android:layout_height="70dp"
+                android:paddingTop="15dp"
                 android:paddingBottom="25dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
@@ -92,12 +92,12 @@
                 android:text="One lecture/day"
                 android:textColor="#460d1e"/>
 
-            <CheckBox
+            <com.langexpo.customfunction.CustomCheckbox
                 android:id="@+id/chbx_goal_one_lession"
                 android:layout_below="@id/chbx_goal_one_lecture"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="25dp"
+                android:layout_height="70dp"
+                android:paddingTop="15dp"
                 android:paddingBottom="25dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
@@ -106,12 +106,12 @@
                 android:text="One lession/day"
                 android:textColor="#460d1e"/>
 
-            <CheckBox
+            <com.langexpo.customfunction.CustomCheckbox
                 android:id="@+id/chbx_goal_five_minute"
                 android:layout_below="@id/chbx_goal_one_lession"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="25dp"
+                android:layout_height="70dp"
+                android:paddingTop="15dp"
                 android:paddingBottom="25dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
@@ -121,7 +121,7 @@
                 android:textColor="#460d1e"/>
         </RelativeLayout>
     </ScrollView>
-    <Button
+    <com.langexpo.customfunction.CustomButton
         android:id="@+id/button_goal_continue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

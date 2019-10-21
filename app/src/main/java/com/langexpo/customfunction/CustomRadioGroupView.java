@@ -1,4 +1,4 @@
-package com.langexpo.customradiobutton;
+package com.langexpo.customfunction;
 
 import android.content.Context;
 import android.os.Build;
@@ -19,7 +19,7 @@ import androidx.annotation.IdRes;
 
  */
 
-public class RelativeRadioGroup extends RelativeLayout {
+public class CustomRadioGroupView extends RelativeLayout {
 
 
 
@@ -43,7 +43,7 @@ public class RelativeRadioGroup extends RelativeLayout {
 
 
 
-    public RelativeRadioGroup(Context context) {
+    public CustomRadioGroupView(Context context) {
 
         super(context);
 
@@ -53,7 +53,7 @@ public class RelativeRadioGroup extends RelativeLayout {
 
 
 
-    public RelativeRadioGroup(Context context, AttributeSet attrs) {
+    public CustomRadioGroupView(Context context, AttributeSet attrs) {
 
         super(context, attrs);
 
@@ -327,7 +327,7 @@ public class RelativeRadioGroup extends RelativeLayout {
 
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
 
-        return new RelativeRadioGroup.LayoutParams(getContext(), attrs);
+        return new CustomRadioGroupView.LayoutParams(getContext(), attrs);
 
     }
 
@@ -343,7 +343,7 @@ public class RelativeRadioGroup extends RelativeLayout {
 
     protected boolean checkLayoutParams(ViewGroup.LayoutParams p) {
 
-        return p instanceof RelativeRadioGroup.LayoutParams;
+        return p instanceof CustomRadioGroupView.LayoutParams;
 
     }
 
@@ -549,7 +549,7 @@ public class RelativeRadioGroup extends RelativeLayout {
 
          */
 
-        public void onCheckedChanged(RelativeRadioGroup group, @IdRes int checkedId);
+        public void onCheckedChanged(CustomRadioGroupView group, @IdRes int checkedId);
 
     }
 
@@ -617,7 +617,7 @@ public class RelativeRadioGroup extends RelativeLayout {
 
         public void onChildViewAdded(View parent, View child) {
 
-            if (parent == RelativeRadioGroup.this && child instanceof RadioButton) {
+            if (parent == CustomRadioGroupView.this && child instanceof RadioButton) {
 
                 int id = child.getId();
 
@@ -661,7 +661,7 @@ public class RelativeRadioGroup extends RelativeLayout {
 
         public void onChildViewRemoved(View parent, View child) {
 
-            if (parent == RelativeRadioGroup.this && child instanceof RadioButton) {
+            if (parent == CustomRadioGroupView.this && child instanceof RadioButton) {
 
                 ((RadioButton) child).setOnCheckedChangeListener(null);
 

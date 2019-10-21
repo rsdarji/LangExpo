@@ -1,4 +1,4 @@
-    package com.ravi.langexpo;
+    package com.langexpo.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.langexpo.R;
 
     public class MainActivity extends AppCompatActivity {
     EditText uname,pass;

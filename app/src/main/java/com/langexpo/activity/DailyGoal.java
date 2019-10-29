@@ -21,5 +21,11 @@ public class DailyGoal extends AppCompatActivity {
         startActivity(intent);
 
     }
+    public void back(View view)
+    {
+        Intent intent=new Intent (this,SelectLaunguage.class);
+        startActivity(intent);
+    }
+
 
 }

@@ -23,7 +23,8 @@
                 android:id="@+id/back"
                 android:layout_height="50dp"
                 android:layout_width="50dp"
-                android:src="@drawable/ic_keyboard_backspace_black_24dp"/>
+                android:src="@drawable/ic_keyboard_backspace_black_24dp"
+                android:onClick="back"/>
 
             <ProgressBar
                 android:id="@+id/pb"

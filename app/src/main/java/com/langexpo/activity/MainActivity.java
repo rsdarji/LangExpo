@@ -120,7 +120,11 @@ import java.nio.charset.StandardCharsets;
                 return;
             }
 
-            new Login(MainActivity.this, username, password).execute();
+            //new Login(MainActivity.this, username, password).execute();
+
+            Intent intent = new Intent(MainActivity.this, Home.class);
+            startActivity(intent);
+
             /*Intent intent = new Intent(MainActivity.this, Home.class);
             startActivity(intent);*/
 

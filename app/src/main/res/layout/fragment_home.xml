@@ -1,181 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent">
-    <LinearLayout
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+    android:layout_height="match_parent"
+    tools:context=".admin.activity.Home">
 
-        <!--<Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="fragment_home" />-->
-
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_view_add_question"
-                android:layout_width="165dp"
-                android:layout_height="150dp"
-                android:textAlignment="textEnd"
-                android:onClick="addQuestion"
-                android:outlineSpotShadowColor="@color/colorAccent" >
-
-                <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                >
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_gravity="bottom"
+                    android:layout_height="230dp"
+                    android:orientation="vertical"
                     android:gravity="center"
-                    android:text="Add Question"
-                    android:background="@color/colorPrimaryLight"
-                    />
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="165dp"
-                android:layout_height="150dp"
-                android:textAlignment="textEnd"
-                android:onClick="addQuestionType"
-                android:layout_marginLeft="25dp"
-                android:outlineSpotShadowColor="@color/colorAccent" >
-
-                <TextView
+                    android:background="@drawable/back">
+                    <ImageView
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:src="@drawable/icon"
+                        android:layout_gravity="center"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Launguage Explorer"
+                        android:textColor="#fff"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="18dp"
+                        android:layout_marginTop="10dp"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_gravity="bottom"
-                    android:gravity="center"
-                    android:text="Add Question Type"
-                    android:background="@color/colorPrimaryLight"
-                    />
-            </com.google.android.material.card.MaterialCardView>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="215dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="135dp"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp">
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/add_language"
+                                    android:layout_centerInParent="true"
+                                    android:id="@+id/imageview4"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Add Launguage"
+                                    android:textSize="16dp"
+                                    android:layout_below="@+id/imageview4"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="10dp"/>
+                                <Button
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/addlaunguage"
+                                    android:background="@android:color/transparent"/>
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/add_level"
+                                    android:layout_centerInParent="true"
+                                    android:id="@+id/imageview3"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Add Level"
+                                    android:textSize="16dp"
+                                    android:layout_below="@+id/imageview3"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="10dp"/>
+                                <Button
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/addlevel"
+                                    android:background="@android:color/transparent"/>
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="135dp"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp">
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/add_question_type"
+                                    android:layout_centerInParent="true"
+                                    android:id="@+id/imageview5"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Add Question Type"
+                                    android:textSize="16dp"
+                                    android:layout_below="@+id/imageview5"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="10dp"/>
+                                <Button
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/add_question_type"
+                                    android:background="@android:color/transparent"/>
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:src="@drawable/add_question2"
+                                    android:layout_centerInParent="true"
+                                    android:id="@+id/imageview6"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Add Question"
+                                    android:textSize="16dp"
+                                    android:layout_below="@+id/imageview6"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="10dp"/>
+                                <Button
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/baddquestion"
+                                    android:background="@android:color/transparent"/>
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="135dp"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp">
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/add_lecture"
+                                    android:layout_centerInParent="true"
+                                    android:id="@+id/imageview"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Add Lecture"
+                                    android:textSize="16dp"
+                                    android:layout_below="@+id/imageview"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="10dp"/>
+                                <Button
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/addlecture"
+                                    android:background="@android:color/transparent"/>
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:src="@drawable/goal"
+                                    android:layout_centerInParent="true"
+                                    android:id="@+id/imageview1"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Add Goal"
+                                    android:textSize="16dp"
+                                    android:layout_below="@+id/imageview1"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="10dp"/>
+                                <Button
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/goal"
+                                    android:background="@android:color/transparent"/>
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="165dp"
-                android:layout_height="150dp"
-                android:textAlignment="textEnd"
-                android:onClick="addLanguage"
-                android:outlineSpotShadowColor="@color/colorAccent" >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_gravity="bottom"
-                    android:gravity="center"
-                    android:text="Add Language"
-                    android:background="@color/colorPrimaryLight"
-                    />
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="165dp"
-                android:layout_height="150dp"
-                android:textAlignment="textEnd"
-                android:onClick="addLecture"
-                android:layout_marginLeft="25dp"
-                android:outlineSpotShadowColor="@color/colorAccent" >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_gravity="bottom"
-                    android:gravity="center"
-                    android:text="Add Lecture"
-                    android:background="@color/colorPrimaryLight"
-                    />
-            </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="165dp"
-                android:layout_height="150dp"
-                android:textAlignment="textEnd"
-                android:onClick="addLanguage"
-                android:outlineSpotShadowColor="@color/colorAccent" >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_gravity="bottom"
-                    android:gravity="center"
-                    android:text="Add Language"
-                    android:background="@color/colorPrimaryLight"
-                    />
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="165dp"
-                android:layout_height="150dp"
-                android:textAlignment="textEnd"
-                android:onClick="addGoal"
-                android:layout_marginLeft="25dp"
-                android:outlineSpotShadowColor="@color/colorAccent" >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_gravity="bottom"
-                    android:gravity="center"
-                    android:text="Add Goal"
-                    android:background="@color/colorPrimaryLight"
-                    />
-            </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="165dp"
-                android:layout_height="150dp"
-                android:textAlignment="textEnd"
-                android:onClick="addLevel"
-                android:outlineSpotShadowColor="@color/colorAccent" >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_gravity="bottom"
-                    android:gravity="center"
-                    android:text="Add Level"
-                    android:background="@color/colorPrimaryLight"
-                    />
-            </com.google.android.material.card.MaterialCardView>
-
-            <!--<com.google.android.material.card.MaterialCardView
-                android:layout_width="165dp"
-                android:layout_height="150dp"
-                android:textAlignment="textEnd"
-                android:onClick="addQuestionType"
-                android:layout_marginLeft="25dp"
-                android:outlineSpotShadowColor="@color/colorAccent" >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_gravity="bottom"
-                    android:gravity="center"
-                    android:text="Add Question Type"
-                    android:background="@color/colorPrimaryLight"
-                    />
-            </com.google.android.material.card.MaterialCardView>-->
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</RelativeLayout>

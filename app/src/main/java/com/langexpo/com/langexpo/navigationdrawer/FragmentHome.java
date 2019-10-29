@@ -18,13 +18,13 @@ public class FragmentHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        CardView cardView = (CardView) view.findViewById(R.id.card_view_add_question);
+        /*CardView cardView = (CardView) view.findViewById(R.id.card_view_add_question);
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast toast = Toast.makeText(view.getContext(), "Please enter correct Username", Toast.LENGTH_LONG);
             }
-        });
+        });*/
 
         return view;
     }

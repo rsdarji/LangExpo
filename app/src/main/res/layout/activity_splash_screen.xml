@@ -16,7 +16,13 @@
             android:src="@drawable/walking_reading_boy"
             />
 
-        <TextView
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/langexpo_text_logo"
+
+            android:layout_below="@+id/walking_reading_boy"/>
+        <!--<TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/walking_reading_boy"
@@ -24,6 +30,6 @@
             android:textColor="#ffffff"
             android:gravity="center_horizontal"
             android:textStyle="bold"
-            android:text="Language Explorer" />
+            android:text="Language Explorer" />-->
 
 </RelativeLayout>

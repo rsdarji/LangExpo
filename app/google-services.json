@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "750064881161",
+    "firebase_url": "https://langexpo.firebaseio.com",
+    "project_id": "langexpo",
+    "storage_bucket": "langexpo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750064881161:android:959781f24511699abff2d8",
+        "android_client_info": {
+          "package_name": "com.langexpo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750064881161-0tsmujm059pkk42d60es12ma511m0gej.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.langexpo",
+            "certificate_hash": "6d6896d8c9bafdda7224e02cf76a12111014344d"
+          }
+        },
+        {
+          "client_id": "750064881161-uidq7rs0ps7jg4loq00fs08es6v48sjj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKHMlISyDpOmqcchcgJknsg5tQ8syrkLc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750064881161-uidq7rs0ps7jg4loq00fs08es6v48sjj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

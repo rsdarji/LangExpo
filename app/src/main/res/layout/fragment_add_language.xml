@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.langexpo.activity.DailyGoal">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="75dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp">
+
+
+
+            <EditText
+                android:id="@+id/et_language_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="Language Name"/>
+            <com.langexpo.customfunction.CustomCheckbox
+                android:id="@+id/chbx_goal_one_quiz"
+                android:layout_below="@+id/et_language_name"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="25dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_button_custom_theme"
+                android:text="One quiz/day"
+                android:textColor="#460d1e"/>
+
+            <com.langexpo.customfunction.CustomCheckbox
+                android:id="@+id/chbx_goal_one_level"
+                android:layout_below="@id/chbx_goal_one_quiz"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="25dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_button_custom_theme"
+                android:text="One level/day"
+                android:textColor="#460d1e"/>
+
+            <com.langexpo.customfunction.CustomCheckbox
+                android:id="@+id/chbx_goal_one_lecture"
+                android:layout_below="@id/chbx_goal_one_level"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="25dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_button_custom_theme"
+                android:text="One lecture/day"
+                android:textColor="#460d1e"/>
+
+            <com.langexpo.customfunction.CustomCheckbox
+                android:id="@+id/chbx_goal_one_lession"
+                android:layout_below="@id/chbx_goal_one_lecture"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="25dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_button_custom_theme"
+                android:text="One lession/day"
+                android:textColor="#460d1e"/>
+
+            <com.langexpo.customfunction.CustomCheckbox
+                android:id="@+id/chbx_goal_five_minute"
+                android:layout_below="@id/chbx_goal_one_lession"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="25dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_button_custom_theme"
+                android:text="5 Minute/day"
+                android:textColor="#460d1e"/>
+        </RelativeLayout>
+    </ScrollView>
+    <com.langexpo.customfunction.CustomButton
+        android:id="@+id/button_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:onClick="continue2"
+        android:text="Continue"
+        android:textStyle="bold"
+        android:layout_margin="15dp"/>
+</RelativeLayout>

@@ -1,5 +1,6 @@
 package com.langexpo.com.langexpo.navigationdrawer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.langexpo.R;
 
@@ -39,10 +40,13 @@ public class FragmentHome extends Fragment {
         toast.show();
     }
     public static void clicAddLecture(View v){
+
+
         Toast toast = Toast.makeText(v.getContext(), "Add Lecture clicked...", Toast.LENGTH_LONG);
         toast.show();
     }
-    public static void clicAddLanguage(View v){
+    public static void clicAddLanguage(View v, FragmentManager f){
+
         Toast toast = Toast.makeText(v.getContext(), "Add Language clicked...", Toast.LENGTH_LONG);
         toast.show();
     }

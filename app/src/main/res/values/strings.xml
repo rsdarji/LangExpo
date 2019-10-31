@@ -24,4 +24,50 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="Levels">
+        <item>Beginner</item>
+        <item>Intermediate</item>
+        <item>Expert</item>
+
+    </string-array>
+    <string-array name="Launguage">
+        <item>French</item>
+        <item>German</item>
+        <item>Spanish</item>
+
+    </string-array>
+    <string-array name="Question_Category">
+        <item>Picture Selection</item>
+        <item>Multiple Choice</item>
+        <item>Sentence Translation</item>
+        <item>Audio Recognition</item>
+        <item>Word Selection</item>
+        <item>Tap The Pair</item>
+        <item>Missing Word Selection</item>
+    </string-array>
+    <string-array name="Lesson_Levels">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+
+
+    </string-array>
+    <string-array name="Lesson_Levels2">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+
+
+    </string-array>
+
+
 </resources>

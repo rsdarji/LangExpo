@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="fragments.AddQuizFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="75dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/add_quiz"
+                android:layout_marginTop="10dp"
+                android:foregroundGravity="center"
+                android:id="@+id/question"/>
+
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/question"
+                android:layout_marginTop="20dp"
+                android:text="Select Level To Add"
+
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/level"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView2"
+                android:layout_marginTop="20dp"
+                android:entries="@array/Levels"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/level"
+                android:layout_weight="10"
+                android:id="@+id/Lay1"
+
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="5"
+                    >
+                    <TextView
+                        android:id="@+id/Fromt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/level"
+                        android:layout_marginTop="20dp"
+                        android:text="From"
+
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/from"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/Fromt"
+                        android:layout_marginTop="20dp"
+                        android:entries="@array/Lesson_Levels"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="5">
+                    <TextView
+                        android:id="@+id/To"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/Fromt"
+                        android:layout_marginTop="20dp"
+                        android:text="To"
+                        android:layout_alignParentRight="true"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/To"
+                        android:layout_below="@+id/To"
+                        android:layout_marginTop="20dp"
+                        android:entries="@array/Lesson_Levels2"
+
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="152dp"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:text="+ Add Quiz"
+                android:layout_below="@+id/Lay1"
+                android:layout_marginTop="20dp"
+                android:onClick="click"
+
+                />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -44,7 +44,6 @@ public class AddLanguage extends Fragment {
 
         StorageReference storageRef = storage.getReference();
         String path = storageRef.getPath();
-        button = (Button)view.findViewById(R.id.button_fragment);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

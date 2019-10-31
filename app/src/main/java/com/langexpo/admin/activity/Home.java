@@ -87,7 +87,9 @@ public class Home extends NavigationDrawer {
         FragmentHome.clickAddQuestion(view);
     }
     public void addQuestionType(View view){
-        FragmentHome.clicAddQuestionType(view);
+        getSupportFragmentManager().beginTransaction().replace(R.id.add_question_type,
+                new AddLanguage()).commit();
+
     }
     public void addLecture(View view){
         FragmentHome.clicAddLecture(view);

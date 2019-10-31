@@ -23,15 +23,8 @@
                 android:src="@drawable/add_language"
                 android:layout_marginTop="10dp"
                 android:foregroundGravity="center"
-                android:id="@+id/question"/>
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:src="@drawable/add_question2"
-                android:layout_marginTop="10dp"
-                android:foregroundGravity="center"
-                android:layout_below="@id/question"
                 android:id="@+id/imglaunguage"/>
+
 
 
             <TextView
@@ -54,7 +47,7 @@
                 android:inputType="textPersonName"
                 />
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/button_add_language"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="152dp"

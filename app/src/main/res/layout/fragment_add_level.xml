@@ -67,16 +67,15 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/button_add_level"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="152dp"
                 android:textStyle="bold"
                 android:textSize="20dp"
                 android:text="+ Add Level"
                 android:layout_below="@+id/level"
                 android:layout_marginTop="20dp"
-                android:onClick="click"
+                android:onClick="addLevel"
 
                 />
         </RelativeLayout>

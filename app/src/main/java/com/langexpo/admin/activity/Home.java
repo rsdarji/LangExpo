@@ -20,7 +20,12 @@ import com.google.firebase.storage.UploadTask;
 import com.langexpo.com.langexpo.navigationdrawer.NavigationDrawer;
 import com.langexpo.R;
 import com.langexpo.com.langexpo.navigationdrawer.FragmentHome;
+import com.langexpo.fragments.AddGoalFragment;
 import com.langexpo.fragments.AddLanguage;
+import com.langexpo.fragments.AddLectureFragment;
+import com.langexpo.fragments.AddLevelFragment;
+import com.langexpo.fragments.AddQuestionFragment;
+import com.langexpo.fragments.AddQuizFragment;
 import com.langexpo.utility.Constant;
 
 import org.json.JSONException;
@@ -38,34 +43,11 @@ import java.util.UUID;
 
 public class Home extends NavigationDrawer {
 
-    private StorageReference mStorageRef;
     private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-        mStorageRef = FirebaseStorage.getInstance().getReference("temp/"+ UUID.randomUUID() +".png");
-
-        /*Uri file = Uri.fromFile(new File("C:\\Users\\UTILISATEUR\\Desktop\\images\\flow\\7.2_contact-us.png"));
-        StorageReference riversRef = mStorageRef.child("images/rivers.jpg");
-
-        riversRef.putFile(file)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        // Get a URL to the uploaded content
-                        Uri downloadUrl = taskSnapshot.getUploadSessionUri();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                        // ...
-                    }
-                });*/
-        //setContentView(R.layout.fragment_home);
         super.onCreate(savedInstanceState);
 
         drawer = findViewById(R.id.drawer_layout);
@@ -75,83 +57,37 @@ public class Home extends NavigationDrawer {
                     new FragmentHome()).commit();
             navigationView.setCheckedItem(R.id.nav_home);
         }
-
-
     }
-
-
-
 
     public void addQuestion(View view) {
-
-        FragmentHome.clickAddQuestion(view);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                new AddQuestionFragment()).commit();
     }
     public void addQuestionType(View view){
-        getSupportFragmentManager().beginTransaction().replace(R.id.add_question_type,
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                 new AddLanguage()).commit();
 
     }
     public void addLecture(View view){
-        FragmentHome.clicAddLecture(view);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                new AddLectureFragment()).commit();
     }
     public void addLanguage(View view){
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                 new AddLanguage()).commit();
-        //FragmentHome.clicAddLanguage(view, f);
     }
     public void addGoal(View view){
-        FragmentHome.clicAddGoal(view);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                new AddGoalFragment()).commit();
     }
     public void addLevel(View view){
-        FragmentHome.clicAddLevel(view);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                new AddLevelFragment()).commit();
     }
-
-    /*public void pickFromGallery(){
-
-        //Create an Intent with action as ACTION_PICK
-        Intent intent=new Intent(Intent.ACTION_PICK);
-        // Sets the type as image/*. This ensures only components of type image are selected
-        intent.setType("image/*");
-        //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
-        String[] mimeTypes = {"image/jpeg", "image/png"};
-        intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
-        // Launching the Intent
-        startActivityForResult(intent,1);
+    public void addQuiz(View view){
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                new AddQuizFragment()).commit();
     }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Result code is RESULT_OK only if the user selects an Image
-        super.onActivityResult(requestCode, resultCode, data);
-        Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG).show();
-        if (resultCode == Activity.RESULT_OK)
-            switch (requestCode) {
-                case 1:
-                    Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_LONG).show();
-                    //data.getData return the content URI for the selected Image
-                    Uri selectedImage = data.getData();
-                    System.out.println("uri : img : " + selectedImage);
-                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
-                    // Get the cursor
-                    Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                    // Move to first row
-                    cursor.moveToFirst();
-                    //Get the column index of MediaStore.Images.Media.DATA
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    //Gets the String value in the column
-                    String imgDecodableString = cursor.getString(columnIndex);
-                    System.out.println("encoded: " + imgDecodableString);
-                    Session s = new Session(getApplicationContext());
-                    String imgPath = imgDecodableString;
-                    s.set("imgPath", imgDecodableString);
-                    Toast.makeText(getApplicationContext(), "3 : "+imgDecodableString, Toast.LENGTH_LONG).show();
-                    cursor.close();
-                    // Set the Image in ImageView after decoding the String
-                    System.out.println("bitmap : " + BitmapFactory.decodeFile(imgDecodableString));
-
-                    break;
-
-            }
-    }*/
 
     private class addUpdateImage extends AsyncTask<Void, Void, String> {
         private ProgressDialog progressBar;

@@ -125,15 +125,15 @@ A lot of schools foll
         </RelativeLayout>
     </ScrollView>
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_add_lecture"
         android:layout_width="match_parent"
-        android:layout_height="67dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="+ Add Lecture"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:onClick="click"
+        android:onClick="addLecture"
+        android:layout_margin="15dp"
         />
 </RelativeLayout>
 

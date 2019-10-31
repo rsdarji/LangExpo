@@ -32,13 +32,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-    public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
+    Session session;
     EditText uname,pass;
     Button login,new_user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        session = new Session(getApplicationContext());
+
         uname=(EditText)findViewById(R.id.edittext_username);
         pass=(EditText)findViewById(R.id.edittext_password);
         login=(Button) findViewById(R.id.button_login);
@@ -121,7 +124,7 @@ import java.nio.charset.StandardCharsets;
             }
 
             //new Login(MainActivity.this, username, password).execute();
-
+            session.set(Constant.User.USER_ID,"1");
             Intent intent = new Intent(MainActivity.this, Home.class);
             startActivity(intent);
 
@@ -204,11 +207,11 @@ import java.nio.charset.StandardCharsets;
                     if(loginResponse.length()!=0 &&
                             loginResponse.get("status").toString().equalsIgnoreCase("ok") &&
                             !loginResponse.get("user_id").toString().equalsIgnoreCase("")) {
-                        Session session = new Session(getApplicationContext());
-                        session.set("user_id",loginResponse.get("user_id").toString());
-                        session.set("email",loginResponse.get("email").toString());
-                        session.set("first_name",loginResponse.get("first_name").toString());
-                        session.set("last_name",loginResponse.get("last_name").toString());
+
+                        session.set(Constant.User.USER_ID,loginResponse.get("user_id").toString());
+                        session.set(Constant.User.EMAIL,loginResponse.get("email").toString());
+                        session.set(Constant.User.FIRST_NAME,loginResponse.get("first_name").toString());
+                        session.set(Constant.User.LAST_NAME,loginResponse.get("last_name").toString());
 
 
                         /*TextView t = (TextView) findViewById(R.id.nav_user_name);

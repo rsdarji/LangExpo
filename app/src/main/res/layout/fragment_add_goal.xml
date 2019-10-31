@@ -47,7 +47,7 @@
                 />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/button_add_goal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="152dp"
@@ -56,7 +56,7 @@
                 android:text="+ Add Goals"
                 android:layout_below="@+id/editText"
                 android:layout_marginTop="20dp"
-                android:onClick="click"
+                android:onClick="addGoal"
 
                 />
         </RelativeLayout>

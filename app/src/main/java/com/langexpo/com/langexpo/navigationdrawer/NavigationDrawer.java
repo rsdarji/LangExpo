@@ -1,13 +1,5 @@
 package com.langexpo.com.langexpo.navigationdrawer;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -24,9 +16,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -34,25 +32,22 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.langexpo.R;
 import com.langexpo.activity.MainActivity;
-import com.langexpo.admin.activity.Home;
-import com.langexpo.utility.SetImageToImageview;
+import com.langexpo.utility.Constant;
 import com.langexpo.utility.ImagePickerActivity;
 import com.langexpo.utility.Session;
+import com.langexpo.utility.SetImageToImageview;
 import com.langexpo.utility.UploadImageToCloud;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
-import java.util.UUID;
 
 import butterknife.BindView;
 
 public class NavigationDrawer extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private StorageReference mStorageRef;
     private DrawerLayout drawer;
-    private static final String TAG = Home.class.getSimpleName();
     public static final int REQUEST_IMAGE = 100;
     @BindView(R.id.nav_avtar)
     ImageView nav_avtar;
@@ -65,7 +60,7 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
         setContentView(R.layout.activity_navigation_drawer);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Log.d("nav_drawer","naviggation drawer");
+        Log.d("nav_drawer", "navigation drawer");
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view1);
@@ -85,16 +80,9 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
         toggle.syncState();
 
         // Clearing older images from cache directory
-
         // don't call this line if you want to choose multiple images in the same activity
-
         // call this once the bitmap(s) usage is over
-
         ImagePickerActivity.clearCache(this);
-
-        //View myFragmentView = getLayoutInflater().inflate(R.layout.fragment_a, , false);
-        mStorageRef = FirebaseStorage.getInstance().getReference("temp/"+ UUID.randomUUID() +".png");
-
 
         new SetImageToImageview(NavigationDrawer.this, R.id.nav_avtar)
                 .execute("https://firebasestorage.googleapis.com/v0/b/langexpo.appspot.com/o/temp%2F1fd3fcba-eb93-46fa-976c-7b43b9c72cfd.png?alt=media&token=5c4fb7d9-88f8-484d-9ca8-1cbe38718ef9");
@@ -179,7 +167,7 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
 
 
     public void changeAvtar(View view) {
-        Toast toast = Toast.makeText(getApplicationContext(),"Hello",Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_LONG);
         toast.show();
 
         Dexter.withActivity(this)
@@ -194,14 +182,12 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
                             showSettingsDialog();
                         }
                     }
+
                     @Override
                     public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
                         token.continuePermissionRequest();
                     }
                 }).check();
-
-
-        //pickFromGallery();
     }
 
     private void showImagePickerOptions() {
@@ -210,6 +196,7 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
             public void onTakeCameraSelected() {
                 launchCameraIntent();
             }
+
             @Override
             public void onChooseGallerySelected() {
                 launchGalleryIntent();
@@ -281,42 +268,23 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                     String a = stream.toString();
-                    String ab = Base64.getEncoder().encodeToString( a.getBytes( "utf-8" ) );
-                    Log.d("encoded img: ",ab);
+                    String ab = Base64.getEncoder().encodeToString(a.getBytes("utf-8"));
+                    Log.d("encoded img: ", ab);
                     byte[] byteArray = stream.toByteArray();
 
-                    UploadImageToCloud.uploadImage(NavigationDrawer.this,byteArray);
+                    String url = UploadImageToCloud.uploadImage(NavigationDrawer.this, byteArray, Constant.IMAGE_FOLDER,
+                            Session.get(Constant.User.USER_ID), Constant.PNG);
 
+                    Log.d("method return url: ", url);
 
-                    //new addUpdateImage(Home.this, ab).execute();
                     // loading profile image from local cache
-                    ((ImageView)findViewById(R.id.nav_avtar)).setImageBitmap(BitmapFactory.decodeByteArray(byteArray,0,byteArray.length));
+                    ((ImageView) findViewById(R.id.nav_avtar)).setImageBitmap(BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length));
 
                     bitmap.recycle();
-                    //loadProfile(uri.toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
-    }
-
-    /*public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality)
-    {
-        ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
-        image.compress(compressFormat, quality, byteArrayOS);
-        return Base64.getEncoder().encodeToString(byteArrayOS.toByteArray(), Base64.classEFAULT);
-    }
-
-    public static Bitmap decodeBase64(String input)
-    {
-        byte[] decodedBytes = Base64.decode(input, 0);
-        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
-    }*/
-
-    private void loadProfile(String url) {
-        Log.d(TAG, "Image cache path: " + url);
-        nav_avtar.setImageBitmap(BitmapFactory.decodeFile(url));
-        //nav_avtar.setColorFilter(ContextCompat.getColor(this, android.R.color.transparent));
     }
 }

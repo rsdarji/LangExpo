@@ -1,50 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="fragments.AddQuestionFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_marginBottom="75dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="15dp"
-            android:paddingRight="15dp"
             android:paddingLeft="15dp"
-            android:paddingTop="15dp">
+            android:paddingTop="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="15dp">
+
             <ImageView
+                android:id="@+id/question"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:src="@drawable/add_question2"
                 android:layout_marginTop="10dp"
                 android:foregroundGravity="center"
-                android:id="@+id/question"/>
+                android:src="@drawable/add_question2" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
                 android:layout_below="@id/question"
+                android:layout_marginTop="70dp"
                 android:text="Question:"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/editText2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
                 android:layout_below="@id/textView3"
+                android:layout_marginTop="10dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                />
+                android:inputType="textPersonName" />
+
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
@@ -53,8 +55,8 @@
                 android:layout_marginTop="20dp"
                 android:text="Select Launguage"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
+
             <Spinner
                 android:id="@+id/launguage"
                 android:layout_width="match_parent"
@@ -73,12 +75,11 @@
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select Question Category"
-                android:textSize="20dp"
                 android:layout_below="@+id/launguage"
                 android:layout_marginTop="20dp"
-                android:textStyle="bold"
-                />
+                android:text="Select Question Category"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
 
             <Spinner
@@ -167,22 +168,15 @@
                 android:text="" />
 
 
-
-
-
-
-
-
-
         </RelativeLayout>
     </ScrollView>
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_add_question"
         android:layout_width="match_parent"
-        android:layout_height="67dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="Add Question"
-        android:onClick="click"
-        />
+        android:layout_margin="15dp"
+        android:onClick="addQuestion"
+        android:text="Add Question" />
 </RelativeLayout>

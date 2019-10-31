@@ -1,25 +1,17 @@
 package com.langexpo.admin.activity;
 
-import androidx.annotation.NonNull;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
-
 import android.app.ProgressDialog;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.langexpo.com.langexpo.navigationdrawer.NavigationDrawer;
 import com.langexpo.R;
 import com.langexpo.com.langexpo.navigationdrawer.FragmentHome;
+import com.langexpo.com.langexpo.navigationdrawer.NavigationDrawer;
 import com.langexpo.fragments.AddGoalFragment;
 import com.langexpo.fragments.AddLanguage;
 import com.langexpo.fragments.AddLectureFragment;
@@ -33,13 +25,11 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.UUID;
 
 public class Home extends NavigationDrawer {
 
@@ -63,28 +53,34 @@ public class Home extends NavigationDrawer {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                 new AddQuestionFragment()).commit();
     }
-    public void addQuestionType(View view){
+
+    public void addQuestionType(View view) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                 new AddLanguage()).commit();
 
     }
-    public void addLecture(View view){
+
+    public void addLecture(View view) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                 new AddLectureFragment()).commit();
     }
-    public void addLanguage(View view){
+
+    public void addLanguage(View view) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                 new AddLanguage()).commit();
     }
-    public void addGoal(View view){
+
+    public void addGoal(View view) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                 new AddGoalFragment()).commit();
     }
-    public void addLevel(View view){
+
+    public void addLevel(View view) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                 new AddLevelFragment()).commit();
     }
-    public void addQuiz(View view){
+
+    public void addQuiz(View view) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                 new AddQuizFragment()).commit();
     }
@@ -95,14 +91,14 @@ public class Home extends NavigationDrawer {
         private String encoadedImg;
         String imgStr;
 
-        public addUpdateImage(Home activity, String image){
+        public addUpdateImage(Home activity, String image) {
             progressBar = new ProgressDialog(activity);
             this.image = image;
             this.encoadedImg = encoadedImg;
 
         }
 
-        protected void onPreExecute(){
+        protected void onPreExecute() {
             progressBar.setMessage("Loading...");
             progressBar.show();
         }
@@ -114,37 +110,35 @@ public class Home extends NavigationDrawer {
             StringBuilder stringBuilder = new StringBuilder();
 
 
-            System.out.println("artid: background method: "+image);
+            System.out.println("artid: background method: " + image);
             try {
 
                 //path = se.get("encoadedImg");
                 //artname artcategory artyear artprice artdescription path userid categoryid
-                String urlParameters  = "image="+image;
+                String urlParameters = "image=" + image;
 
                 //imgStr = Base64.getEncoder().encodeToString(image);
-                byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
-                int    postDataLength = postData.length;
+                byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+                int postDataLength = postData.length;
                 // create the HttpURLConnection
-                url = new URL("http://"+ Constant.WEB_SERVICE_HOST +":"+Constant.WEB_SERVICE_PORT+"/WebApplication1/webresources/mobile/addprofileimage");
+                url = new URL("http://" + Constant.WEB_SERVICE_HOST + ":" + Constant.WEB_SERVICE_PORT + "/WebApplication1/webresources/mobile/addprofileimage");
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 // uncomment this if you want to write output to this url
                 connection.setDoOutput(true);
                 connection.setDoInput(true);
-                connection.setInstanceFollowRedirects( false );
-                connection.setRequestProperty( "charset", "utf-8");
-                connection.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
-                connection.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded");
-                connection.setUseCaches( false );
+                connection.setInstanceFollowRedirects(false);
+                connection.setRequestProperty("charset", "utf-8");
+                connection.setRequestProperty("Content-Length", Integer.toString(postDataLength));
+                connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                connection.setUseCaches(false);
                 // give it 15 seconds to respond
-                connection.setReadTimeout(45*1000);
+                connection.setReadTimeout(45 * 1000);
 
 
-
-
-                try( DataOutputStream wr = new DataOutputStream( connection.getOutputStream())) {
-                    wr.write( postData );
+                try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
+                    wr.write(postData);
                 }
 
 
@@ -167,11 +161,11 @@ public class Home extends NavigationDrawer {
 
                 // read the output from the server
 
-                int status =connection.getResponseCode();
-                if(status<400){
+                int status = connection.getResponseCode();
+                if (status < 400) {
                     reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     //read response
-                }else{
+                } else {
                     reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
                     //read response
                 }
@@ -182,27 +176,25 @@ public class Home extends NavigationDrawer {
                 }
 
                 System.out.println(stringBuilder.toString());
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 try {
                     throw e;
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
-            }
-            finally {
+            } finally {
                 if (reader != null) {
-                    try{
+                    try {
                         reader.close();
-                    }
-                    catch (IOException e) {
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
             }
             return stringBuilder.toString();
         }
+
         @Override
 
         protected void onPostExecute(String result) {
@@ -211,16 +203,15 @@ public class Home extends NavigationDrawer {
 
             try {
                 JSONObject loginResponse = new JSONObject(result);
-                if(loginResponse.length()!=0 &&
-                        loginResponse.get("status").toString().equalsIgnoreCase("ok") ) {
+                if (loginResponse.length() != 0 &&
+                        loginResponse.get("status").toString().equalsIgnoreCase("ok")) {
 
                     /*Intent intent = new Intent(UploadNewArt.this, Artistchoice.class);
                     startActivity(intent);*/
-                    Toast.makeText(getApplicationContext(),"Your profile picture has been changed successfully.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Your profile picture has been changed successfully.", Toast.LENGTH_LONG).show();
                     progressBar.dismiss();
-                }
-                else{
-                    Toast toast = Toast.makeText(getApplicationContext(),"Sorry! Please try again later...",Toast.LENGTH_LONG);
+                } else {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Sorry! Please try again later...", Toast.LENGTH_LONG);
                     progressBar.dismiss();
                     toast.show();
                 }

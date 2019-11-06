@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".admin.activity.AddLanguage">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:title="Language"
+        android:hapticFeedbackEnabled="true"
+        app:titleTextColor="@color/colorWhite"
+        android:theme="@style/ToolbarTheme"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="75dp"
+        android:layout_below="@+id/my_toolbar">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/add_language2"
+                android:layout_marginTop="10dp"
+                android:foregroundGravity="center"
+                android:id="@+id/img_language"/>
+
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/img_language_logo"
+                android:layout_below="@+id/img_language"
+                android:layout_centerHorizontal="true"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_language"
+                app:civ_border_width="2dp"
+                android:onClick="changeLanguageFlag"
+                android:layout_marginTop="50dp"
+                app:civ_border_color="#460d1e"/>
+
+            <TextView
+                android:id="@+id/tv_language_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_language_logo"
+                android:text="Choose Language Flag"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/colorPrimary"/>
+
+
+            <EditText
+                android:id="@+id/editText_language_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_language_logo"
+                android:layout_marginTop="20dp"
+                android:hint="Name of Language"
+                android:gravity="center"
+                android:inputType="textPersonName"
+                />
+            <com.langexpo.customfunction.CustomButton
+                android:id="@+id/button_add_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Add"
+                android:onClick="addLanguageToDB"
+                android:layout_below="@+id/editText_language_name"
+                android:layout_marginTop="20dp" />
+
+            <com.langexpo.customfunction.CustomButton
+                android:id="@+id/button_delete_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="152dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:text="Delete"
+                android:onClick="deleteLanguageToDB"
+                android:layout_below="@+id/button_add_language"/>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -55,6 +55,8 @@ public class Home extends NavigationDrawer {
     }
 
     public void addQuestionType(View view) {
+        Intent i = new Intent(Home.this, QuestionTypeList.class);
+        startActivity(i);
         /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                 new AddLanguage()).commit();*/
 
@@ -78,8 +80,10 @@ public class Home extends NavigationDrawer {
     }
 
     public void addLevel(View view) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
-                new AddLevelFragment()).commit();
+        Intent i = new Intent(Home.this, LevelList.class);
+        startActivity(i);
+        /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                new AddLevelFragment()).commit();*/
     }
 
     public void addQuiz(View view) {

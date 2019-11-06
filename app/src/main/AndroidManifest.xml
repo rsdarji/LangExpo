@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".admin.activity.AddQuestion"></activity>
         <activity android:name=".AddQuestionType"></activity>
         <activity android:name=".admin.activity.AddLevel" />
         <activity android:name=".admin.activity.LevelList" />

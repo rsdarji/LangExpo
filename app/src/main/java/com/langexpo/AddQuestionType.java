@@ -1,20 +1,18 @@
-package com.langexpo.admin.activity;
+package com.langexpo;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
-import android.view.View;
 
-import com.langexpo.R;
-
-public class AddLevel extends AppCompatActivity {
+public class AddQuestionType extends AppCompatActivity {
 
     Toolbar myToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_level);
+        setContentView(R.layout.activity_add_question_type);
 
         myToolbar = (Toolbar) findViewById(R.id.admin_add_question_type_my_toolbar);
         setSupportActionBar(myToolbar);
@@ -26,9 +24,5 @@ public class AddLevel extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
-    }
-
-    public void addLevel(View view) {
-
     }
 }

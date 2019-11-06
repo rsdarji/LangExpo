@@ -11,11 +11,17 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@drawable/application_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".com.langexpo.navigationdrawer.NavigationDrawer"></activity>
+        <activity android:name=".admin.activity.AddLevel"></activity>
+        <activity android:name=".admin.activity.LevelList" />
+        <activity android:name=".admin.activity.LanguageList" />
+        <activity android:name=".admin.activity.AddLanguage" />
+        <activity android:name=".com.langexpo.navigationdrawer.NavigationDrawer" />
+        <activity android:name=".utility.Image" />
         <activity android:name=".utility.ImagePickerActivity" />
         <activity
             android:name=".admin.activity.Home"

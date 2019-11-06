@@ -156,8 +156,26 @@ public class MainActivity extends AppCompatActivity {
                 BufferedReader reader = null;
                 StringBuilder stringBuilder = new StringBuilder();
 
+                String methodName = "login";
+                stringBuilder.append(Constant.PROTOCOL);
+                stringBuilder.append(Constant.COLON);
+                stringBuilder.append(Constant.FORWARD_SLASH);
+                stringBuilder.append(Constant.FORWARD_SLASH);
+                stringBuilder.append(Constant.WEB_SERVICE_HOST);
+                stringBuilder.append(Constant.COLON);
+                stringBuilder.append(Constant.WEB_SERVICE_PORT);
+                stringBuilder.append(Constant.FORWARD_SLASH);
+                stringBuilder.append(Constant.CONTEXT_PATH);
+                stringBuilder.append(Constant.FORWARD_SLASH);
+                stringBuilder.append(Constant.APPLICATION_PATH);
+                stringBuilder.append(Constant.FORWARD_SLASH);
+                stringBuilder.append(Constant.CLASS_PATH);
+                stringBuilder.append(Constant.FORWARD_SLASH);
+                stringBuilder.append(methodName);
+
+
                 try {
-                    url = new URL("http://"+ Constant.WEB_SERVICE_HOST +":"+Constant.WEB_SERVICE_PORT+"/WebApplication1/webresources/mobile/login&"+username+"&"+password);
+                    url = new URL(stringBuilder.toString()+"&"+username+"&"+password);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     // uncomment this if you want to write output to this url
@@ -169,13 +187,14 @@ public class MainActivity extends AppCompatActivity {
                     connection.setReadTimeout(15*1000);
                     connection.connect();
                     // read the output from the server
+                    stringBuilder = new StringBuilder();
                     reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     String line = null;
                     while ((line = reader.readLine()) != null) {
                         stringBuilder.append(line);
                     }
 
-                    System.out.println("url: "+stringBuilder.toString());
+                    System.out.println("response: "+stringBuilder.toString());
                 }
                 catch (Exception e) {
                     e.printStackTrace();

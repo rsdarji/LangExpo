@@ -1,6 +1,7 @@
 package com.langexpo.admin.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,6 @@ import com.langexpo.R;
 import com.langexpo.com.langexpo.navigationdrawer.FragmentHome;
 import com.langexpo.com.langexpo.navigationdrawer.NavigationDrawer;
 import com.langexpo.fragments.AddGoalFragment;
-import com.langexpo.fragments.AddLanguage;
 import com.langexpo.fragments.AddLectureFragment;
 import com.langexpo.fragments.AddLevelFragment;
 import com.langexpo.fragments.AddQuestionFragment;
@@ -55,8 +55,8 @@ public class Home extends NavigationDrawer {
     }
 
     public void addQuestionType(View view) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
-                new AddLanguage()).commit();
+        /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                new AddLanguage()).commit();*/
 
     }
 
@@ -66,8 +66,10 @@ public class Home extends NavigationDrawer {
     }
 
     public void addLanguage(View view) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
-                new AddLanguage()).commit();
+        Intent i = new Intent(Home.this, LanguageList.class);
+        startActivity(i);
+        /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                new AddLanguage()).commit();*/
     }
 
     public void addGoal(View view) {
@@ -95,7 +97,6 @@ public class Home extends NavigationDrawer {
             progressBar = new ProgressDialog(activity);
             this.image = image;
             this.encoadedImg = encoadedImg;
-
         }
 
         protected void onPreExecute() {

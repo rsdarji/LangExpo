@@ -17,11 +17,11 @@ import java.io.InputStream;
 
 
 
-public class SetImageToImageview extends AsyncTask<String, Void, Bitmap> {
+public class SetURLImageToImageview extends AsyncTask<String, Void, Bitmap> {
     int imageView;
     Activity activity;
 
-    public SetImageToImageview(Activity activity, int imageView) {
+    public SetURLImageToImageview(Activity activity, int imageView) {
         this.imageView = imageView;
         this.activity = activity;
     }

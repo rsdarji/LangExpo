@@ -2,12 +2,16 @@ package com.langexpo.utility;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -21,12 +25,11 @@ import java.nio.charset.StandardCharsets;
 public class UploadImageToCloud {
 
     private static StorageReference mStorageRef;
-    private
-    static Uri downloadUri;
+    private static Uri downloadUri;
 
     public static String uploadImage(Activity activity, byte[] byteArray, String folder, String fileName, String contentType) {
-
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+
         firebaseStorage.getReference().child("temp").getDownloadUrl();
         mStorageRef = firebaseStorage.getReference(folder + "/" + fileName + "." + contentType);
 
@@ -95,6 +98,24 @@ public class UploadImageToCloud {
         );*/
 
         return stringBuilder.toString();
+    }
+
+    public static void deleteStorageFile(String url){
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference photoRef = firebaseStorage.getReferenceFromUrl(url);
+        photoRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                // File deleted successfully
+                Log.d("delete ", "onSuccess: deleted file");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Uh-oh, an error occurred!
+                Log.d("delete", "onFailure: did not delete file");
+            }
+        });
     }
 
 }

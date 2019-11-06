@@ -13,6 +13,8 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -35,13 +37,14 @@ import com.langexpo.activity.MainActivity;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.ImagePickerActivity;
 import com.langexpo.utility.Session;
-import com.langexpo.utility.SetImageToImageview;
+import com.langexpo.utility.SetURLImageToImageview;
 import com.langexpo.utility.UploadImageToCloud;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
+import java.util.UUID;
 
 import butterknife.BindView;
 
@@ -51,6 +54,8 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
     public static final int REQUEST_IMAGE = 100;
     @BindView(R.id.nav_avtar)
     ImageView nav_avtar;
+    String imageFileName;
+    int imageId;
 
 
     @Override
@@ -84,7 +89,7 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
         // call this once the bitmap(s) usage is over
         ImagePickerActivity.clearCache(this);
 
-        new SetImageToImageview(NavigationDrawer.this, R.id.nav_avtar)
+        new SetURLImageToImageview(NavigationDrawer.this, R.id.nav_avtar)
                 .execute("https://firebasestorage.googleapis.com/v0/b/langexpo.appspot.com/o/temp%2F1fd3fcba-eb93-46fa-976c-7b43b9c72cfd.png?alt=media&token=5c4fb7d9-88f8-484d-9ca8-1cbe38718ef9");
 
     }
@@ -165,11 +170,27 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
 
     }
 
-
     public void changeAvtar(View view) {
         Toast toast = Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_LONG);
         toast.show();
+        imageId = R.id.nav_avtar;
+        imageFileName = Session.get(Constant.User.USER_ID);
+        checkPermission();
+    }
 
+    /*public void changeLanguageFlag(View view){
+        imageId = R.id.img_language_logo;
+        UUID uuid = UUID.randomUUID();
+        imageFileName = "languagelogo"+uuid.toString();
+        checkPermission();
+    }*/
+
+
+
+    /**
+     * START - Image (Crop, camera, gallery)
+     */
+    public void checkPermission(){
         Dexter.withActivity(this)
                 .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .withListener(new MultiplePermissionsListener() {
@@ -204,30 +225,15 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
         });
     }
 
-    /**
-     * Showing Alert Dialog with Settings option
-     * Navigates user to app settings
-     * NOTE: Keep proper title and message depending on your app
-     */
-    private void showSettingsDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(NavigationDrawer.this);
-        builder.setTitle(getString(R.string.dialog_permission_title));
-        builder.setMessage(getString(R.string.dialog_permission_message));
-        builder.setPositiveButton(getString(R.string.go_to_settings), (dialog, which) -> {
-            dialog.cancel();
-            openSettings();
-        });
-        builder.setNegativeButton(getString(android.R.string.cancel), (dialog, which) -> dialog.cancel());
-        builder.show();
-    }
-
     private void launchCameraIntent() {
         Intent intent = new Intent(NavigationDrawer.this, ImagePickerActivity.class);
         intent.putExtra(ImagePickerActivity.INTENT_IMAGE_PICKER_OPTION, ImagePickerActivity.REQUEST_IMAGE_CAPTURE);
+
         // setting aspect ratio
         intent.putExtra(ImagePickerActivity.INTENT_LOCK_ASPECT_RATIO, true);
         intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_X, 1); // 16x9, 1x1, 3:4, 3:2
         intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_Y, 1);
+
         // setting maximum bitmap width and height
         intent.putExtra(ImagePickerActivity.INTENT_SET_BITMAP_MAX_WIDTH_HEIGHT, true);
         intent.putExtra(ImagePickerActivity.INTENT_BITMAP_MAX_WIDTH, 1000);
@@ -245,6 +251,23 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
         intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_X, 1); // 16x9, 1x1, 3:4, 3:2
         intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_Y, 1);
         startActivityForResult(intent, REQUEST_IMAGE);
+    }
+
+    /**
+     * Showing Alert Dialog with Settings option
+     * Navigates user to app settings
+     * NOTE: Keep proper title and message depending on your app
+     */
+    private void showSettingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.dialog_permission_title));
+        builder.setMessage(getString(R.string.dialog_permission_message));
+        builder.setPositiveButton(getString(R.string.go_to_settings), (dialog, which) -> {
+            dialog.cancel();
+            openSettings();
+        });
+        builder.setNegativeButton(getString(android.R.string.cancel), (dialog, which) -> dialog.cancel());
+        builder.show();
     }
 
     // navigating user to app settings
@@ -273,12 +296,13 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
                     byte[] byteArray = stream.toByteArray();
 
                     String url = UploadImageToCloud.uploadImage(NavigationDrawer.this, byteArray, Constant.IMAGE_FOLDER,
-                            Session.get(Constant.User.USER_ID), Constant.PNG);
-
+                            imageFileName, Constant.PNG);
+                    Session.set(Constant.UPLOADED_ITEM_URL,"");
+                    Session.set(Constant.UPLOADED_ITEM_URL,url);
                     Log.d("method return url: ", url);
 
                     // loading profile image from local cache
-                    ((ImageView) findViewById(R.id.nav_avtar)).setImageBitmap(BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length));
+                    ((ImageView) findViewById(imageId)).setImageBitmap(BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length));
 
                     bitmap.recycle();
                 } catch (IOException e) {
@@ -287,4 +311,8 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
             }
         }
     }
+
+    /**
+     * END - Image (Crop, camera, gallery)
+     */
 }

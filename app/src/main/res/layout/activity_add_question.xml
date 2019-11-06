@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".admin.activity.AddQuestion">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/admin_add_question_my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:title="Question"
+        android:hapticFeedbackEnabled="true"
+        app:titleTextColor="@color/colorWhite"
+        android:theme="@style/ToolbarTheme"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="75dp"
+        android:layout_below="@+id/admin_add_question_my_toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="15dp">
+
+            <ImageView
+                android:id="@+id/question"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                android:foregroundGravity="center"
+                android:src="@drawable/add_question2" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/question"
+                android:layout_marginTop="70dp"
+                android:text="Question:"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/textView3"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editText2"
+                android:layout_marginTop="20dp"
+                android:text="Select Launguage"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/launguage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView"
+                android:layout_marginTop="20dp"
+
+                android:entries="@array/Launguage"
+                android:textSize="20dp"
+                android:textStyle="bold"
+
+                />
+
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/launguage"
+                android:layout_marginTop="20dp"
+                android:text="Select Question Category"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+
+            <Spinner
+                android:id="@+id/question_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView6"
+                android:layout_marginTop="20dp"
+                android:entries="@array/Question_Category"
+                android:textSize="20dp"
+                android:textStyle="bold"
+
+                />
+
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/question_category"
+                android:layout_marginTop="20dp"
+                android:text="Select Level To Add"
+
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/level"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView2"
+                android:layout_marginTop="20dp"
+                android:entries="@array/Levels"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editText7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/level"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+
+                android:hint="Enter Option 1"
+                android:inputType="textPersonName"
+                android:text="" />
+
+            <EditText
+                android:id="@+id/editText8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editText7"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+
+                android:hint="Enter Option 2"
+
+                android:inputType="textPersonName"
+                android:text="" />
+
+            <EditText
+                android:id="@+id/editText9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editText8"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+
+                android:hint="Enter Option 3"
+
+                android:inputType="textPersonName"
+                android:text="" />
+
+            <EditText
+                android:id="@+id/editText10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editText9"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+
+                android:hint="Enter Option 4"
+
+                android:inputType="textPersonName"
+                android:text="" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button_add_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="15dp"
+        android:onClick="addQuestion"
+        android:text="Add Question" />
+</RelativeLayout>

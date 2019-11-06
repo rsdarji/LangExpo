@@ -16,10 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".admin.activity.AddQuestion"></activity>
-        <activity android:name=".AddQuestionType"></activity>
+        <activity android:name=".admin.activity.AddQuiz"></activity>
+        <activity android:name=".admin.activity.AddGoal" />
+        <activity android:name=".admin.activity.AddLecture" />
+        <activity android:name=".admin.activity.AddQuestion" />
+        <activity android:name=".admin.activity.AddQuestionType" />
         <activity android:name=".admin.activity.AddLevel" />
-        <activity android:name=".admin.activity.QuestionTypeList"></activity>
+        <activity android:name=".admin.activity.QuestionTypeList" />
         <activity android:name=".admin.activity.LevelList" />
         <activity android:name=".admin.activity.LanguageList" />
         <activity android:name=".admin.activity.AddLanguage" />

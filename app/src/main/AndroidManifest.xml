@@ -16,7 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".admin.activity.AddQuiz"></activity>
+        <activity android:name=".admin.activity.QuizList"></activity>
+        <activity android:name=".admin.activity.GoalList" />
+        <activity android:name=".admin.activity.LectureList" />
+        <activity android:name=".admin.activity.QuestionList" />
+        <activity android:name=".admin.activity.AddQuiz" />
         <activity android:name=".admin.activity.AddGoal" />
         <activity android:name=".admin.activity.AddLecture" />
         <activity android:name=".admin.activity.AddQuestion" />

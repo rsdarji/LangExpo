@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".admin.activity.LectureList">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/admin_LectureList_my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:title="Lecture"
+        android:hapticFeedbackEnabled="true"
+        app:titleTextColor="@color/colorWhite"
+        android:theme="@style/ToolbarTheme"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/admin_LectureList_recyclerView"
+        android:layout_marginBottom="75dp"
+        android:layout_below="@+id/admin_LectureList_my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.langexpo.customfunction.CustomButton
+        android:id="@+id/admin_button_add_Lecture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textStyle="bold"
+        android:layout_margin="15dp"
+        android:text="Add Lecture"
+        android:onClick="goToLectureList"
+        android:layout_below="@+id/editText_language_name"
+        android:layout_marginTop="20dp"/>
+
+
+</RelativeLayout>

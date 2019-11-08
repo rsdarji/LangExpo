@@ -20,5 +20,10 @@ import androidx.core.content.ContentResolverCompat;
 import com.langexpo.R;
 
 public class Utility {
-
+    public static int getValue(String value, int defaultValue){
+        if(!value.equalsIgnoreCase("")){
+            return Integer.parseInt(value);
+        }
+        return defaultValue;
+    }
 }

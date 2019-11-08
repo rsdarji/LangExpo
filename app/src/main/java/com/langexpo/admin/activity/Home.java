@@ -50,8 +50,10 @@ public class Home extends NavigationDrawer {
     }
 
     public void addQuestion(View view) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
-                new AddQuestionFragment()).commit();
+        Intent i = new Intent(Home.this, AddQuestion.class);
+        startActivity(i);
+        /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                new AddQuestionFragment()).commit();*/
     }
 
     public void addQuestionType(View view) {
@@ -63,8 +65,10 @@ public class Home extends NavigationDrawer {
     }
 
     public void addLecture(View view) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
-                new AddLectureFragment()).commit();
+        Intent i = new Intent(Home.this, AddLecture.class);
+        startActivity(i);
+        /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                new AddLectureFragment()).commit();*/
     }
 
     public void addLanguage(View view) {

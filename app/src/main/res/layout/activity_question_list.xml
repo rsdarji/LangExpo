@@ -7,7 +7,7 @@
     tools:context=".admin.activity.QuestionList">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/admin_QuestionList_my_toolbar"
+        android:id="@+id/admin_question_list_my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -16,13 +16,19 @@
         android:hapticFeedbackEnabled="true"
         app:titleTextColor="@color/colorWhite"
         android:theme="@style/ToolbarTheme"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/admin_QuestionList_recyclerView"
-        android:layout_marginBottom="75dp"
-        android:layout_below="@+id/admin_QuestionList_my_toolbar"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:id="@+id/admin_question_list_refresh_layout"
+        android:layout_below="@+id/admin_question_list_my_toolbar">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/admin_question_list_recyclerView"
+            android:layout_marginBottom="75dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.langexpo.customfunction.CustomButton
         android:id="@+id/admin_button_add_Question"
@@ -33,7 +39,6 @@
         android:layout_margin="15dp"
         android:text="Add Question"
         android:onClick="goToQuestionList"
-        android:layout_below="@+id/editText_language_name"
         android:layout_marginTop="20dp"/>
 
 

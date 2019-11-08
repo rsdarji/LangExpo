@@ -7,7 +7,7 @@
     tools:context=".admin.activity.GoalList">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/admin_GoalList_my_toolbar"
+        android:id="@+id/admin_goal_list_my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -17,12 +17,19 @@
         app:titleTextColor="@color/colorWhite"
         android:theme="@style/ToolbarTheme"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/admin_LectureList_recyclerView"
-        android:layout_marginBottom="75dp"
-        android:layout_below="@+id/admin_LectureList_my_toolbar"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/admin_goal_list_my_toolbar"
+        android:id="@+id/admin_goal_list_refresh_layout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/admin_goal_list_recyclerView"
+            android:layout_marginBottom="75dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.langexpo.customfunction.CustomButton
         android:id="@+id/admin_button_add_Goal"
@@ -33,7 +40,6 @@
         android:layout_margin="15dp"
         android:text="Add Goal"
         android:onClick="goToGoalList"
-        android:layout_below="@+id/editText_language_name"
         android:layout_marginTop="20dp"/>
 
 

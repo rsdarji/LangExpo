@@ -22,39 +22,46 @@ public class QuestionTypeAdapter extends RecyclerView.Adapter<QuestionTypeAdapte
     private Context mCtx;
 
     //we are storing all the products in a list
-    private List<QuestionType> QuestionTypeList;
+    private List<QuestionType> questionTypeList;
 
     //getting the context and product list with constructor
-    public QuestionTypeAdapter(Context mCtx, List<Language> languageList) {
+    public QuestionTypeAdapter(Context mCtx, List<QuestionType> questionTypeList) {
         this.mCtx = mCtx;
-        this.QuestionTypeList = QuestionTypeList;
+        this.questionTypeList = questionTypeList;
     }
 
     @Override
     public QuestionTypeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //inflating and returning our view holder
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.language_row_layout_admin, null);
+        View view = inflater.inflate(R.layout.questiontype_row_layout_admin, null);
         return new QuestionTypeViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(QuestionTypeViewHolder holder, int position) {
         //getting the product of the specified position
-        QuestionType questionType = QuestionTypeList.get(position);
+        QuestionType questionType = questionTypeList.get(position);
 
         //binding the data with the viewholder views
 
-        holder.QuestionTypeName.setText(questionType.getQuestionTypeName());
+        holder.questionTypeName.setText(questionType.getQuestionTypeName());
         //holder.languageFlag.setImageBitmap(BitmapFactory.decodeStream(in));
 
 
 
         holder.itemView.setOnClickListener(v -> {
             //Toast.makeText(mCtx, "item clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(mCtx, QuestionType.class);
+            Intent intent = new Intent(mCtx, AddQuestionType.class);
             intent.putExtra("questionTypeId", questionType.getQuestionTypeId());
             intent.putExtra("questionTypeName",questionType.getQuestionTypeName());
+            intent.putExtra("totalOptions", questionType.getTotalOptions());
+            intent.putExtra("totalDisplayOptions", questionType.getTotalDisplayOptions());
+            intent.putExtra("multipleAnswer", questionType.isMultipleAnswer());
+            intent.putExtra("questionAudio", questionType.isQuestionAudio());
+            intent.putExtra("optionAudio", questionType.isOptionAudio());
+            intent.putExtra("questionImage", questionType.isQuestionImage());
+            intent.putExtra("optionImage", questionType.isOptionImage());
             mCtx.startActivity(intent);
         });
 
@@ -63,17 +70,17 @@ public class QuestionTypeAdapter extends RecyclerView.Adapter<QuestionTypeAdapte
 
     @Override
     public int getItemCount() {
-        return QuestionTypeList.size();
+        return questionTypeList.size();
     }
 
     class QuestionTypeViewHolder extends RecyclerView.ViewHolder {
 
-        TextView QuestionTypeName;
+        TextView questionTypeName;
 
         public QuestionTypeViewHolder(View itemView) {
             super(itemView);
 
-            QuestionTypeName = itemView.findViewById(R.id.questiontype_row_layout_admin_questiontype3f_name);
+            questionTypeName = itemView.findViewById(R.id.questiontype_row_layout_admin_questiontype3f_name);
 
         }
     }

@@ -17,12 +17,19 @@
         app:titleTextColor="@color/colorWhite"
         android:theme="@style/ToolbarTheme"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/admin_QuestionType_recyclerView"
-        android:layout_marginBottom="75dp"
-        android:layout_below="@+id/admin_QuestionTypeList_my_toolbar"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/admin_QuestionTypeList_my_toolbar"
+        android:id="@+id/admin_question_type_list_refresh_layout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/admin_QuestionType_recyclerView"
+            android:layout_marginBottom="75dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.langexpo.customfunction.CustomButton
         android:id="@+id/admin_button_add_QuestionType"
@@ -32,7 +39,7 @@
         android:textStyle="bold"
         android:layout_margin="15dp"
         android:text="Add Question Type"
-        android:onClick="goToQuestionTypeList"
+        android:onClick="goToQuestionType"
         android:layout_below="@+id/editText_language_name"
         android:layout_marginTop="20dp"/>
 

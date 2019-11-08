@@ -9,7 +9,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:elevation="8dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="0.0px"
@@ -25,6 +25,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:padding="8dp">
 
             <com.elyeproj.loaderviewlibrary.LoaderTextView
@@ -33,8 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:fontFamily=""
-                android:text="abcd"
-                android:layout_centerVertical="true"
+                android:text="Question Type"
                 android:textStyle="bold"
                 android:textSize="20dp"
                 android:textColor="@color/colorPrimary"/>

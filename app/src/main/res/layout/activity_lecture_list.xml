@@ -21,7 +21,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/admin_lecture_list_my_toolbar"
-        android:id="@+id/admin_lecture_list_refresh_layout">
+        android:id="@+id/admin_lecture_list_refresh_layout"
+
+        android:layout_marginTop="5dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/admin_lecture_list_recyclerView"

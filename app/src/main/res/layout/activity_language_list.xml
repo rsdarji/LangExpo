@@ -21,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/my_toolbar"
-        android:id="@+id/admin_language_list_refresh_layout">
+        android:id="@+id/admin_language_list_refresh_layout"
+        android:layout_marginTop="5dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -41,6 +42,5 @@
         android:text="Add Language"
         android:onClick="goToAddLanguage"
         android:layout_below="@+id/editText_language_name"/>
-
-
+    
 </RelativeLayout>

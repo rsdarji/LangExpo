@@ -79,8 +79,10 @@ public class Home extends NavigationDrawer {
     }
 
     public void addGoal(View view) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
-                new AddGoalFragment()).commit();
+        Intent i = new Intent(Home.this, GoalList.class);
+        startActivity(i);
+        /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                new AddGoalFragment()).commit();*/
     }
 
     public void addLevel(View view) {

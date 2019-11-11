@@ -85,8 +85,6 @@ public class AddLevel extends AppCompatActivity {
             userLevelValue = getIntent().getStringExtra("userLevel");
             sequenceNumberValue = getIntent().getIntExtra("sequenceNumber",0);
 
-
-
             setLevelDetail(levelId, levelNameValue, userLevelValue, sequenceNumberValue);
         }
     }

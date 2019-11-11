@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -32,6 +33,7 @@ import java.util.List;
 
 public class LanguageList extends AppCompatActivity {
 
+    SwipeRefreshLayout refreshLayout;
     RecyclerView recyclerView;
     List<Language> languageList;
     @Override
@@ -47,11 +49,17 @@ public class LanguageList extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        refreshLayout = findViewById(R.id.admin_language_list_refresh_layout);
         //initializing the languageList
         languageList = new ArrayList<>();
 
-
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                languageList = new ArrayList<>();
+                new GetLanguageList(LanguageList.this).execute();
+            }
+        });
         //to get all language list
         new GetLanguageList(this).execute();
     }
@@ -167,6 +175,7 @@ public class LanguageList extends AppCompatActivity {
                     LanguageAdapter adapter = new LanguageAdapter(LanguageList.this, languageList);
                     recyclerView.setAdapter(adapter);
                     progressBar.dismiss();
+                    refreshLayout.setRefreshing(false);
                 }
                 else{
                     Toast toast = Toast.makeText(getApplicationContext(),"Not available any language.",Toast.LENGTH_LONG);

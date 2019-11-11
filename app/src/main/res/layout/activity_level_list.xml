@@ -17,12 +17,20 @@
         app:titleTextColor="@color/colorWhite"
         android:theme="@style/ToolbarTheme"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/admin_level_recyclerView"
-        android:layout_marginBottom="75dp"
-        android:layout_below="@+id/admin_level_my_toolbar"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/admin_level_list_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/admin_level_my_toolbar"
+        android:layout_marginTop="5dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/admin_level_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="75dp" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.langexpo.customfunction.CustomButton
         android:id="@+id/admin_button_add_level"
@@ -33,8 +41,6 @@
         android:layout_margin="15dp"
         android:text="Add Level"
         android:onClick="goToAddLevel"
-        android:layout_below="@+id/editText_language_name"
         android:layout_marginTop="20dp"/>
-
 
 </RelativeLayout>

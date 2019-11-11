@@ -89,9 +89,9 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
         // call this once the bitmap(s) usage is over
         ImagePickerActivity.clearCache(this);
 
-        new SetURLImageToImageview(NavigationDrawer.this, R.id.nav_avtar)
+        /*new SetURLImageToImageview(NavigationDrawer.this, R.id.nav_avtar)
                 .execute("https://firebasestorage.googleapis.com/v0/b/langexpo.appspot.com/o/temp%2F1fd3fcba-eb93-46fa-976c-7b43b9c72cfd.png?alt=media&token=5c4fb7d9-88f8-484d-9ca8-1cbe38718ef9");
-
+*/
     }
 
     @Override

@@ -19,8 +19,10 @@
         app:cardPreventCornerOverlap="false"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp">
+        android:foreground="?android:attr/selectableItemBackground"
+        android:focusable="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -34,15 +36,60 @@
                 android:padding="4dp" />-->
 
             <com.elyeproj.loaderviewlibrary.LoaderTextView
-                android:id="@+id/level_row_layout_admin_language_name"
+                android:id="@+id/level_row_layout_admin_level_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:fontFamily=""
-                android:text="abcd"
-                android:layout_centerVertical="true"
+                android:text="Level Name"
                 android:textStyle="bold"
                 android:textSize="20dp"
+                android:textColor="@color/colorPrimary"/>
+
+            <com.elyeproj.loaderviewlibrary.LoaderTextView
+                android:id="@+id/level_row_layout_admin_level_user_level_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:fontFamily=""
+                android:text="User Level: "
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:layout_below="@+id/level_row_layout_admin_level_name"
+                android:textColor="@color/colorPrimary"/>
+            <com.elyeproj.loaderviewlibrary.LoaderTextView
+                android:id="@+id/level_row_layout_admin_level_user_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:fontFamily=""
+                android:text=""
+                android:textSize="16dp"
+                android:layout_toRightOf="@+id/level_row_layout_admin_level_user_level_tv"
+                android:layout_below="@+id/level_row_layout_admin_level_name"
+                android:textColor="@color/colorPrimary"/>
+
+            <com.elyeproj.loaderviewlibrary.LoaderTextView
+                android:id="@+id/level_row_layout_admin_level_sequence_number_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:fontFamily=""
+                android:text="Sequence Number: "
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:layout_below="@+id/level_row_layout_admin_level_user_level_tv"
+                android:textColor="@color/colorPrimary"/>
+            <com.elyeproj.loaderviewlibrary.LoaderTextView
+                android:id="@+id/level_row_layout_admin_level_sequence_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:fontFamily=""
+                android:text=""
+                android:textSize="16dp"
+                android:layout_toRightOf="@+id/level_row_layout_admin_level_sequence_number_tv"
+                android:layout_below="@+id/level_row_layout_admin_level_user_level_tv"
                 android:textColor="@color/colorPrimary"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

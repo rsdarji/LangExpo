@@ -17,12 +17,19 @@
         app:titleTextColor="@color/colorWhite"
         android:theme="@style/ToolbarTheme"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_marginBottom="75dp"
-        android:layout_below="@+id/my_toolbar"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/my_toolbar"
+        android:id="@+id/admin_language_list_refresh_layout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_marginBottom="75dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.langexpo.customfunction.CustomButton
         android:id="@+id/button_add_language"
@@ -31,10 +38,9 @@
         android:layout_alignParentBottom="true"
         android:textStyle="bold"
         android:layout_margin="15dp"
-        android:text="+ Language"
+        android:text="Add Language"
         android:onClick="goToAddLanguage"
-        android:layout_below="@+id/editText_language_name"
-        android:layout_marginTop="20dp"/>
+        android:layout_below="@+id/editText_language_name"/>
 
 
 </RelativeLayout>

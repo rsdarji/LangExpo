@@ -37,7 +37,6 @@ import com.langexpo.R;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.ImagePickerActivity;
 import com.langexpo.utility.Session;
-import com.langexpo.utility.SetURLImageToImageview;
 import com.langexpo.utility.UploadImageToCloud;
 import com.squareup.picasso.Picasso;
 

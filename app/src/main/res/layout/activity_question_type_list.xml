@@ -24,7 +24,7 @@
         android:id="@+id/admin_question_type_list_refresh_layout">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/admin_QuestionType_recyclerView"
+            android:id="@+id/admin_question_type_recyclerView"
             android:layout_marginBottom="75dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

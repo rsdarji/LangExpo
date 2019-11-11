@@ -20,5 +20,10 @@ public class Levels extends AppCompatActivity {
         Intent intent=new Intent (this,DailyGoal.class);
         startActivity(intent);
     }
+    public void register(View view)
+    {
+        Intent intent=new Intent (this,CreateProfile.class);
+        startActivity(intent);
+    }
 
 }

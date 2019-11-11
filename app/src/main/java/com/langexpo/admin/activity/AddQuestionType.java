@@ -340,7 +340,7 @@ public class AddQuestionType extends AppCompatActivity {
             BufferedReader reader = null;
             StringBuilder stringBuilder = new StringBuilder();
 
-            String methodName = "addUpdateQuestionType1";
+            String methodName = "addUpdateQuestionType";
             stringBuilder.append(Constant.PROTOCOL);
             stringBuilder.append(Constant.COLON);
             stringBuilder.append(Constant.FORWARD_SLASH);

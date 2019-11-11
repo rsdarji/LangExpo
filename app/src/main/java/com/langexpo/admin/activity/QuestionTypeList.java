@@ -46,7 +46,7 @@ public class QuestionTypeList extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         //getting the recyclerview from xml
-        recyclerView = (RecyclerView) findViewById(R.id.admin_QuestionType_recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.admin_question_type_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         refreshLayout = findViewById(R.id.admin_question_type_list_refresh_layout);

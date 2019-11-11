@@ -11,7 +11,9 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         session = new Session(getApplicationContext());
+        session.set("admin","false");
 
         uname=(EditText)findViewById(R.id.edittext_username);
         pass=(EditText)findViewById(R.id.edittext_password);
@@ -48,6 +51,16 @@ public class MainActivity extends AppCompatActivity {
         new_user=(Button) findViewById(R.id.button_newuser);
         pass.setEnabled(false);
         login.setEnabled(false);
+        Switch sw = (Switch) findViewById(R.id.admin_switch);
+        sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    session.set("admin","true");
+                } else {
+                    session.set("admin","false");
+                }
+            }
+        });
         uname.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

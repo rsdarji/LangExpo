@@ -76,6 +76,17 @@
             android:text="New User"
             android:onClick="newuser"/>
 
+        <Switch
+            android:id="@+id/admin_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:switchMinWidth="56dp"
+            android:layout_gravity="center"
+            android:text="Admin?"
+            android:checked="false"
+            android:textOff="No"
+            android:textOn="YES"/>
+
         <TextView
             android:id="@+id/tv_forgot_password"
             android:layout_width="match_parent"

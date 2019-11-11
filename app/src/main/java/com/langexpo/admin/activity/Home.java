@@ -18,7 +18,9 @@ import com.langexpo.fragments.AddLectureFragment;
 import com.langexpo.fragments.AddLevelFragment;
 import com.langexpo.fragments.AddQuestionFragment;
 import com.langexpo.fragments.AddQuizFragment;
+import com.langexpo.fragments.FragmentUserHome;
 import com.langexpo.utility.Constant;
+import com.langexpo.utility.Session;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,10 +44,14 @@ public class Home extends NavigationDrawer {
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view1);
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null && Boolean.parseBoolean(Session.get("admin").toString())) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                     new FragmentHome()).commit();
             navigationView.setCheckedItem(R.id.nav_home);
+        }else{
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                    new FragmentUserHome()).commit();
+            Toast.makeText(Home.this, "Not admin",Toast.LENGTH_LONG).show();
         }
     }
 

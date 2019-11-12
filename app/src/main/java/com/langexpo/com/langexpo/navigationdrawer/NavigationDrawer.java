@@ -33,6 +33,8 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.langexpo.R;
+import com.langexpo.activity.ContactUs;
+import com.langexpo.activity.Feedback;
 import com.langexpo.activity.MainActivity;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.ImagePickerActivity;
@@ -123,12 +125,15 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
                         new FragmentHome()).commit();
                 break;
             case R.id.nav_contact_us:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
-                        new FragmentHome()).commit();
+                Intent intent = new Intent(NavigationDrawer.this, ContactUs.class);
+                startActivity(intent);
+                /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                        new FragmentHome()).commit();*/
                 break;
             case R.id.nav_feedback:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
-                        new FragmentHome()).commit();
+                Intent i = new Intent(NavigationDrawer.this, Feedback.class);
+                startActivity(i);
+
                 break;
             case R.id.nav_share:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
@@ -141,7 +146,7 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
             case R.id.nav_sign_out:
                 /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FragmentHome()).commit();*/
-                Intent intent = new Intent(NavigationDrawer.this, MainActivity.class);
+                intent = new Intent(NavigationDrawer.this, MainActivity.class);
                 startActivity(intent);
                 Session session = new Session(getApplicationContext());
                 session.clear();

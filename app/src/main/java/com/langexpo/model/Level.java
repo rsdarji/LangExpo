@@ -4,13 +4,26 @@ public class Level {
     private long levelId;
     private String levelName;
     private String levelType;
+    private long languageId;
+    private String languageName;
     private int sequenceNumber;
 
 
-    public Level(long levelId, String levelName, String levelType, int sequenceNumber){
+    public Level(long levelId, String levelName, String levelType,
+                 long languageId, String languageName, int sequenceNumber){
         this.levelId = levelId;
         this.levelName = levelName;
         this.levelType = levelType;
+        this.languageId = languageId;
+        this.languageName = languageName;
+        this.sequenceNumber = sequenceNumber;
+    }
+    public Level(long levelId, String levelName, String levelType,
+                 long languageId, int sequenceNumber){
+        this.levelId = levelId;
+        this.levelName = levelName;
+        this.levelType = levelType;
+        this.languageId = languageId;
         this.sequenceNumber = sequenceNumber;
     }
 
@@ -36,6 +49,22 @@ public class Level {
 
     public void setLevelType(String levelType) {
         this.levelType = levelType;
+    }
+
+    public long getLanguageId() {
+        return languageId;
+    }
+
+    public void setLanguageId(long languageId) {
+        this.languageId = languageId;
+    }
+
+    public String getLanguageName() {
+        return languageName;
+    }
+
+    public void setLanguageName(String languageName) {
+        this.languageName = languageName;
     }
 
     public int getSequenceNumber() {

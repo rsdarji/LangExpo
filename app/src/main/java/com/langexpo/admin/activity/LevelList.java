@@ -89,6 +89,7 @@ public class LevelList extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if(!query.equalsIgnoreCase("")) {
+
                     adapter.getFilter().filter(query);
                 }else{
                     levelList = new ArrayList<>();
@@ -100,6 +101,7 @@ public class LevelList extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 if(!newText.equalsIgnoreCase("")) {
+
                     adapter.getFilter().filter(newText);
                 }else{
                     levelList = new ArrayList<>();
@@ -230,6 +232,8 @@ public class LevelList extends AppCompatActivity {
                         levelList.add(new Level(level.getLong("levelId"),
                                 level.getString("levelName"),
                                 level.getString("levelType"),
+                                level.getLong("languageId"),
+                                level.getString("languageName"),
                                 level.getInt("sequenceNumber")));
                     }
                     adapter = new LevelAdapter(LevelList.this, levelList);

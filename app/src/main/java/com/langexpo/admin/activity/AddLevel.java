@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,10 +22,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.langexpo.R;
+import com.langexpo.model.Language;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.LangExpoAlertDialog;
 import com.langexpo.utility.Utility;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,19 +42,22 @@ import java.net.URL;
 
 public class AddLevel extends AppCompatActivity {
 
-    long levelId;
+    long levelId, languageId;
     Toolbar myToolbar;
     EditText levelNameET, sequenceNumberET;
     Button addLevelBT;
-    Spinner userLevelSpinner;
-    String levelNameValue, userLevelValue;
+    Spinner userLevelSpinner, languageSpinner;
+    ArrayAdapter languageSpinnerAdapter;
+    String levelNameValue, userLevelValue, languageSpinnerValue;
     int sequenceNumberValue;
     boolean updateLevel = false;
+    String[] langaugeArray = new String[]{};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_level);
+        new GetLanguageList(AddLevel.this).execute();
 
         myToolbar = (Toolbar) findViewById(R.id.admin_add_level_my_toolbar);
         setSupportActionBar(myToolbar);
@@ -60,11 +66,26 @@ public class AddLevel extends AppCompatActivity {
 
         addLevelBT = (Button) findViewById(R.id.admin_button_add_level);
         levelNameET = (EditText) findViewById(R.id.admin_add_level_level_name);
-        sequenceNumberET = (EditText) findViewById(R.id.admin_add_level_levelname_et);
         userLevelSpinner = (Spinner) findViewById(R.id.admin_add_level_spinner);
+        languageSpinner = (Spinner) findViewById(R.id.admin_add_language_spinner);
+        sequenceNumberET = (EditText) findViewById(R.id.admin_add_level_levelname_et);
 
+
+
+        languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> parentView,
+                                       View selectedItemView, int position, long id) {
+                languageSpinnerValue = parentView.getItemAtPosition(position).toString();
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) {// do nothing
+            }
+
+        });
         getIncomingIntent();
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -76,29 +97,33 @@ public class AddLevel extends AppCompatActivity {
         if (getIntent().hasExtra("levelId") &&
                 getIntent().hasExtra("levelName") &&
                 getIntent().hasExtra("userLevel") &&
+                getIntent().hasExtra("languageId") &&
+                getIntent().hasExtra("languageName") &&
                 getIntent().hasExtra("sequenceNumber")) {
             updateLevel = true;
             myToolbar.setTitle("Update Level");
-            addLevelBT.setText("Update Level");
+            addLevelBT.setText("Update");
             levelId = getIntent().getLongExtra("levelId", 0);
             levelNameValue = getIntent().getStringExtra("levelName");
             userLevelValue = getIntent().getStringExtra("userLevel");
+            languageId = getIntent().getLongExtra("languageId",0);
+            languageSpinnerValue = getIntent().getStringExtra("languageName");
             sequenceNumberValue = getIntent().getIntExtra("sequenceNumber",0);
 
-            setLevelDetail(levelId, levelNameValue, userLevelValue, sequenceNumberValue);
+            setLevelDetail(levelId, levelNameValue, userLevelValue, languageSpinnerValue, sequenceNumberValue);
         }
     }
 
     private void setLevelDetail(long levelId, String levelNameValue,
-               String userLevelValue, int sequenceNumberValue){
+               String userLevelValue, String languageSpinnerValue, int sequenceNumberValue){
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.Levels, android.R.layout.simple_spinner_item);
         levelNameET.setText(levelNameValue);
         if(userLevelValue!=""){
             userLevelSpinner.setSelection(adapter.getPosition(userLevelValue));
         }
+
         //userLevelSpinner.setSelection();
         sequenceNumberET.setText(String.valueOf(sequenceNumberValue));
-
     }
 
     public void addLevel(View view) {
@@ -113,9 +138,14 @@ public class AddLevel extends AppCompatActivity {
             levelNameET.requestFocus();
             return;
         }
-        if (userLevelValue.equalsIgnoreCase("---Select User Level---")) {
+        if (userLevelValue.trim().equalsIgnoreCase(Constant.SPINNER_DEFAULT_VALUE_USER_LEVEL)) {
             ((TextView)userLevelSpinner.getSelectedView()).setError("Please select user level");
             userLevelSpinner.requestFocus();
+            return;
+        }
+        if (languageSpinnerValue.trim().equalsIgnoreCase(Constant.SPINNER_DEFAULT_VALUE_LANGUAGE)) {
+            ((TextView)languageSpinner.getSelectedView()).setError("Please select Language");
+            languageSpinner.requestFocus();
             return;
         }
         if (sequenceNumberValue == 0) {
@@ -321,7 +351,8 @@ public class AddLevel extends AppCompatActivity {
 
             try {
                 String urlParameters  = "levelId="+levelId+"&levelNameValue="+levelNameValue+
-                        "&userLevelValue="+userLevelValue+"&sequenceNumberValue="+sequenceNumberValue;
+                        "&userLevelValue="+userLevelValue+"&sequenceNumberValue="+sequenceNumberValue+
+                        "&languageName="+languageSpinnerValue;
 
                 byte[] postData       = urlParameters.getBytes();
                 int    postDataLength = postData.length;
@@ -403,9 +434,126 @@ public class AddLevel extends AppCompatActivity {
                 else if(loginResponse.get("status").toString().equalsIgnoreCase("error")){
                     if(loginResponse.get("code").toString().equalsIgnoreCase("LE_D_411")) {
                         LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(AddLevel.this, AddLevel.this);
-                        alertDialog.alertDialog("Duplicate", "Level with this sequence and user level already added. \n" + loginResponse.get("message").toString());
+                        alertDialog.alertDialog("Duplicate", loginResponse.get("message").toString());
                     }
                     Toast toast = Toast.makeText(AddLevel.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
+                    progressBar.dismiss();
+                    toast.show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private class GetLanguageList extends AsyncTask<Void, Void, String> {
+        private ProgressDialog progressBar;
+
+        public GetLanguageList(AddLevel activity){
+            progressBar = new ProgressDialog(activity);
+        }
+
+        protected void onPreExecute(){
+            progressBar.setMessage("Loading...");
+            progressBar.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            URL url = null;
+            BufferedReader reader = null;
+            StringBuilder stringBuilder = new StringBuilder();
+
+            String methodName = "featchAllLanguages";
+            stringBuilder.append(Constant.PROTOCOL);
+            stringBuilder.append(Constant.COLON);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(Constant.WEB_SERVICE_HOST);
+            stringBuilder.append(Constant.COLON);
+            stringBuilder.append(Constant.WEB_SERVICE_PORT);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(Constant.CONTEXT_PATH);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(Constant.APPLICATION_PATH);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(Constant.CLASS_PATH);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(methodName);
+
+
+            try {
+                url = new URL(stringBuilder.toString());
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                // uncomment this if you want to write output to this url
+
+                connection.setDoInput(true);
+                connection.setInstanceFollowRedirects( false );
+
+                // give it 15 seconds to respond
+                connection.setReadTimeout(15*1000);
+                connection.connect();
+                // read the output from the server
+                stringBuilder = new StringBuilder();
+                reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+
+                System.out.println("response: "+stringBuilder.toString());
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                try {
+                    throw e;
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            finally {
+                if (reader != null) {
+                    try{
+                        reader.close();
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            return stringBuilder.toString();
+        }
+        @Override
+
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            System.out.println(result);
+            try {
+                JSONObject allLanguageList = new JSONObject(result);
+                if(allLanguageList.get("status").toString().equalsIgnoreCase("ok")) {
+
+                    JSONArray languages = allLanguageList.getJSONArray("languages");
+                    languages = languages.getJSONArray(0);
+                    JSONObject language;
+                    //languages.getJSONObject(i).getString("languageId");
+                    langaugeArray = new String[languages.length()+1];
+                    langaugeArray[0] = "---Select Language---";
+                    for(int i = 1; i<=languages.length();i++){
+                        language = languages.getJSONObject(i-1);
+                        langaugeArray[i] = language.getString("languageName");
+                    }
+                    languageSpinnerAdapter = new ArrayAdapter(
+                            AddLevel.this,android.R.layout.simple_list_item_1 ,langaugeArray);
+                    if(languageSpinnerAdapter!=null) {
+                        languageSpinner.setAdapter(languageSpinnerAdapter);
+                    }
+                    if(languageSpinnerValue!=""){
+                        languageSpinner.setSelection(languageSpinnerAdapter.getPosition(languageSpinnerValue));
+                    }
+                    progressBar.dismiss();
+                }
+                else{
+                    Toast toast = Toast.makeText(getApplicationContext(),"Not available any language.",Toast.LENGTH_LONG);
                     progressBar.dismiss();
                     toast.show();
                 }

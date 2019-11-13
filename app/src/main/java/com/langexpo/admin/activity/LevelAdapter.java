@@ -53,6 +53,7 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.LevelViewHol
         holder.levelName.setText(level.getLevelName());
         holder.userLevel.setText(level.getLevelType());
         holder.sequenceNumber.setText(String.valueOf(level.getSequenceNumber()));
+        holder.languageName.setText(level.getLanguageName());
         //holder.languageFlag.setImageBitmap(BitmapFactory.decodeStream(in));
 
         holder.itemView.setOnClickListener(v -> {
@@ -61,6 +62,8 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.LevelViewHol
             intent.putExtra("levelId", level.getLevelId());
             intent.putExtra("levelName", level.getLevelName());
             intent.putExtra("userLevel", level.getLevelType());
+            intent.putExtra("languageId", level.getLanguageId());
+            intent.putExtra("languageName", level.getLanguageName());
             intent.putExtra("sequenceNumber", level.getSequenceNumber());
             mCtx.startActivity(intent);
         });
@@ -78,6 +81,7 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.LevelViewHol
         TextView levelName;
         TextView userLevel;
         TextView sequenceNumber;
+        TextView languageName;
 
         public LevelViewHolder(View itemView) {
             super(itemView);
@@ -85,6 +89,7 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.LevelViewHol
             levelName = itemView.findViewById(R.id.level_row_layout_admin_level_name);
             userLevel = itemView.findViewById(R.id.level_row_layout_admin_level_user_level);
             sequenceNumber = itemView.findViewById(R.id.level_row_layout_admin_level_sequence_number);
+            languageName = itemView.findViewById(R.id.level_row_layout_admin_level_language);
         }
     }
 
@@ -103,6 +108,8 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.LevelViewHol
                     for (Level row : levelList) {
                         if (row.getLevelName().toLowerCase().contains(Key.toLowerCase())){
                             lstFiltered.add(row);
+                        }if (row.getLanguageName().toLowerCase().contains(Key.toLowerCase())){
+                            lstFiltered.add(row);
                         }
                     }
                     mDataFiltered = lstFiltered;
@@ -115,8 +122,10 @@ public class LevelAdapter extends RecyclerView.Adapter<LevelAdapter.LevelViewHol
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 //levelList.clear();
+                List<Level> levelList1 = levelList;
                 levelList = (List<Level>) results.values;
                 notifyDataSetChanged();
+                /*levelList = levelList1;*/
             }
         };
     }

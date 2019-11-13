@@ -15,6 +15,9 @@ public interface Constant {
     String COLON = ":";
     String FORWARD_SLASH = "/";
 
+    String SPINNER_DEFAULT_VALUE_LEVEL = "---Select level---";
+    String SPINNER_DEFAULT_VALUE_LANGUAGE = "---Select Language---";
+    String SPINNER_DEFAULT_VALUE_USER_LEVEL = "---Select User Level---";
     /**
      * Google cloud storage
      */

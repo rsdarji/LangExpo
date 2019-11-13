@@ -31,4 +31,7 @@ public class AddQuestion extends AppCompatActivity {
     public void addQuestion(View view) {
 
     }
+
+    public void deleteQuestionToDB(View view) {
+    }
 }

@@ -131,8 +131,15 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
                         new FragmentHome()).commit();
                 break;
             case R.id.nav_share:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
-                        new FragmentHome()).commit();
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                String body = "Lange Expo        \"https://play.google.com/store/apps/\"";
+                String sub = "Lang Expo";
+                myIntent.putExtra(Intent.EXTRA_SUBJECT,sub);
+                myIntent.putExtra(Intent.EXTRA_TEXT,body);
+                startActivity(Intent.createChooser(myIntent, "Share Using"));
+                /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                        new FragmentHome()).commit();*/
                 break;
             case R.id.nav_deactivate_account:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,

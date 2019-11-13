@@ -15,8 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.CreateProfile"></activity>
-        <activity android:name=".admin.activity.QuizList"></activity>
+        <activity android:name=".activity.CreateProfile" />
+        <activity android:name=".admin.activity.QuizList" />
         <activity android:name=".admin.activity.GoalList" />
         <activity android:name=".admin.activity.LectureList" />
         <activity android:name=".admin.activity.QuestionList" />

@@ -179,7 +179,7 @@
                                 <ImageView
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
-                                    android:src="@drawable/add_language"
+                                    android:src="@drawable/add_language2"
                                     android:layout_centerInParent="true"
                                     android:id="@+id/imageview4"/>
                                 <TextView

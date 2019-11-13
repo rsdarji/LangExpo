@@ -138,7 +138,7 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
             case R.id.nav_share:
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("text/plain");
-                String body = "Lange Expo        \"https://play.google.com/store/apps/\"";
+                String body = "LangExpo\n\"https://play.google.com/store/apps/\"";
                 String sub = "Lang Expo";
                 myIntent.putExtra(Intent.EXTRA_SUBJECT,sub);
                 myIntent.putExtra(Intent.EXTRA_TEXT,body);

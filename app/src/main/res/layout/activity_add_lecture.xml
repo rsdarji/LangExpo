@@ -35,84 +35,84 @@
                 android:src="@drawable/add_lecture"
                 android:layout_marginTop="10dp"
                 android:foregroundGravity="center"
-                android:id="@+id/tlaunguage"/>
+                android:id="@+id/admin_add_lecture_img"/>
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:layout_below="@id/tlaunguage"
-                android:text="Lecture Name:"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                />
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/admin_add_lecture_name_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:hint="Lecture Name"
+                android:gravity="center"
+                android:layout_below="@id/admin_add_lecture_img"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/admin_add_lecture_sequence_et"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/textView3"
+                android:hint="Lecture sequence number"
+                android:gravity="center"
+                android:layout_below="@id/admin_add_lecture_name_et"
                 android:ems="10"
-                android:inputType="textPersonName"
-                />
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/editText2"
-                android:layout_marginTop="20dp"
-                android:text="Select Launguage"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                />
-            <Spinner
-                android:id="@+id/l_launguage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textView"
-                android:layout_marginTop="20dp"
-
-                android:entries="@array/Launguage"
-                android:textSize="20dp"
-                android:textStyle="bold"
-
-                />
-
-
-
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/l_launguage"
-                android:layout_marginTop="20dp"
-                android:text="Select Level To Add"
-
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:inputType="number" />
 
             <Spinner
-                android:id="@+id/level"
+                android:id="@+id/admin_add_lecture_level_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textView2"
-                android:layout_marginTop="20dp"
-                android:entries="@array/Levels"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:spinnerMode="dialog"
+                android:entries="@array/level"
+                android:textSize="18dp"
+                android:layout_centerInParent="true"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_below="@+id/admin_add_lecture_sequence_et"/>
 
+            <Spinner
+                android:id="@+id/admin_add_lecture_language_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:spinnerMode="dialog"
+                android:entries="@array/lecture"
+                android:textSize="18dp"
+                android:layout_centerInParent="true"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_below="@+id/admin_add_lecture_level_spinner"/>
 
             <ScrollView
+                android:id="@+id/admin_add_lecture_content_et_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/level"
+                android:layout_below="@id/admin_add_lecture_language_spinner"
                 android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                >
-                <TextView
-                    android:id="@+id/textView4"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/admin_add_lecture_content_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Lecture Content"
+                    android:layout_gravity="top|left"
+                    android:layout_marginTop="10dp"
+                    android:inputType="textMultiLine"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:lines="6"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:scrollHorizontally="false" />
+
+
+                <!--<TextView
+                    android:id="@+id/admin_add_lecture_content_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="You are a blank canvas. And that’s great! At least, you don’t have any bad habits and you cannot wait to start learning French!
@@ -120,24 +120,71 @@
 You need help on every possible front: French pronunciation and vocabulary, but also very accessible explanations to clarify the differences between the French and English languages.
 
 A lot of schools foll
-"
-                    />
+"/>-->
             </ScrollView>
 
+            <TextView
+                android:id="@+id/admin_add_lecture_preview_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/admin_add_lecture_content_et_scroll"
+                android:text="Preview"/>
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/admin_add_lecture_preview_tv"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/admin_add_lecture_content_preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|left"
+                    android:layout_marginTop="10dp"
+                    android:inputType="textMultiLine"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:lines="6"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:scrollHorizontally="false" />
+            </ScrollView>
         </RelativeLayout>
     </ScrollView>
-    <Button
-        android:id="@+id/button_add_lecture"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:text="+ Add Lecture"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:onClick="addLecture"
-        android:layout_margin="15dp"
-        />
+        android:layout_margin="15dp">
+        <com.langexpo.customfunction.CustomButton
+            android:id="@+id/button_add_lecture"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:textStyle="bold"
+            android:onClick="addLecture"
+            android:layout_marginRight="5dp"
+            android:layout_weight="5"/>
+
+        <com.langexpo.customfunction.CustomButton
+            android:id="@+id/button_delete_language"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Delete"
+            android:onClick="deleteLecture"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="2"/>
+    </LinearLayout>
+
 </RelativeLayout>
 
 

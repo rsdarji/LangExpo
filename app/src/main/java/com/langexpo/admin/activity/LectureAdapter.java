@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,21 +14,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.langexpo.R;
 import com.langexpo.model.Language;
 import com.langexpo.model.Lecture;
+import com.langexpo.model.Level;
 import com.langexpo.model.Question;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.LectureViewHolder> {
+public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.LectureViewHolder> implements Filterable {
     //this context we will use to inflate the layout
     private Context mCtx;
 
     //we are storing all the products in a list
-    private List<Lecture> LectureList;
-
+    private List<Lecture> lectureList;
+    private List<Lecture> mDataFiltered;
     //getting the context and product list with constructor
-    public LectureAdapter(Context mCtx, List<Language> languageList) {
+    public LectureAdapter(Context mCtx, List<Lecture> lectureList) {
         this.mCtx = mCtx;
-        this.LectureList = LectureList;
+        this.lectureList = lectureList;
+        this.mDataFiltered = lectureList;
     }
 
     @Override
@@ -40,7 +45,7 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.LectureV
     @Override
     public void onBindViewHolder(LectureAdapter.LectureViewHolder holder, int position) {
         //getting the product of the specified position
-        Lecture lecture = LectureList.get(position);
+        Lecture lecture = lectureList.get(position);
 
         //binding the data with the viewholder views
 
@@ -51,7 +56,7 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.LectureV
 
         holder.itemView.setOnClickListener(v -> {
             //Toast.makeText(mCtx, "item clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(mCtx, Question.class);
+            Intent intent = new Intent(mCtx, AddLecture.class);
             intent.putExtra("lectureId", lecture.getLectureId());
             intent.putExtra("lectureName",lecture.getLectureName());
             mCtx.startActivity(intent);
@@ -62,7 +67,7 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.LectureV
 
     @Override
     public int getItemCount() {
-        return LectureList.size();
+        return lectureList.size();
     }
 
     class LectureViewHolder extends RecyclerView.ViewHolder {
@@ -75,5 +80,38 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.LectureV
             lectureName = itemView.findViewById(R.id.lecture_row_layout_admin_lecture3f_name);
 
         }
+    }
+
+    @Override
+    public Filter getFilter() {
+
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String Key = constraint.toString();
+                if (Key.isEmpty()) {
+                    mDataFiltered = lectureList ;
+                }
+                else {
+                    List<Lecture> lstFiltered = new ArrayList<>();
+                    for (Lecture row : lectureList) {
+                        if (row.getLanguageName().toLowerCase().contains(Key.toLowerCase())){
+                            lstFiltered.add(row);
+                        }
+                    }
+                    mDataFiltered = lstFiltered;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values= mDataFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                //levelList.clear();
+                lectureList = (List<Lecture>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }

@@ -445,6 +445,7 @@ public class AddLevel extends AppCompatActivity {
             }
         }
     }
+
     private class GetLanguageList extends AsyncTask<Void, Void, String> {
         private ProgressDialog progressBar;
 
@@ -537,7 +538,7 @@ public class AddLevel extends AppCompatActivity {
                     JSONObject language;
                     //languages.getJSONObject(i).getString("languageId");
                     langaugeArray = new String[languages.length()+1];
-                    langaugeArray[0] = "---Select Language---";
+                    langaugeArray[0] = Constant.SPINNER_DEFAULT_VALUE_LANGUAGE;
                     for(int i = 1; i<=languages.length();i++){
                         language = languages.getJSONObject(i-1);
                         langaugeArray[i] = language.getString("languageName");

@@ -1,77 +1,88 @@
 package com.langexpo.model;
 
 public class Lecture {
-    private long LectureId;
-    private String LectureName;
-    private String LanguageName;
-    private long LanguageId;
-    private String LevelName;
-    private long LevelId;
-    private String Content;
+    private long lectureId;
+    private String lectureName;
+    private String lectureContent;
+    private long languageId;
+    private String languageName;
+    private long levelId;
+    private String levelName;
+    private int sequenceNumber;
 
-    public Lecture(long LectureId, String LectureName, String LanguageName, long LanguageId, String LevelName, long LevelId, String Content){
-        this.LectureId = LectureId;
-        this.LectureName = LectureName;
-        this.LanguageName = LanguageName;
-        this.LanguageId = LanguageId;
-        this.LevelName = LevelName;
-        this.LevelId = LevelId;
-        this.Content = Content;
+    public Lecture(long lectureId, String lectureName, String lectureContent,
+                   long languageId, String languageName, long levelId,
+                   String levelName, int sequenceNumber){
+        this.lectureId = lectureId;
+        this.lectureName = lectureName;
+        this.lectureContent = lectureContent;
+        this.languageId = languageId;
+        this.languageName = languageName;
+        this.levelId = levelId;
+        this.levelName = levelName;
     }
 
     public long getLectureId() {
-        return LectureId;
+        return lectureId;
     }
 
     public void setLectureId(long lectureId) {
-        LectureId = lectureId;
+        this.lectureId = lectureId;
     }
 
     public String getLectureName() {
-        return LectureName;
+        return lectureName;
     }
 
     public void setLectureName(String lectureName) {
-        LectureName = lectureName;
+        this.lectureName = lectureName;
     }
 
-    public String getLanguageName() {
-        return LanguageName;
+    public String getLectureContent() {
+        return lectureContent;
     }
 
-    public void setLanguageName(String languageName) {
-        LanguageName = languageName;
+    public void setLectureContent(String lectureContent) {
+        this.lectureContent = lectureContent;
     }
 
     public long getLanguageId() {
-        return LanguageId;
+        return languageId;
     }
 
     public void setLanguageId(long languageId) {
-        LanguageId = languageId;
+        this.languageId = languageId;
     }
 
-    public String getLevelName() {
-        return LevelName;
+    public String getLanguageName() {
+        return languageName;
     }
 
-    public void setLevelName(String levelName) {
-        LevelName = levelName;
+    public void setLanguageName(String languageName) {
+        this.languageName = languageName;
     }
 
     public long getLevelId() {
-        return LevelId;
+        return levelId;
     }
 
     public void setLevelId(long levelId) {
-        LevelId = levelId;
+        this.levelId = levelId;
     }
 
-    public String getContent() {
-        return Content;
+    public String getLevelName() {
+        return levelName;
     }
 
-    public void setContent(String content) {
-        Content = content;
+    public void setLevelName(String levelName) {
+        this.levelName = levelName;
+    }
+
+    public int getSequenceNumber() {
+        return sequenceNumber;
+    }
+
+    public void setSequenceNumber(int sequenceNumber) {
+        this.sequenceNumber = sequenceNumber;
     }
 }

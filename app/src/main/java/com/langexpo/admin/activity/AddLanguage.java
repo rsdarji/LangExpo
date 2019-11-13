@@ -36,6 +36,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.langexpo.R;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.ImagePickerActivity;
+import com.langexpo.utility.LangExpoAlertDialog;
 import com.langexpo.utility.Session;
 import com.langexpo.utility.UploadImageToCloud;
 import com.squareup.picasso.Picasso;
@@ -424,6 +425,10 @@ public class AddLanguage extends AppCompatActivity {
                     toast.show();
                 }
                 else if(loginResponse.get("status").toString().equalsIgnoreCase("error")){
+                    if(loginResponse.get("code").toString().equalsIgnoreCase("LE_D_411")) {
+                        LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(AddLanguage.this, AddLanguage.this);
+                        alertDialog.alertDialog("Duplicate", loginResponse.get("message").toString());
+                    }
                     Toast toast = Toast.makeText(AddLanguage.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
                     progressBar.dismiss();
                     toast.show();

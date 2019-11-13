@@ -52,6 +52,7 @@
                 android:id="@+id/admin_add_level_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:spinnerMode="dialog"
                 android:layout_below="@id/admin_add_level_level_name"
                 android:layout_marginTop="10dp"
                 android:entries="@array/Levels"
@@ -61,36 +62,62 @@
                 android:gravity="center"
                 android:textStyle="bold" />
 
+            <Spinner
+                android:id="@+id/admin_add_language_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog"
+                android:layout_below="@id/admin_add_level_spinner"
+                android:layout_marginTop="10dp"
+                android:entries="@array/language"
+                android:textSize="18dp"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/admin_add_level_levelname_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/admin_add_level_spinner"
+                android:layout_below="@+id/admin_add_language_spinner"
                 android:layout_marginTop="10dp"
                 android:ems="10"
                 android:gravity="center"
                 android:hint="Sequence Number"
                 android:inputType="number"/>
 
-            <com.langexpo.customfunction.CustomButton
-                android:id="@+id/admin_button_add_level"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Add Level"
-                android:layout_below="@+id/admin_add_level_levelname_et"
-                android:layout_marginTop="10dp"
-                android:onClick="addLevel"/>
 
-            <com.langexpo.customfunction.CustomButton
-                android:id="@+id/admin_button_delete_level"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Delete Level"
-                android:layout_below="@+id/admin_button_add_level"
-                android:layout_marginTop="10dp"
-                android:onClick="deleteLevelToDB"/>
         </RelativeLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="15dp">
+        <com.langexpo.customfunction.CustomButton
+            android:id="@+id/admin_button_add_level"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Add"
+            android:layout_marginRight="5dp"
+            android:layout_below="@+id/admin_add_level_levelname_et"
+            android:onClick="addLevel"
+            android:layout_weight="5"/>
+
+        <com.langexpo.customfunction.CustomButton
+            android:id="@+id/admin_button_delete_level"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Delete"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/admin_button_add_level"
+            android:onClick="deleteLevelToDB"
+            android:layout_weight="2"/>
+    </LinearLayout>
 </RelativeLayout>

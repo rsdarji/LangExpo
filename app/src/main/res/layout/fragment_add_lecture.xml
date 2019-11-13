@@ -60,15 +60,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textView"
                 android:layout_marginTop="20dp"
-
-                android:entries="@array/Launguage"
                 android:textSize="20dp"
-                android:textStyle="bold"
-
-                />
-
-
-
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/textView2"
@@ -93,12 +86,30 @@
 
 
             <ScrollView
+                android:id="@+id/admin_add_lecture_html_content_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/level"
                 android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/admin_add_lecture_html_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="You are a blank canvas. And that’s great! At least, you don’t have any bad habits and you cannot wait to start learning French!
+
+You need help on every possible front: French pronunciation and vocabulary, but also very accessible explanations to clarify the differences between the French and English languages.
+
+A lot of schools foll
+" />
+            </ScrollView>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/admin_add_lecture_html_content_scroll"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="match_parent"
@@ -108,8 +119,7 @@
 You need help on every possible front: French pronunciation and vocabulary, but also very accessible explanations to clarify the differences between the French and English languages.
 
 A lot of schools foll
-"
-                    />
+" />
             </ScrollView>
 
 

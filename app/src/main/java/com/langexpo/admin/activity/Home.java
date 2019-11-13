@@ -71,7 +71,7 @@ public class Home extends NavigationDrawer {
     }
 
     public void addLecture(View view) {
-        Intent i = new Intent(Home.this, AddLecture.class);
+        Intent i = new Intent(Home.this, LectureList.class);
         startActivity(i);
         /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                 new AddLectureFragment()).commit();*/

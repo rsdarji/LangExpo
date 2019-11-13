@@ -40,6 +40,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.18'
     implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.synnapps:carouselview:0.1.5'
+
 
 
     //Butterknife

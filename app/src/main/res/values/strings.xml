@@ -30,14 +30,20 @@
         <item>Beginner</item>
         <item>Intermediate</item>
         <item>Expert</item>
-
     </string-array>
-    <string-array name="Launguage">
-        <item>French</item>
-        <item>German</item>
-        <item>Spanish</item>
 
+    <string-array name="level">
+        <item>---Select level---</item>
     </string-array>
+
+    <string-array name="lecture">
+        <item>---Select Lecture---</item>
+    </string-array>
+
+    <string-array name="language">
+        <item>---Select Language---</item>
+    </string-array>
+
     <string-array name="Question_Category">
         <item>Picture Selection</item>
         <item>Multiple Choice</item>
@@ -47,6 +53,7 @@
         <item>Tap The Pair</item>
         <item>Missing Word Selection</item>
     </string-array>
+
     <string-array name="Lesson_Levels">
         <item>1</item>
         <item>2</item>

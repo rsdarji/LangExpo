@@ -63,13 +63,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textView"
                 android:layout_marginTop="20dp"
-
-                android:entries="@array/Launguage"
                 android:textSize="20dp"
-                android:textStyle="bold"
-
-                />
-
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/textView6"
@@ -80,7 +75,6 @@
                 android:text="Select Question Category"
                 android:textSize="20dp"
                 android:textStyle="bold" />
-
 
             <Spinner
                 android:id="@+id/question_category"

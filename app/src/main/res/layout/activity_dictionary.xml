@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".activity.Dictionary"
     android:layout_margin="15dp">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/dictinary_my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:title="Search Word"
+        android:hapticFeedbackEnabled="true"
+        app:titleTextColor="@color/colorWhite"
+        android:theme="@style/ToolbarTheme"/>
 
     <EditText
         android:id="@+id/editText_dictionary_search"

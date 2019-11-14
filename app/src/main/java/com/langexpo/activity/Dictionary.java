@@ -2,6 +2,7 @@ package com.langexpo.activity;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -34,6 +35,7 @@ public class Dictionary extends AppCompatActivity {
     private String translatedText;
     private boolean connected;
     Translate translate;
+
     private ImageView favourite,unfavourite;
 
 
@@ -41,6 +43,7 @@ public class Dictionary extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dictionary);
+
         inputToTranslate = findViewById(R.id.editText_dictionary_search);
         translatedTv = findViewById(R.id.textView_result);
         Button translateButton = findViewById(R.id.button_translate);
@@ -125,5 +128,6 @@ public class Dictionary extends AppCompatActivity {
 
         return connected;
     }
-    }
+
+}
 

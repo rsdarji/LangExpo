@@ -34,6 +34,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.langexpo.R;
 import com.langexpo.activity.ContactUs;
+import com.langexpo.activity.Dictionary;
 import com.langexpo.activity.Feedback;
 import com.langexpo.activity.MainActivity;
 import com.langexpo.utility.Constant;
@@ -121,8 +122,9 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
                         new FragmentHome()).commit();
                 break;
             case R.id.nav_Dictionary:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
-                        new FragmentHome()).commit();
+                Intent intent_dictionary = new Intent(NavigationDrawer.this, Dictionary.class);
+                startActivity(intent_dictionary);
+
                 break;
             case R.id.nav_contact_us:
                 Intent intent = new Intent(NavigationDrawer.this, ContactUs.class);

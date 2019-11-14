@@ -112,7 +112,7 @@ public class AddLanguage extends AppCompatActivity {
     private void setLanguageDetail(long languageId, String languageName,
                                    String languageFlagURL){
         languageNameET.setText(languageName);
-        Picasso.with(this)
+        Picasso.get()
                 .load(languageFlagURL)
                 .into(languageFlagIV);
         myToolbar.setTitle("Update Language");

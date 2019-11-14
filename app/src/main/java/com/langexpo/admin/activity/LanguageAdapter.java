@@ -52,7 +52,7 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Langua
 
         holder.languageName.setText(language.getLanguageName());
         //holder.languageFlag.setImageBitmap(BitmapFactory.decodeStream(in));
-        Picasso.with(mCtx)
+        Picasso.get()
                 .load(language.getLanguageFlagURL())
                 .into(holder.languageFlag);
 

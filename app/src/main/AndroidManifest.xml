@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ContactUs"></activity>
+        <activity android:name=".activity.FavouriteWords"></activity>
+        <activity android:name=".activity.Dictionary" />
+        <activity android:name=".activity.ContactUs" />
         <activity android:name=".activity.Feedback" />
         <activity android:name=".activity.CreateProfile" />
         <activity android:name=".admin.activity.QuizList" />

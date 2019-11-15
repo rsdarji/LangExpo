@@ -1,6 +1,7 @@
 package com.langexpo.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
 
 public class ContactUs extends AppCompatActivity {
+    Toolbar myToolbar;
     private int[] mImages = new int[]{
             R.drawable.image1,R.drawable.image2,R.drawable.image3,R.drawable.image4,R.drawable.image5,R.drawable.image6,R.drawable.image7,R.drawable.image8
     };
@@ -25,6 +27,11 @@ public class ContactUs extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_us);
+        myToolbar = (Toolbar) findViewById(R.id.Contact_us_my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         CarouselView carouselView=(findViewById(R.id.carousel1));
         carouselView.setPageCount(mImages.length);
         carouselView.setImageListener(new ImageListener() {
@@ -42,4 +49,10 @@ public class ContactUs extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 }

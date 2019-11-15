@@ -50,6 +50,9 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.LectureV
         //binding the data with the viewholder views
 
         holder.lectureName.setText(lecture.getLectureName());
+        holder.levelName.setText(lecture.getLevelName());
+        holder.sequenceNumber.setText(String.valueOf(lecture.getSequenceNumber()));
+        holder.languageName.setText(lecture.getLanguageName());
         //holder.languageFlag.setImageBitmap(BitmapFactory.decodeStream(in));
 
 
@@ -59,6 +62,12 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.LectureV
             Intent intent = new Intent(mCtx, AddLecture.class);
             intent.putExtra("lectureId", lecture.getLectureId());
             intent.putExtra("lectureName",lecture.getLectureName());
+            intent.putExtra("lectureContent", lecture.getLectureContent());
+            intent.putExtra("languageId",lecture.getLanguageId());
+            intent.putExtra("languageName", lecture.getLanguageName());
+            intent.putExtra("levelId",lecture.getLevelId());
+            intent.putExtra("levelName",lecture.getLevelName());
+            intent.putExtra("sequenceNumber",lecture.getSequenceNumber());
             mCtx.startActivity(intent);
         });
 
@@ -73,12 +82,17 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.LectureV
     class LectureViewHolder extends RecyclerView.ViewHolder {
 
         TextView lectureName;
+        TextView levelName;
+        TextView sequenceNumber;
+        TextView languageName;
 
         public LectureViewHolder(View itemView) {
             super(itemView);
 
             lectureName = itemView.findViewById(R.id.lecture_row_layout_admin_lecture3f_name);
-
+            levelName = itemView.findViewById(R.id.lecture_row_layout_admin_level_name);
+            sequenceNumber = itemView.findViewById(R.id.lecture_row_layout_admin_sequence_number);
+            languageName = itemView.findViewById(R.id.lecture_row_layout_admin_language_name);
         }
     }
 
@@ -95,7 +109,13 @@ public class LectureAdapter extends RecyclerView.Adapter<LectureAdapter.LectureV
                 else {
                     List<Lecture> lstFiltered = new ArrayList<>();
                     for (Lecture row : lectureList) {
+                        if (row.getLectureName().toLowerCase().contains(Key.toLowerCase())){
+                            lstFiltered.add(row);
+                        }
                         if (row.getLanguageName().toLowerCase().contains(Key.toLowerCase())){
+                            lstFiltered.add(row);
+                        }
+                        if (row.getLevelName().toLowerCase().contains(Key.toLowerCase())){
                             lstFiltered.add(row);
                         }
                     }

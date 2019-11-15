@@ -60,4 +60,6 @@ public interface Constant {
         String PHONE = "phone";
         String ACTIVE = "active";
     }
+
+    public final long userId = 1;
 }

@@ -20,6 +20,7 @@ public class Lecture {
         this.languageName = languageName;
         this.levelId = levelId;
         this.levelName = levelName;
+        this.sequenceNumber = sequenceNumber;
     }
 
     public long getLectureId() {

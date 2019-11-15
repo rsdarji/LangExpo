@@ -35,6 +35,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.langexpo.R;
 import com.langexpo.activity.ContactUs;
 import com.langexpo.activity.Dictionary;
+import com.langexpo.activity.FavoriteList;
 import com.langexpo.activity.Feedback;
 import com.langexpo.activity.MainActivity;
 import com.langexpo.utility.Constant;
@@ -99,6 +100,7 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case R.id.nav_home:
                 System.out.println("hello home");
@@ -122,12 +124,16 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
                         new FragmentHome()).commit();
                 break;
             case R.id.nav_Dictionary:
-                Intent intent_dictionary = new Intent(NavigationDrawer.this, Dictionary.class);
-                startActivity(intent_dictionary);
-
+                intent = new Intent(NavigationDrawer.this, Dictionary.class);
+                startActivity(intent);
                 break;
+            case R.id.nav_favorite:
+                intent = new Intent(NavigationDrawer.this, FavoriteList.class);
+                startActivity(intent);
+                break;
+
             case R.id.nav_contact_us:
-                Intent intent = new Intent(NavigationDrawer.this, ContactUs.class);
+                intent = new Intent(NavigationDrawer.this, ContactUs.class);
                 startActivity(intent);
                 /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                         new FragmentHome()).commit();*/

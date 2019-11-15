@@ -28,6 +28,10 @@
             android:icon="@drawable/ic_dictionary"
             android:title="Dictionary" />
         <item
+            android:id="@+id/nav_favorite"
+            android:icon="@drawable/ic_favorite_filled"
+            android:title="Favorite" />
+        <item
             android:id="@+id/nav_contact_us"
             android:icon="@drawable/ic_contact_us"
             android:title="Contact Us" />

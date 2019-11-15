@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.FavouriteWords"></activity>
+        <activity android:name=".activity.FavoriteList"></activity>
         <activity android:name=".activity.Dictionary" />
         <activity android:name=".activity.ContactUs" />
         <activity android:name=".activity.Feedback" />

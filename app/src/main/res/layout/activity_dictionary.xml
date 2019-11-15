@@ -5,64 +5,80 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.Dictionary"
-    android:layout_margin="15dp">
+    >
 
-    <EditText
-        android:id="@+id/editText_dictionary_search"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/dictionary_my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="141dp"
-        android:ems="10"
-        android:gravity="center"
-        android:textSize="30dp"
-        android:hint="Search a word"
-        android:inputType="textMultiLine"
-        android:text=""/>
-
-    <Button
-        android:id="@+id/button_translate"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:title="Dictionary"
+        android:hapticFeedbackEnabled="true"
+        app:titleTextColor="@color/colorWhite"
+        android:theme="@style/ToolbarTheme"/>
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Translate"
-        android:layout_below="@id/editText_dictionary_search"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/dictionary_my_toolbar"
+        android:layout_margin="15dp">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button_translate"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView_result"
+        <EditText
+            android:id="@+id/editText_dictionary_search"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_weight="5"
-            android:text="No word found"
+            android:layout_height="141dp"
+            android:ems="10"
+            android:gravity="center"
             android:textSize="30dp"
-            android:textStyle="bold" />
+            android:hint="Search a word"
+            android:inputType="textMultiLine"
+            android:text=""/>
 
-        <ImageView
-            android:id="@+id/imageView_unfavourite"
-            android:layout_width="90dp"
+        <Button
+            android:id="@+id/button_translate"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="2"
-            android:src="@drawable/ic_favorite"
-            android:text="UnFavourite"
-            android:textStyle="bold" />
+            android:text="Translate"
+            android:layout_below="@id/editText_dictionary_search"/>
 
-        <!--<ImageView
-            android:id="@+id/imageView_favourite"
-            android:src="@drawable/ic_favorite_filled"
-            android:layout_width="90dp"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="2"
-            android:text="Favourite"
-            android:textStyle="bold" />-->
+            android:layout_below="@+id/button_translate"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textView_result"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_weight="5"
+                android:text="No word found"
+                android:textSize="30dp"
+                android:textStyle="bold" />
 
+            <ImageView
+                android:id="@+id/imageView_unfavourite"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="2"
+                android:src="@drawable/ic_favorite"
+                android:text="UnFavourite"
+                android:textStyle="bold" />
+
+            <!--<ImageView
+                android:id="@+id/imageView_favourite"
+                android:src="@drawable/ic_favorite_filled"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="2"
+                android:text="Favourite"
+                android:textStyle="bold" />-->
+
+        </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

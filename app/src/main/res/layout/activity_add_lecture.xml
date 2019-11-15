@@ -99,7 +99,7 @@
                     android:id="@+id/admin_add_lecture_content_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Lecture Content"
+                    android:hint="Lecture Content (Up to 4000 char)"
                     android:layout_gravity="top|left"
                     android:layout_marginTop="10dp"
                     android:inputType="textMultiLine"
@@ -107,6 +107,7 @@
                     android:scrollbarStyle="insideInset"
                     android:scrollbars="vertical"
                     android:lines="6"
+                    android:maxLength="4000"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:scrollHorizontally="false" />
 
@@ -184,7 +185,6 @@ A lot of schools foll
             android:layout_marginLeft="5dp"
             android:layout_weight="2"/>
     </LinearLayout>
-
 </RelativeLayout>
 
 

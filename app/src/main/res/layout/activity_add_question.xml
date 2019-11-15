@@ -33,28 +33,18 @@
             android:paddingBottom="15dp">
 
             <ImageView
-                android:id="@+id/question"
+                android:id="@+id/admin_add_question_img"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginTop="10dp"
                 android:foregroundGravity="center"
                 android:src="@drawable/add_question2" />
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/question"
-                android:layout_marginTop="70dp"
-                android:text="Question:"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/admin_add_question_question"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/textView3"
+                android:layout_below="@id/admin_add_question_img"
                 android:layout_marginTop="10dp"
                 android:ems="10"
                 android:inputType="textPersonName" />
@@ -63,7 +53,7 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/editText2"
+                android:layout_below="@id/admin_add_question_question"
                 android:layout_marginTop="20dp"
                 android:text="Select Launguage"
                 android:textSize="20dp"
@@ -188,5 +178,4 @@
             android:onClick="deleteQuestionToDB"
             android:layout_weight="2"/>
     </LinearLayout>
-
 </RelativeLayout>

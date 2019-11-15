@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.FavouriteWords">
+    tools:context=".activity.FavoriteList">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/admin_QuestionTypeList_my_toolbar"
+        android:id="@+id/favorite_my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        app:title="Favourite List"
+        app:title="Favourites"
         android:hapticFeedbackEnabled="true"
         app:titleTextColor="@color/colorWhite"
         android:theme="@style/ToolbarTheme"/>
@@ -20,27 +20,17 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/admin_QuestionTypeList_my_toolbar"
-        android:id="@+id/admin_question_type_list_refresh_layout">
+        android:layout_below="@+id/favorite_my_toolbar"
+        android:layout_marginTop="5dp"
+        android:id="@+id/favorite_refresh_layout">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/admin_question_type_recyclerView"
-            android:layout_marginBottom="75dp"
+            android:id="@+id/favorite_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <com.langexpo.customfunction.CustomButton
-        android:id="@+id/admin_button_add_QuestionType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:textStyle="bold"
-        android:layout_margin="15dp"
-        android:text="Add Question Type"
-        android:layout_below="@+id/editText_language_name"
-        android:layout_marginTop="20dp"/>
 
 
 </RelativeLayout>

@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,8 +63,10 @@ public class AddLecture extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_lecture);
 
-        new GetLanguageList(AddLecture.this).execute();
-        new GetLevelList(AddLecture.this).execute();
+        if(!updateLecture) {
+            new GetLanguageList(AddLecture.this).execute();
+            new GetLevelList(AddLecture.this).execute();
+        }
 
         myToolbar = (Toolbar) findViewById(R.id.admin_add_lecture_my_toolbar);
         setSupportActionBar(myToolbar);
@@ -80,6 +83,7 @@ public class AddLecture extends AppCompatActivity {
         previewText = (TextView) findViewById(R.id.admin_add_lecture_preview_tv);
         //previewBT = (Button) findViewById(R.id.button_preivew_lecture_content);
 
+        getIncomingIntent();
         // display preview in dialogbox.
         previewText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +137,7 @@ public class AddLecture extends AppCompatActivity {
             }
 
         });
-        getIncomingIntent();
+
     }
 
     @Override
@@ -174,12 +178,15 @@ public class AddLecture extends AppCompatActivity {
         lectureNameET.setText(lectureNameValue);
         sequenceNumberET.setText(String.valueOf(sequenceNumberValue));
         lectureContentET.setText(lectureContentValue);
-        if(lectureContentValue.length() != 0)
+        if(lectureContentValue.length() != 0) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 lectureContentPreview.setText(Html.fromHtml(lectureContentValue.toString(), Html.FROM_HTML_MODE_LEGACY));
             } else {
                 lectureContentPreview.setText(Html.fromHtml(lectureContentValue.toString()));
             }
+        }
+        new GetLanguageList(AddLecture.this).execute();
+        new GetLevelList(AddLecture.this).execute();
     }
 
     public void addLecture(View view) {
@@ -348,12 +355,16 @@ public class AddLecture extends AppCompatActivity {
                         loginResponse.get("status").toString().equalsIgnoreCase("ok") ) {
 
                     Toast toast = Toast.makeText(AddLecture.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
-                    Intent intent = new Intent(AddLecture.this, LevelList.class);
+                    Intent intent = new Intent(AddLecture.this, LectureList.class);
                     startActivity(intent);
                     progressBar.dismiss();
                     toast.show();
                 }
                 else if(loginResponse.get("status").toString().equalsIgnoreCase("error")){
+                    if(loginResponse.get("code").toString().equalsIgnoreCase("LE_D_411")) {
+                        LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(AddLecture.this, AddLecture.this);
+                        alertDialog.alertDialog("Already Deleted", loginResponse.get("message").toString());
+                    }
                     Toast toast = Toast.makeText(AddLecture.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
                     progressBar.dismiss();
                     toast.show();
@@ -417,15 +428,9 @@ public class AddLecture extends AppCompatActivity {
 
 
             try {
-                lectureContentByteData = lectureContentValue.getBytes("UTF-8");//Better to specify encoding
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-
-            try {
                 String urlParameters  = "lectureId="+lectureId+"&lectureNameValue="+lectureNameValue+
                         "&sequenceNumberValue="+sequenceNumberValue+"&languageNameValue="+languageNameValue+
-                        "&levelNameValue="+levelNameValue+"&lectureContentValue="+lectureContentByteData;
+                        "&levelNameValue="+levelNameValue+"&lectureContentValue="+lectureContentValue;
 
                 byte[] postData       = urlParameters.getBytes();
                 int    postDataLength = postData.length;
@@ -739,7 +744,7 @@ public class AddLecture extends AppCompatActivity {
                     if(levelSpinnerAdapter!=null) {
                         levelSpinner.setAdapter(levelSpinnerAdapter);
                     }
-                    if(!levelNameValue.equalsIgnoreCase("")){
+                    if(levelNameValue!=""){
                         levelSpinner.setSelection(levelSpinnerAdapter.getPosition(levelNameValue));
                     }
                     progressBar.dismiss();

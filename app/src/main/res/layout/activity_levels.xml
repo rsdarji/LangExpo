@@ -52,6 +52,7 @@
                 android:textColor="@color/colorPrimary"/>
 
             <RadioGroup
+                android:id="@+id/select_level_radio_button_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -59,7 +60,7 @@
                 android:layout_below="@+id/title">
 
                 <com.langexpo.customfunction.CustomRadioButton
-                    android:id="@+id/radio_button_beginner"
+                    android:id="@+id/select_level_radio_button_beginner"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:paddingTop="15dp"
@@ -71,8 +72,8 @@
                     android:text="Beginner" />
 
                 <com.langexpo.customfunction.CustomRadioButton
-                    android:id="@+id/radio_button_intermediate"
-                    android:layout_below="@id/radio_button_beginner"
+                        android:id="@+id/select_level_radio_button_intermediate"
+                    android:layout_below="@id/select_level_radio_button_beginner"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:paddingTop="15dp"
@@ -84,8 +85,8 @@
                     android:text="Intermediate" />
 
                 <com.langexpo.customfunction.CustomRadioButton
-                    android:id="@+id/radio_button_expert"
-                    android:layout_below="@id/radio_button_intermediate"
+                    android:id="@+id/select_level_radio_button_expert"
+                    android:layout_below="@id/select_level_radio_button_intermediate"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:paddingTop="15dp"
@@ -103,7 +104,7 @@
         android:layout_marginTop="650dp"
         android:textStyle="bold"
         android:text="Continue"
-        android:onClick="register"
+        android:onClick="levelContinue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

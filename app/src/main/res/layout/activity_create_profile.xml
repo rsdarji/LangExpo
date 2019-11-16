@@ -7,10 +7,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.CreateProfile">
 
-
-
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/my_toolbar"
+        android:id="@+id/user_create_profile_my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"

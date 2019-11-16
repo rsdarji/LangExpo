@@ -280,7 +280,7 @@ public class AddLevel extends AppCompatActivity {
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            System.out.println(result);
+            System.out.println("deleteLevel: "+result);
             try {
                 JSONObject loginResponse = new JSONObject(result);
                 if(loginResponse.length()!=0 &&
@@ -419,7 +419,7 @@ public class AddLevel extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            System.out.println(result);
+            System.out.println("addUpdateLevel: "+result);
             try {
                 JSONObject loginResponse = new JSONObject(result);
                 if(loginResponse.length()!=0 &&

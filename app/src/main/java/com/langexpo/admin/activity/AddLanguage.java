@@ -280,7 +280,7 @@ public class AddLanguage extends AppCompatActivity {
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            System.out.println(result);
+            System.out.println("deleteLanguage: "+result);
             try {
                 JSONObject loginResponse = new JSONObject(result);
                 if(loginResponse.length()!=0 &&
@@ -406,7 +406,7 @@ public class AddLanguage extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            System.out.println(result);
+            System.out.println("addUpdateLanguage: "+result);
             try {
                 JSONObject loginResponse = new JSONObject(result);
                 if(loginResponse.length()!=0 &&

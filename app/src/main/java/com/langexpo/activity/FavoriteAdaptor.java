@@ -300,7 +300,7 @@ public class FavoriteAdaptor extends RecyclerView.Adapter<FavoriteAdaptor.Favori
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            System.out.println(result);
+            System.out.println("markfavorite: "+ result);
             try {
                 JSONObject loginResponse = new JSONObject(result);
                 if(loginResponse.length()!=0 &&

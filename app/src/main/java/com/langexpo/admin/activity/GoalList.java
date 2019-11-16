@@ -214,7 +214,7 @@ public class GoalList extends AppCompatActivity {
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            System.out.println(result);
+            System.out.println("featchAllGoal: "+result);
             try {
                 JSONObject allLanguageList = new JSONObject(result);
                 if(allLanguageList.get("status").toString().equalsIgnoreCase("ok")) {

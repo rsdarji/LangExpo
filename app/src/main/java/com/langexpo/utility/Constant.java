@@ -62,4 +62,9 @@ public interface Constant {
     }
 
     public final long userId = 1;
+
+
+    public interface Session{
+        String USER_SELECTED_LANGUAGE="user-selected-language"; //SelectLanuguageAdapter.java
+    }
 }

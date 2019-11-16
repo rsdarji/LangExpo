@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         session = new Session(getApplicationContext());
+        session.clear();
+        //Toast.makeText(MainActivity.this, Session.get(Constant.Session.USER_SELECTED_LANGUAGE),Toast.LENGTH_SHORT).show();
         session.set("admin","false");
 
         uname=(EditText)findViewById(R.id.edittext_username);

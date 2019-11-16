@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="15dp"
     tools:context="com.langexpo.activity.DailyGoal">
 
-    <ScrollView
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_marginBottom="75dp">
@@ -17,7 +18,7 @@
             android:paddingRight="15dp"
             android:paddingLeft="15dp"
             android:paddingTop="15dp">
-
+-->
             <ImageView
                 android:id="@+id/back"
                 android:layout_height="50dp"
@@ -35,7 +36,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_toEndOf="@+id/back"
                 android:max="100"
-                android:progress="25"
+                android:progress="50"
                 android:progressDrawable="@drawable/custom_progress"
                 android:visibility="visible" />
 
@@ -51,7 +52,33 @@
                 android:textSize="25dp"
                 android:textColor="#460d1e"/>
 
-            <com.langexpo.customfunction.CustomCheckbox
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/select_goal_refresh_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="75dp"
+                android:layout_below="@+id/tv_goal_title">
+
+
+                <!--<RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/title"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center">-->
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/select_goal_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="75dp"
+                    android:layout_height="match_parent" />
+
+                <!--</RadioGroup>-->
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <!--<com.langexpo.customfunction.CustomCheckbox
                 android:id="@+id/chbx_goal_one_quiz"
                 android:layout_below="@id/tv_goal_title"
                 android:layout_width="match_parent"
@@ -119,16 +146,15 @@
                 android:button="@android:color/transparent"
                 android:background="@drawable/radio_button_custom_theme"
                 android:text="5 Minute/day"
-                android:textColor="#460d1e"/>
-        </RelativeLayout>
-    </ScrollView>
+                android:textColor="#460d1e"/>-->
+        <!--</RelativeLayout>
+    </ScrollView>-->
     <com.langexpo.customfunction.CustomButton
         android:id="@+id/button_goal_continue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:onClick="continue2"
+        android:onClick="goalContinue"
         android:text="Continue"
-        android:textStyle="bold"
-        android:layout_margin="15dp"/>
+        android:textStyle="bold"/>
 </RelativeLayout>

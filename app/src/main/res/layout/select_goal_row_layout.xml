@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+        <com.langexpo.customfunction.CustomCheckbox
+            android:id="@+id/daily_goal_chbx"
+            android:layout_below="@id/tv_goal_title"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="25dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:button="@android:color/transparent"
+            android:background="@drawable/radio_button_custom_theme"
+            android:text="One quiz/day"
+            android:textColor="#460d1e"/>
+
+</LinearLayout>

@@ -8,12 +8,16 @@ import android.view.View;
 
 import com.langexpo.R;
 
+import java.util.ArrayList;
+
 public class Levels extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
+
+        getIncomingIntent();
     }
     public void back(View view)
     {
@@ -24,6 +28,15 @@ public class Levels extends AppCompatActivity {
     {
         Intent intent=new Intent (this,CreateProfile.class);
         startActivity(intent);
+    }
+
+    private void getIncomingIntent() {
+        /*if (getIntent().hasExtra("userSelectedGoals")) {
+            ArrayList<String> test = getIntent().getStringArrayListExtra("userSelectedGoals");
+            for(String s : test){
+                System.out.println("s : "+s);
+            }
+        }*/
     }
 
 }

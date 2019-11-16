@@ -65,6 +65,8 @@ public interface Constant {
 
 
     public interface Session{
-        String USER_SELECTED_LANGUAGE="user-selected-language"; //SelectLanuguageAdapter.java
+        String USER_SELECTED_LANGUAGE="userSelectedLanguage"; //SelectLanuguageAdapter.java
+        String USER_SELECTED_GOALS = "userSelectedGoals"; //DailyGoal.java -> goalContinue()
+        String USER_SELECTED_LEVEL = "userSelectedlevel";
     }
 }

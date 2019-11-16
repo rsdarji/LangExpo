@@ -41,7 +41,6 @@ public class SelectLaunguage extends AppCompatActivity {
     SwipeRefreshLayout refreshLayout;
     RecyclerView recyclerView;
     List<Language> languageList;
-    String userSelectedLanguage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +64,10 @@ public class SelectLaunguage extends AppCompatActivity {
         });
         //to get all language list
         new GetLanguageList(this).execute();
-        SelectLanguageAdapter.lastCheckedRB=null;
+        if(Session.get(Constant.Session.USER_SELECTED_LANGUAGE).equalsIgnoreCase("")){
+            SelectLanguageAdapter.lastCheckedRB=null;
+        }
+
 
 
     }

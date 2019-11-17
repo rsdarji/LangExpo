@@ -41,6 +41,7 @@ import com.langexpo.activity.Dictionary;
 import com.langexpo.activity.FavoriteList;
 import com.langexpo.activity.Feedback;
 import com.langexpo.activity.MainActivity;
+import com.langexpo.activity.ManageProfile;
 import com.langexpo.admin.activity.AddLanguage;
 import com.langexpo.admin.activity.LanguageList;
 import com.langexpo.fragments.FragmentUserHome;
@@ -126,14 +127,15 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
                 }
                 break;
             case R.id.nav_manage_profile:
+                intent = new Intent(NavigationDrawer.this, ManageProfile.class);
+                startActivity(intent);
+
+                break;
+            /*case R.id.nav_notification:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                         new FragmentHome()).commit();
                 break;
-            case R.id.nav_notification:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
-                        new FragmentHome()).commit();
-                break;
-            case R.id.nav_progress:
+            *//*case R.id.nav_progress:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                         new FragmentHome()).commit();
                 break;
@@ -141,7 +143,7 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                         new FragmentHome()).commit();
                 break;
-            case R.id.nav_Dictionary:
+            */case R.id.nav_Dictionary:
                 intent = new Intent(NavigationDrawer.this, Dictionary.class);
                 startActivity(intent);
                 break;

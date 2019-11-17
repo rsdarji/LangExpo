@@ -34,7 +34,7 @@
             android:overScrollMode="always"
             android:scrollbarStyle="insideInset"
             android:scrollbars="vertical"
-            android:lines="33"
+            android:lines="50"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:scrollHorizontally="false" />
     </ScrollView>

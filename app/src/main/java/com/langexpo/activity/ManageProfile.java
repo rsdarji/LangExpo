@@ -30,20 +30,15 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.langexpo.R;
-import com.langexpo.admin.activity.AddLanguage;
-import com.langexpo.admin.activity.Home;
-import com.langexpo.admin.activity.LanguageList;
-import com.langexpo.com.langexpo.navigationdrawer.NavigationDrawer;
 import com.langexpo.utility.Constant;
-import com.langexpo.utility.Image;
 import com.langexpo.utility.ImagePickerActivity;
 import com.langexpo.utility.LangExpoAlertDialog;
 import com.langexpo.utility.Session;
 import com.langexpo.utility.UploadImageToCloud;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -56,33 +51,27 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
-public class CreateProfile extends AppCompatActivity {
-
-
+public class ManageProfile extends AppCompatActivity {
     ImageView profileImg;
     EditText firstNameET, lastNameET, emailET, phoneET, passwordET, confirmPasswordET;
     TextView profileImgTV;
-    Button registerBT, skipBT;
+    Button updateBT, skipBT;
     String firstName, lastName, email, password, confirmPassword, profileImageFileName, url;
     long phone;
     Toolbar myToolbar;
     int profileImgId;
     byte[] byteArray;
     public static final int REQUEST_IMAGE = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_profile);
-
-        myToolbar = (Toolbar) findViewById(R.id.user_create_profile_my_toolbar);
+        setContentView(R.layout.activity_manage_profile);
+        myToolbar = (Toolbar) findViewById(R.id.user_manage_profile_my_toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-
-        profileImg = (ImageView) findViewById(R.id.img_create_profile_img);
         profileImgTV = (TextView) findViewById(R.id.profile_img_tv);
         firstNameET = (EditText) findViewById(R.id.profile_firstname_et);
         lastNameET = (EditText) findViewById(R.id.profile_lastname_et);
@@ -91,70 +80,61 @@ public class CreateProfile extends AppCompatActivity {
         passwordET = (EditText) findViewById(R.id.profile_password_et);
         confirmPasswordET = (EditText) findViewById(R.id.profile_confirm_password_et);
         profileImgId = R.id.img_create_profile_img;
-        registerBT = (Button)findViewById(R.id.profile_register_bt);
-        skipBT = (Button)findViewById(R.id.profile_skip_bt);
+        updateBT = (Button)findViewById(R.id.profile_update_bt);
+
 
         firstNameET.setText(Session.get(Constant.User.FIRST_NAME));
-    }
+        lastNameET.setText(Session.get(Constant.User.LAST_NAME));
+        emailET.setText(Session.get(Constant.User.EMAIL));
+        phoneET.setText(Session.get(Constant.User.PHONE));
+        Picasso.get()
+                .load(Session.get(Constant.User.AVTAR))
+                .into((ImageView) findViewById(profileImgId));
 
+
+    }
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
 
-    public void skip(View view) {
 
-    }
-
-    public void register(View view) {
+    public void update(View view) {
         firstName = firstNameET.getText().toString();
         lastName = lastNameET.getText().toString();
         email = emailET.getText().toString();
         phone = Long.parseLong(phoneET.getText().toString());
-        password = passwordET.getText().toString();
-        confirmPassword = confirmPasswordET.getText().toString();
 
         //validation start
 
         if(firstName.equalsIgnoreCase("")){
-            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(CreateProfile.this, CreateProfile.this);
+            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(ManageProfile.this, ManageProfile.this);
             alertDialog.alertDialog("Error", "Please enter first name.");
             firstNameET.requestFocus();
             return;
         }
         if(lastName.equalsIgnoreCase("")){
-            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(CreateProfile.this, CreateProfile.this);
+            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(ManageProfile.this, ManageProfile.this);
             alertDialog.alertDialog("Error", "Please enter last name.");
             lastNameET.requestFocus();
             return;
         }
         if(email.equalsIgnoreCase("") || !email.contains("@")){
-            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(CreateProfile.this, CreateProfile.this);
+            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(ManageProfile.this, ManageProfile.this);
             alertDialog.alertDialog("Error", "Please enter correct email.");
             emailET.requestFocus();
             return;
         }
         if(String.valueOf(phone).equalsIgnoreCase("") || String.valueOf(phone).length()<10){
-            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(CreateProfile.this, CreateProfile.this);
+            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(ManageProfile.this, ManageProfile.this);
             alertDialog.alertDialog("Error", "Phone number should not empty or less than 10 digit.");
             phoneET.requestFocus();
             return;
         }
-        if(password.equalsIgnoreCase("")){
-            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(CreateProfile.this, CreateProfile.this);
-            alertDialog.alertDialog("Error", "Please enter password.");
-            passwordET.requestFocus();
-            return;
-        }
-        if(confirmPassword.equalsIgnoreCase("")){
-            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(CreateProfile.this, CreateProfile.this);
-            alertDialog.alertDialog("Error", "Please enter confirm password.");
-            confirmPasswordET.requestFocus();
-            return;
-        }
+
         if(!password.trim().equalsIgnoreCase(confirmPassword.trim())){
-            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(CreateProfile.this, CreateProfile.this);
+            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(ManageProfile.this, ManageProfile.this);
             alertDialog.alertDialog("Error", "password and confirm password must be same.");
             confirmPasswordET.requestFocus();
             return;
@@ -164,12 +144,12 @@ public class CreateProfile extends AppCompatActivity {
 
         if(byteArray.length!=0) {
             profileImageFileName = "profile"+String.valueOf(phone);
-            url = UploadImageToCloud.uploadImage(CreateProfile.this, byteArray, Constant.IMAGE_FOLDER,
+            url = UploadImageToCloud.uploadImage(ManageProfile.this, byteArray, Constant.IMAGE_FOLDER,
                     profileImageFileName, Constant.PNG);
         }
 
-        new CreateProfileAsyncTask(CreateProfile.this, firstName, lastName, email,
-                phone, password, url).execute();
+        new ManageProfile.ManageProfileAsyncTask(ManageProfile.this, firstName, lastName, email,
+                phone, url).execute();
     }
 
     public void changeProfileImg(View view){
@@ -178,23 +158,23 @@ public class CreateProfile extends AppCompatActivity {
         checkPermission();
     }
 
-    private class CreateProfileAsyncTask extends AsyncTask<Void, Void, String> {
+    private class ManageProfileAsyncTask extends AsyncTask<Void, Void, String> {
         private ProgressDialog progressBar;
         private String firstName;
         private String lastName;
         private String email;
         private long phone;
-        private String password;
+
         private String profileImageURL;
 
-        public CreateProfileAsyncTask(Activity activity, String firstName, String lastName,
-                                    String email, long phone, String password, String profileImageURL){
+        public ManageProfileAsyncTask(Activity activity, String firstName, String lastName,
+                                      String email, long phone,  String profileImageURL){
             progressBar = new ProgressDialog(activity);
             this.firstName = firstName;
             this.lastName = lastName;
             this.email = email;
             this.phone = phone;
-            this.password = password;
+
             this.profileImageURL = profileImageURL;
         }
 
@@ -245,7 +225,7 @@ public class CreateProfile extends AppCompatActivity {
                     }
                 }
                 String urlParameters = "firstName="+firstName+"&lastName="+lastName+"&email="+email+
-                        "&phone="+phone+"&password="+password+"&profileImageURL="+profileImageURL+"&language="+language+
+                        "&phone="+phone+"&profileImageURL="+profileImageURL+"&language="+language+
                         "&userGoals="+userGoals.toString()+"&userLevels="+userLevels;
 
                 byte[] postData       = urlParameters.getBytes();
@@ -315,8 +295,8 @@ public class CreateProfile extends AppCompatActivity {
                             UploadImageToCloud.deleteStorageFile(oldLanguageFlagURL);
                         }
                     }*/
-                    Toast toast = Toast.makeText(com.langexpo.activity.CreateProfile.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
-                    Intent intent = new Intent(CreateProfile.this, MainActivity.class);
+                    Toast toast = Toast.makeText(com.langexpo.activity.ManageProfile.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
+                    Intent intent = new Intent(ManageProfile.this, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
@@ -326,11 +306,11 @@ public class CreateProfile extends AppCompatActivity {
                 }
                 else if(loginResponse.get("status").toString().equalsIgnoreCase("error")){
                     if(loginResponse.get("code").toString().equalsIgnoreCase("LE_D_PHONE_EMAIL")) {
-                        LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(CreateProfile.this, CreateProfile.this);
+                        LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(ManageProfile.this, ManageProfile.this);
                         alertDialog.alertDialog("Duplicate", loginResponse.get("message").toString());
                     }
 
-                    Toast toast = Toast.makeText(CreateProfile.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(ManageProfile.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
 
                     progressBar.dismiss();
                     toast.show();
@@ -380,7 +360,7 @@ public class CreateProfile extends AppCompatActivity {
     }
 
     private void launchCameraIntent() {
-        Intent intent = new Intent(CreateProfile.this, ImagePickerActivity.class);
+        Intent intent = new Intent(ManageProfile.this, ImagePickerActivity.class);
         intent.putExtra(ImagePickerActivity.INTENT_IMAGE_PICKER_OPTION, ImagePickerActivity.REQUEST_IMAGE_CAPTURE);
 
         // setting aspect ratio
@@ -397,7 +377,7 @@ public class CreateProfile extends AppCompatActivity {
     }
 
     private void launchGalleryIntent() {
-        Intent intent = new Intent(CreateProfile.this, ImagePickerActivity.class);
+        Intent intent = new Intent(ManageProfile.this, ImagePickerActivity.class);
         intent.putExtra(ImagePickerActivity.INTENT_IMAGE_PICKER_OPTION, ImagePickerActivity.REQUEST_GALLERY_IMAGE);
 
         // setting aspect ratio

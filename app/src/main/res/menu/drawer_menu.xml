@@ -11,11 +11,11 @@
             android:id="@+id/nav_manage_profile"
             android:icon="@drawable/ic_profile"
             android:title="Manage Profile" />
-        <item
+       <!-- <item
             android:id="@+id/nav_notification"
             android:icon="@drawable/ic_notifications"
             android:title="Notification" />
-        <item
+       --> <!--<item
             android:id="@+id/nav_progress"
             android:icon="@drawable/ic_progress"
             android:title="Progress" />
@@ -23,7 +23,7 @@
             android:id="@+id/nav_achievement"
             android:icon="@drawable/ic_award"
             android:title="Achievements" />
-        <item
+        --><item
             android:id="@+id/nav_Dictionary"
             android:icon="@drawable/ic_dictionary"
             android:title="Dictionary" />

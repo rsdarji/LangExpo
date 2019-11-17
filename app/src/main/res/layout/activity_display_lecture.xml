@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.DisplayLecture">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/admin_display_lecture_my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:title="Lecture"
+        android:hapticFeedbackEnabled="true"
+        app:titleTextColor="@color/colorWhite"
+        android:theme="@style/ToolbarTheme"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:orientation="vertical"
+        android:layout_below="@+id/admin_display_lecture_my_toolbar">
+
+        <TextView
+            android:id="@+id/admin_display_lecture_content_preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top|left"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:overScrollMode="always"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:lines="33"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:scrollHorizontally="false" />
+    </ScrollView>
+</RelativeLayout>

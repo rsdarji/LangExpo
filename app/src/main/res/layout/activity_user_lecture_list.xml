@@ -17,23 +17,23 @@
         app:titleTextColor="@color/colorWhite"
         android:theme="@style/ToolbarTheme"/>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/user_lecture_list_my_toolbar"
-        android:id="@+id/user_lecture_list_refresh_layout"
-
-        android:layout_marginTop="5dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/user_lecture_list_recyclerView"
-            android:layout_marginBottom="75dp"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_below="@+id/user_lecture_list_my_toolbar"
+            android:id="@+id/user_lecture_list_refresh_layout"
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            android:layout_marginTop="5dp">
 
-    <com.langexpo.customfunction.CustomButton
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/user_lecture_list_recyclerView"
+                android:layout_marginBottom="75dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <!--<com.langexpo.customfunction.CustomButton
         android:id="@+id/admin_button_add_Lecture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,8 +41,7 @@
         android:textStyle="bold"
         android:layout_margin="15dp"
         android:text="Add Lecture"
-        android:onClick="goToAddLecture"
-        android:layout_marginTop="20dp"/>
+        android:onClick="goToAddLecture"/>-->
 
 
 </RelativeLayout>

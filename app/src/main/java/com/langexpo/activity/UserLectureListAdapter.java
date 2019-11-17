@@ -48,8 +48,6 @@ public class UserLectureListAdapter extends RecyclerView.Adapter<UserLectureList
         //binding the data with the viewholder views
 
         holder.lectureName.setText(lecture.getLectureName());
-        holder.levelName.setText(lecture.getLevelName());
-        holder.sequenceNumber.setText(String.valueOf(lecture.getSequenceNumber()));
         holder.languageName.setText(lecture.getLanguageName());
         //holder.languageFlag.setImageBitmap(BitmapFactory.decodeStream(in));
 
@@ -57,7 +55,7 @@ public class UserLectureListAdapter extends RecyclerView.Adapter<UserLectureList
 
         holder.itemView.setOnClickListener(v -> {
             //Toast.makeText(mCtx, "item clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(mCtx, AddLecture.class);
+            Intent intent = new Intent(mCtx, DisplayLecture.class);
             intent.putExtra("lectureId", lecture.getLectureId());
             intent.putExtra("lectureName",lecture.getLectureName());
             intent.putExtra("lectureContent", lecture.getLectureContent());
@@ -80,16 +78,12 @@ public class UserLectureListAdapter extends RecyclerView.Adapter<UserLectureList
     class LectureViewHolder extends RecyclerView.ViewHolder {
 
         TextView lectureName;
-        TextView levelName;
-        TextView sequenceNumber;
         TextView languageName;
 
         public LectureViewHolder(View itemView) {
             super(itemView);
 
             lectureName = itemView.findViewById(R.id.lecture_row_layout_user_lecture3f_name);
-            levelName = itemView.findViewById(R.id.lecture_row_layout_user_level_name);
-            sequenceNumber = itemView.findViewById(R.id.lecture_row_layout_user_sequence_number);
             languageName = itemView.findViewById(R.id.lecture_row_layout_user_language_name);
         }
     }
@@ -111,9 +105,6 @@ public class UserLectureListAdapter extends RecyclerView.Adapter<UserLectureList
                             lstFiltered.add(row);
                         }
                         if (row.getLanguageName().toLowerCase().contains(Key.toLowerCase())){
-                            lstFiltered.add(row);
-                        }
-                        if (row.getLevelName().toLowerCase().contains(Key.toLowerCase())){
                             lstFiltered.add(row);
                         }
                     }

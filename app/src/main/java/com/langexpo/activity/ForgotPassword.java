@@ -6,13 +6,14 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.langexpo.R;
 
 public class ForgotPassword extends AppCompatActivity {
-    EditText uname,email;
+    EditText email;
     Button fpass;
     Toolbar myToolbar;
     @Override
@@ -24,52 +25,13 @@ public class ForgotPassword extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        uname=(EditText)findViewById(R.id.edittext_username);
         email=(EditText)findViewById(R.id.edittext_email);
         fpass=(Button) findViewById(R.id.button_forget_password);
-        email.setEnabled(false);
-        fpass.setEnabled(false);
-        uname.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.toString().equals("")){
-                    email.setEnabled(false);
-                }else{
-                    email.setEnabled(true);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-        email.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.toString().equals("")){
-                    fpass.setEnabled(false);
-                }else{
-                    fpass.setEnabled(true);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
+    }
+    public void reset_password(View view){
+        String forgot_user_email=email.getText().toString();
 
     }
     @Override

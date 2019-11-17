@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.ManageProfile"></activity>
         <activity android:name=".activity.UserLevelList" />
         <activity android:name=".activity.UserLectureList" />
         <activity android:name=".activity.ResetPassword" />

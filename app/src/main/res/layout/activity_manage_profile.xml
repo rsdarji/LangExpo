@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.ManageProfile">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/user_manage_profile_my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:title="Create Profile"
+        android:hapticFeedbackEnabled="true"
+        app:titleTextColor="@color/colorWhite"
+        android:theme="@style/ToolbarTheme"/>
+
+    <ScrollView
+        android:id="@+id/create_profile_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="75dp"
+        android:layout_below="@+id/my_toolbar">
+        <RelativeLayout
+            android:id="@+id/create_profile_inner_relative_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/img_create_profile_img"
+                android:layout_below="@+id/img_language"
+                android:layout_centerHorizontal="true"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_user"
+                app:civ_border_width="2dp"
+                android:layout_marginTop="70dp"
+                app:civ_border_color="#460d1e"/>
+
+            <TextView
+                android:id="@+id/profile_img_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_create_profile_img"
+                android:text="Profile Image"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/colorPrimary"/>
+
+            <EditText
+                android:id="@+id/profile_firstname_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_img_tv"
+                android:layout_marginTop="10dp"
+                android:hint="First Name"
+                android:gravity="center"
+                android:inputType="textPersonName"/>
+
+            <EditText
+                android:id="@+id/profile_lastname_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_firstname_et"
+                android:layout_marginTop="5dp"
+                android:hint="Last Name"
+                android:gravity="center"
+                android:inputType="textPersonName"/>
+
+            <EditText
+                android:id="@+id/profile_email_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_lastname_et"
+                android:layout_marginTop="5dp"
+                android:hint="Email"
+                android:gravity="center"
+                android:inputType="textEmailAddress"/>
+
+            <EditText
+                android:id="@+id/profile_phone_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_email_et"
+                android:layout_marginTop="5dp"
+                android:hint="Phone No"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="10"/>
+
+            <EditText
+                android:id="@+id/profile_password_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_phone_et"
+                android:layout_marginTop="5dp"
+                android:hint="Password"
+                android:gravity="center"
+                android:inputType="textPassword"/>
+
+            <EditText
+                android:id="@+id/profile_confirm_password_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_password_et"
+                android:layout_marginTop="5dp"
+                android:hint="Confirm Password"
+                android:gravity="center"
+                android:inputType="textPassword"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="15dp"
+        android:orientation="horizontal">
+
+        <com.langexpo.customfunction.CustomButton
+            android:id="@+id/profile_register_bt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:layout_marginRight="5dp"
+            android:text="Register"
+            android:textStyle="bold" />
+
+        <com.langexpo.customfunction.CustomButton
+            android:id="@+id/profile_skip_bt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:text="Skip"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

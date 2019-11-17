@@ -11,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.langexpo.R;
+import com.langexpo.activity.UserLectureList;
 import com.langexpo.com.langexpo.navigationdrawer.FragmentHome;
 import com.langexpo.com.langexpo.navigationdrawer.NavigationDrawer;
 import com.langexpo.fragments.AddGoalFragment;
@@ -101,6 +102,20 @@ public class Home extends NavigationDrawer {
     public void addQuiz(View view) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                 new AddQuizFragment()).commit();
+    }
+
+    public void goToUserProgress(View view) {
+    }
+
+    public void goToUserQuiz(View view) {
+    }
+
+    public void goToUserLecture(View view) {
+        Intent i = new Intent(Home.this, UserLectureList.class);
+        startActivity(i);
+    }
+
+    public void goToUserLevel(View view) {
     }
 
     private class addUpdateImage extends AsyncTask<Void, Void, String> {

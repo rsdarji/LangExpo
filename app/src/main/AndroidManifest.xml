@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.UserLectureList"></activity>
+        <activity android:name=".activity.DisplayLecture"></activity>
+        <activity android:name=".activity.UserLectureList" />
         <activity android:name=".activity.ResetPassword" />
         <activity android:name=".activity.FavoriteList" />
         <activity android:name=".activity.Dictionary" />

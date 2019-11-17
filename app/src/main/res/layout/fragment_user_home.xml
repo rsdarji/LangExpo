@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.FragmentUserHome">
+    tools:context=".admin.activity.Home">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -80,6 +80,13 @@
                                     android:text="Levels"
                                     android:textSize="16dp" />
 
+                                <Button
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/button_user_level"
+                                    android:onClick="goToUserLevel"
+                                    android:background="@android:color/transparent"/>
+
                             </RelativeLayout>
 
                         </androidx.cardview.widget.CardView>
@@ -111,7 +118,8 @@
                                 <Button
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:id="@+id/addlevel"
+                                    android:id="@+id/button_user_lecture"
+                                    android:onClick="goToUserLecture"
                                     android:background="@android:color/transparent"/>
 
                             </RelativeLayout>
@@ -153,7 +161,8 @@
                                 <Button
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:id="@+id/button_add_question_type"
+                                    android:id="@+id/button_user_quiz"
+                                    android:onClick="goToUserQuiz"
                                     android:background="@android:color/transparent"/>
 
                             </RelativeLayout>
@@ -187,7 +196,8 @@
                                 <Button
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:id="@+id/button_add_goal"
+                                    android:id="@+id/button_user_progress"
+                                    android:onClick="goToUserProgress"
                                     android:background="@android:color/transparent"/>
 
                             </RelativeLayout>

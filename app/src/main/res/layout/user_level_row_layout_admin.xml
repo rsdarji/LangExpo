@@ -27,6 +27,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="90dp"
+            android:gravity="center_vertical"
             android:padding="8dp">
 
             <!--<com.elyeproj.loaderviewlibrary.LoaderImageView
@@ -46,7 +47,7 @@
                 android:textSize="20dp"
                 android:textColor="@color/colorPrimary"/>
 
-            <com.elyeproj.loaderviewlibrary.LoaderTextView
+            <!--<com.elyeproj.loaderviewlibrary.LoaderTextView
                 android:id="@+id/level_row_layout_user_level_user_level_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,7 +91,7 @@
                 android:textSize="16dp"
                 android:layout_toRightOf="@+id/level_row_layout_user_level_sequence_number_tv"
                 android:layout_below="@+id/level_row_layout_user_level_user_level_tv"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"/>-->
             <!--<com.elyeproj.loaderviewlibrary.LoaderTextView
                 android:id="@+id/level_row_layout_admin_level_language_tv"
                 android:layout_width="wrap_content"
@@ -111,7 +112,6 @@
                 android:text=""
                 android:textSize="16dp"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/level_row_layout_user_level_user_level_tv"
                 android:textColor="@color/colorPrimary"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

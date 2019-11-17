@@ -2,6 +2,7 @@ package com.langexpo.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,14 +50,12 @@ public class UserLevelAdapter extends RecyclerView.Adapter<UserLevelAdapter.Leve
         //binding the data with the viewholder views
 
         holder.levelName.setText(level.getLevelName());
-        holder.userLevel.setText(level.getLevelType());
-        holder.sequenceNumber.setText(String.valueOf(level.getSequenceNumber()));
         holder.languageName.setText(level.getLanguageName());
         //holder.languageFlag.setImageBitmap(BitmapFactory.decodeStream(in));
 
         holder.itemView.setOnClickListener(v -> {
             //Toast.makeText(mCtx, "item clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(mCtx, AddLevel.class);
+            Intent intent = new Intent(mCtx, DisplayLevelQuestions.class);
             intent.putExtra("levelId", level.getLevelId());
             intent.putExtra("levelName", level.getLevelName());
             intent.putExtra("userLevel", level.getLevelType());
@@ -68,7 +67,6 @@ public class UserLevelAdapter extends RecyclerView.Adapter<UserLevelAdapter.Leve
 
     }
 
-
     @Override
     public int getItemCount() {
         return levelList.size();
@@ -77,16 +75,12 @@ public class UserLevelAdapter extends RecyclerView.Adapter<UserLevelAdapter.Leve
     class LevelViewHolder extends RecyclerView.ViewHolder {
 
         TextView levelName;
-        TextView userLevel;
-        TextView sequenceNumber;
         TextView languageName;
 
         public LevelViewHolder(View itemView) {
             super(itemView);
 
             levelName = itemView.findViewById(R.id.level_row_layout_user_level_name);
-            userLevel = itemView.findViewById(R.id.level_row_layout_user_level_user_level);
-            sequenceNumber = itemView.findViewById(R.id.level_row_layout_user_level_sequence_number);
             languageName = itemView.findViewById(R.id.level_row_layout_user_level_language);
         }
     }

@@ -22,12 +22,14 @@ import com.langexpo.admin.activity.LevelList;
 import com.langexpo.model.Level;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.LangExpoAlertDialog;
+import com.langexpo.utility.Session;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ConnectException;
@@ -47,16 +49,16 @@ public class UserLevelList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_level_list);
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.admin_level_my_toolbar);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.user_level_my_toolbar);
         setSupportActionBar(myToolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         //getting the recyclerview from xml
-        recyclerView = (RecyclerView) findViewById(R.id.admin_level_recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.user_level_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        refreshLayout = findViewById(R.id.admin_level_list_refresh_layout);
+        refreshLayout = findViewById(R.id.user_level_list_refresh_layout);
         //initializing the levelList
         levelList = new ArrayList<>();
 
@@ -122,6 +124,8 @@ public class UserLevelList extends AppCompatActivity {
         private ProgressDialog progressBar;
         android.app.AlertDialog.Builder builder;
         Context mContext;
+        String userLanguage = Session.get(Constant.User.LANGUAGE);
+        String userLevel = Session.get(Constant.User.USER_LEVEL);
 
         public GetUserLevelList(UserLevelList activity, Context mContext) {
             progressBar = new ProgressDialog(activity);
@@ -142,7 +146,7 @@ public class UserLevelList extends AppCompatActivity {
             BufferedReader reader = null;
             StringBuilder stringBuilder = new StringBuilder();
 
-            String methodName = "featchAlllevel";
+            String methodName = "featchUserLevel";
             stringBuilder.append(Constant.PROTOCOL);
             stringBuilder.append(Constant.COLON);
             stringBuilder.append(Constant.FORWARD_SLASH);
@@ -161,17 +165,29 @@ public class UserLevelList extends AppCompatActivity {
 
 
             try {
+
+                String urlParameters  = "userLanguage="+userLanguage+"&userLevel="+userLevel;
+
+                byte[] postData       = urlParameters.getBytes();
+                int    postDataLength = postData.length;
                 url = new URL(stringBuilder.toString());
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
+                connection.setRequestMethod("POST");
                 // uncomment this if you want to write output to this url
-
+                connection.setDoOutput(true);
                 connection.setDoInput(true);
-                connection.setInstanceFollowRedirects(false);
-
+                connection.setInstanceFollowRedirects( false );
+                connection.setRequestProperty( "charset", "utf-8");
+                connection.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+                connection.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded");
+                connection.setUseCaches( false );
                 // give it 15 seconds to respond
-                connection.setReadTimeout(15 * 1000);
-                connection.setConnectTimeout(15 * 1000);
+                connection.setReadTimeout(15*1000);
+                connection.setConnectTimeout(15*1000);
+                try( DataOutputStream wr = new DataOutputStream( connection.getOutputStream())) {
+                    wr.write( postData );
+                }
+
                 connection.connect();
                 // read the output from the server
                 stringBuilder = new StringBuilder();

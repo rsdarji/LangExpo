@@ -3,10 +3,13 @@ package com.langexpo.com.langexpo.navigationdrawer;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
@@ -38,14 +41,24 @@ import com.langexpo.activity.Dictionary;
 import com.langexpo.activity.FavoriteList;
 import com.langexpo.activity.Feedback;
 import com.langexpo.activity.MainActivity;
+import com.langexpo.admin.activity.AddLanguage;
+import com.langexpo.admin.activity.LanguageList;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.ImagePickerActivity;
 import com.langexpo.utility.Session;
 import com.langexpo.utility.SetURLImageToImageview;
 import com.langexpo.utility.UploadImageToCloud;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
@@ -155,8 +168,27 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
                         new FragmentHome()).commit();*/
                 break;
             case R.id.nav_deactivate_account:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
-                        new FragmentHome()).commit();
+               /* getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                        new FragmentHome()).commit();*/
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme)
+                        .setTitle("Deactivate Account?")
+                        .setMessage("Do you really want to deactivate your Account?")
+                        .setIconAttribute(android.R.attr.alertDialogIcon)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                //Toast.makeText(AddLanguage.this, "Yaay", Toast.LENGTH_SHORT).show();
+
+                            }})
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                //Toast.makeText(AddLanguage.this, "no", Toast.LENGTH_SHORT).show();
+                            }
+
+                        });
+                builder.show();
+
                 break;
             case R.id.nav_sign_out:
                 /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -335,4 +367,131 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
     /**
      * END - Image (Crop, camera, gallery)
      */
+
+
+    //start code for deactivate account assync task
+    private class DeactivateAccountAsyncTask extends AsyncTask<Void, Void, String> {
+        private ProgressDialog progressBar;
+        private long userId;
+
+        public DeactivateAccountAsyncTask(Activity activity, long userId){
+            progressBar = new ProgressDialog(activity);
+            this.userId = userId;
+        }
+
+        protected void onPreExecute(){
+            progressBar.setMessage("Loading...");
+            progressBar.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            URL url = null;
+            BufferedReader reader = null;
+            StringBuilder stringBuilder = new StringBuilder();
+
+            String methodName = "deactivateAccount";
+            stringBuilder.append(Constant.PROTOCOL);
+            stringBuilder.append(Constant.COLON);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(Constant.WEB_SERVICE_HOST);
+            stringBuilder.append(Constant.COLON);
+            stringBuilder.append(Constant.WEB_SERVICE_PORT);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(Constant.CONTEXT_PATH);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(Constant.APPLICATION_PATH);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(Constant.CLASS_PATH);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(methodName);
+
+
+            try {
+
+                String urlParameters  = "userId="+userId;
+
+
+                byte[] postData       = urlParameters.getBytes();
+                int    postDataLength = postData.length;
+                url = new URL(stringBuilder.toString());
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                // uncomment this if you want to write output to this url
+                connection.setDoOutput(true);
+                connection.setDoInput(true);
+                connection.setInstanceFollowRedirects( false );
+                connection.setRequestProperty( "charset", "utf-8");
+                connection.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+                connection.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded");
+                connection.setUseCaches( false );
+                // give it 15 seconds to respond
+                connection.setReadTimeout(45*1000);
+
+                try( DataOutputStream wr = new DataOutputStream( connection.getOutputStream())) {
+                    wr.write( postData );
+                }
+
+                connection.connect();
+
+                // read the output from the server
+                stringBuilder = new StringBuilder();
+                reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+
+                System.out.println("response: "+stringBuilder.toString());
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                try {
+                    throw e;
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            finally {
+                if (reader != null) {
+                    try{
+                        reader.close();
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            return stringBuilder.toString();
+        }
+        @Override
+
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            System.out.println("deleteLanguage: "+result);
+            try {
+                JSONObject loginResponse = new JSONObject(result);
+                if(loginResponse.length()!=0 &&
+                        loginResponse.get("status").toString().equalsIgnoreCase("ok") ) {
+
+                    UploadImageToCloud.deleteStorageFile(Session.get(Constant.UPLOADED_ITEM_URL));
+
+                    Toast toast = Toast.makeText(NavigationDrawer.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
+                    Intent intent = new Intent(NavigationDrawer.this, LanguageList.class);
+                    startActivity(intent);
+                    progressBar.dismiss();
+                    toast.show();
+                }
+                else if(loginResponse.get("status").toString().equalsIgnoreCase("error")){
+                    Toast toast = Toast.makeText(NavigationDrawer.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
+                    progressBar.dismiss();
+                    toast.show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    //end code for deactivate account assync task
 }

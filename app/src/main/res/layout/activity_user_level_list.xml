@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.UserLevelList">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/user_level_my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:title="Levels"
+        android:hapticFeedbackEnabled="true"
+        app:titleTextColor="@color/colorWhite"
+        android:theme="@style/ToolbarTheme"/>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/user_level_list_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/user_level_my_toolbar"
+        android:layout_marginTop="5dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/admin_level_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="75dp" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.langexpo.customfunction.CustomButton
+        android:id="@+id/user_button_add_level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textStyle="bold"
+        android:layout_margin="15dp"
+        android:text="Add Level"
+        android:onClick="goToAddLevel"
+        android:layout_marginTop="20dp"/>
+
+</RelativeLayout>

@@ -17,6 +17,7 @@ import com.langexpo.admin.activity.LanguageList;
 import com.langexpo.model.Favorite;
 import com.langexpo.model.Language;
 import com.langexpo.utility.Constant;
+import com.langexpo.utility.Session;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,11 +60,11 @@ public class FavoriteList extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 favoriteList = new ArrayList<>();
-                new GetFavoristList(FavoriteList.this, Constant.userId).execute();
+                new GetFavoristList(FavoriteList.this, Long.parseLong(Session.get(Constant.User.USER_ID))).execute();
             }
         });
         //to get all language list
-        new GetFavoristList(this,Constant.userId).execute();
+        new GetFavoristList(this,Long.parseLong(Session.get(Constant.User.USER_ID))).execute();
     }
 
     @Override

@@ -77,7 +77,6 @@ public class DailyGoalAdapter extends RecyclerView.Adapter<DailyGoalAdapter.Dail
         });
     }
 
-
     @Override
     public int getItemCount() {
         return goalList.size();

@@ -66,9 +66,7 @@ public class MainActivity extends AppCompatActivity {
         uname.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(charSequence.toString().equals("")){
@@ -86,9 +84,7 @@ public class MainActivity extends AppCompatActivity {
         pass.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(charSequence.toString().equals("")){
@@ -97,10 +93,8 @@ public class MainActivity extends AppCompatActivity {
                     login.setEnabled(true);
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
 
@@ -110,14 +104,11 @@ public class MainActivity extends AppCompatActivity {
         public void newuser(View view) {
             Intent intent= new Intent(this,SelectLaunguage.class);
             startActivity(intent);
-
         }
 
         public void forgot_password(View view) {
             Intent intent= new Intent(this,ForgotPassword.class);
             startActivity(intent);
-
-
         }
 
         public void login(View view) {
@@ -126,22 +117,24 @@ public class MainActivity extends AppCompatActivity {
             Toast toast;
             if(username.isEmpty()| password.isEmpty()){
                 if(username.isEmpty()){
+                    uname.setError("Please enter correct Username");
                     uname.requestFocus();
                     uname.setText("");
-                    toast = Toast.makeText(getApplicationContext(), "Please enter correct Username", Toast.LENGTH_LONG);
+                    //toast = Toast.makeText(getApplicationContext(), "Please enter correct Username", Toast.LENGTH_LONG);
                 }else{
+                    pass.setError("Password cannot be empty or contains only whitespace(s)");
                     pass.requestFocus();
                     pass.setText("");
-                    toast = Toast.makeText(getApplicationContext(), "Password cannot be empty or contains only whitespace(s)", Toast.LENGTH_LONG);
+                    //toast = Toast.makeText(getApplicationContext(), "Password cannot be empty or contains only whitespace(s)", Toast.LENGTH_LONG);
                 }
-                toast.show();
+                //toast.show();
                 return;
             }
 
-            //new Login(MainActivity.this, username, password).execute();
-            session.set(Constant.User.USER_ID,"1");
+            new Login(MainActivity.this, username, password).execute();
+            /*session.set(Constant.User.USER_ID,"1");
             Intent intent = new Intent(MainActivity.this, Home.class);
-            startActivity(intent);
+            startActivity(intent);*/
 
             /*Intent intent = new Intent(MainActivity.this, Home.class);
             startActivity(intent);*/
@@ -240,12 +233,22 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject loginResponse = new JSONObject(result);
                     if(loginResponse.length()!=0 &&
                             loginResponse.get("status").toString().equalsIgnoreCase("ok") &&
-                            !loginResponse.get("user_id").toString().equalsIgnoreCase("")) {
+                            !loginResponse.get("userId").toString().equalsIgnoreCase("")) {
 
-                        session.set(Constant.User.USER_ID,loginResponse.get("user_id").toString());
+
+                        session.set(Constant.User.USER_ID,loginResponse.get("userId").toString());
+                        session.set(Constant.User.USER_NAME,loginResponse.get("userName").toString());
                         session.set(Constant.User.EMAIL,loginResponse.get("email").toString());
-                        session.set(Constant.User.FIRST_NAME,loginResponse.get("first_name").toString());
-                        session.set(Constant.User.LAST_NAME,loginResponse.get("last_name").toString());
+                        session.set(Constant.User.FIRST_NAME,loginResponse.get("firstName").toString());
+                        session.set(Constant.User.LAST_NAME,loginResponse.get("lastName").toString());
+                        session.set(Constant.User.PHONE,loginResponse.get("phone").toString());
+                        session.set(Constant.User.ACTIVE,loginResponse.get("active").toString());
+                        session.set(Constant.User.ROLE,loginResponse.get("role").toString());
+                        if(loginResponse.get("role").toString().equalsIgnoreCase("1")){
+                            session.set(Constant.User.LANGUAGE,loginResponse.get("language").toString());
+                            session.set(Constant.User.USER_LEVEL,loginResponse.get("userLevel").toString());
+                            session.set(Constant.User.AVTAR,loginResponse.get("avtar").toString());
+                        }
 
 
                         /*TextView t = (TextView) findViewById(R.id.nav_user_name);

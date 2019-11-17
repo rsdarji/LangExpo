@@ -35,87 +35,86 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/img_language_logo"
+                android:id="@+id/img_create_profile_img"
                 android:layout_below="@+id/img_language"
                 android:layout_centerHorizontal="true"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/ic_language"
+                android:onClick="changeProfileImg"
+                android:src="@drawable/ic_user"
                 app:civ_border_width="2dp"
-
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="70dp"
                 app:civ_border_color="#460d1e"/>
 
             <TextView
-                android:id="@+id/tv_upload_profile"
+                android:id="@+id/profile_img_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/img_language_logo"
-                android:text="Choose Language Flag"
+                android:layout_below="@+id/img_create_profile_img"
+                android:text="Profile Image"
                 android:layout_centerHorizontal="true"
                 android:textColor="@color/colorPrimary"/>
 
-
             <EditText
-                android:id="@+id/editText_firstname"
+                android:id="@+id/profile_firstname_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_upload_profile"
-                android:layout_marginTop="20dp"
+                android:layout_below="@+id/profile_img_tv"
+                android:layout_marginTop="10dp"
                 android:hint="First Name"
                 android:gravity="center"
-                android:inputType="textPersonName"
-                />
+                android:inputType="textPersonName"/>
+
             <EditText
-                android:id="@+id/editText_lastname"
+                android:id="@+id/profile_lastname_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editText_firstname"
-                android:layout_marginTop="20dp"
+                android:layout_below="@+id/profile_firstname_et"
+                android:layout_marginTop="5dp"
                 android:hint="Last Name"
                 android:gravity="center"
-                android:inputType="textPersonName"
-                />
+                android:inputType="textPersonName"/>
+
             <EditText
-                android:id="@+id/editText_user_email"
+                android:id="@+id/profile_email_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editText_lastname"
-                android:layout_marginTop="20dp"
+                android:layout_below="@+id/profile_lastname_et"
+                android:layout_marginTop="5dp"
                 android:hint="Email"
                 android:gravity="center"
-                android:inputType="textPersonName"
-                />
+                android:inputType="textEmailAddress"/>
+
             <EditText
-                android:id="@+id/editText_phoneno"
+                android:id="@+id/profile_phone_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editText_user_email"
-                android:layout_marginTop="20dp"
+                android:layout_below="@+id/profile_email_et"
+                android:layout_marginTop="5dp"
                 android:hint="Phone No"
                 android:gravity="center"
-                android:inputType="textPersonName"
-                />
+                android:inputType="number"
+                android:maxLength="10"/>
+
             <EditText
-                android:id="@+id/editText_user_password"
+                android:id="@+id/profile_password_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editText_phoneno"
-                android:layout_marginTop="20dp"
+                android:layout_below="@+id/profile_phone_et"
+                android:layout_marginTop="5dp"
                 android:hint="Password"
                 android:gravity="center"
-                android:inputType="textPersonName"
-                />
+                android:inputType="textPassword"/>
+
             <EditText
-                android:id="@+id/editText_confirm_password"
+                android:id="@+id/profile_confirm_password_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editText_user_password"
-                android:layout_marginTop="20dp"
+                android:layout_below="@+id/profile_password_et"
+                android:layout_marginTop="5dp"
                 android:hint="Confirm Password"
                 android:gravity="center"
-                android:inputType="textPersonName"
-                />
+                android:inputType="textPassword"/>
 
             </RelativeLayout>
 
@@ -130,21 +129,23 @@
         android:orientation="horizontal">
 
         <com.langexpo.customfunction.CustomButton
-            android:id="@+id/button_register"
+            android:id="@+id/profile_register_bt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="5"
             android:layout_marginRight="5dp"
             android:text="Register"
+            android:onClick="register"
             android:textStyle="bold" />
 
         <com.langexpo.customfunction.CustomButton
-            android:id="@+id/button_skip"
+            android:id="@+id/profile_skip_bt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginLeft="5dp"
             android:text="Skip"
+            android:onClick="skip"
             android:textStyle="bold" />
     </LinearLayout>
 

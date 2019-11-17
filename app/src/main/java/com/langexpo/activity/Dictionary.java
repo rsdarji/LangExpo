@@ -34,6 +34,7 @@ import com.langexpo.admin.activity.AddLecture;
 import com.langexpo.admin.activity.LectureList;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.LangExpoAlertDialog;
+import com.langexpo.utility.Session;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -83,13 +84,13 @@ public class Dictionary extends AppCompatActivity {
                 if(unfavourite.getDrawable().getConstantState() == getResources().getDrawable( R.drawable.ic_favorite).getConstantState()){
                     unfavourite.setImageResource(R.drawable.ic_favorite_filled);
                     if(!translatedTv.getText().toString().equalsIgnoreCase("No word found")) {
-                        new AddFavoriteAsyncTask(Dictionary.this, Constant.userId, true,
+                        new AddFavoriteAsyncTask(Dictionary.this, Long.parseLong(Session.get(Constant.User.USER_ID)), true,
                                 inputToTranslate.getText().toString(), translatedText).execute();
                     }
 
                 }else{
                     unfavourite.setImageResource(R.drawable.ic_favorite);
-                    new AddFavoriteAsyncTask(Dictionary.this, Constant.userId, false,
+                    new AddFavoriteAsyncTask(Dictionary.this, Long.parseLong(Session.get(Constant.User.USER_ID)), false,
                             inputToTranslate.getText().toString(), translatedText).execute();
                 }
             }
@@ -230,7 +231,7 @@ public class Dictionary extends AppCompatActivity {
 
 
             try {
-                String urlParameters  = "userId="+Constant.userId+"&favorite="+favorite+
+                String urlParameters  = "userId="+Long.parseLong(Session.get(Constant.User.USER_ID))+"&favorite="+favorite+
                         "&searchWord="+searchWord+"&resultWord="+translatedText;
 
                 byte[] postData       = urlParameters.getBytes();

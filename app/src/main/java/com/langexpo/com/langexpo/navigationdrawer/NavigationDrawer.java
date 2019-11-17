@@ -38,6 +38,7 @@ import com.langexpo.activity.Dictionary;
 import com.langexpo.activity.FavoriteList;
 import com.langexpo.activity.Feedback;
 import com.langexpo.activity.MainActivity;
+import com.langexpo.fragments.FragmentUserHome;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.ImagePickerActivity;
 import com.langexpo.utility.Session;
@@ -103,9 +104,13 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
         Intent intent;
         switch (item.getItemId()) {
             case R.id.nav_home:
-                System.out.println("hello home");
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
-                        new FragmentHome()).commit();
+                if(Session.get(Constant.User.ROLE).equalsIgnoreCase("1")){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                            new FragmentUserHome()).commit();
+                }else {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                            new FragmentHome()).commit();
+                }
                 break;
             case R.id.nav_manage_profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
@@ -162,14 +167,16 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
                 /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FragmentHome()).commit();*/
                 intent = new Intent(NavigationDrawer.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 Session session = new Session(getApplicationContext());
                 session.clear();
                 break;
-            case R.id.nav_sign_up:
+            /*case R.id.nav_sign_up:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                         new FragmentHome()).commit();
-                break;
+                break;*/
         }
 
         drawer.closeDrawer(GravityCompat.START);

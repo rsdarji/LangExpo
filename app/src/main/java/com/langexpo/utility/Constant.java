@@ -59,6 +59,11 @@ public interface Constant {
         String LAST_NAME = "last_name";
         String PHONE = "phone";
         String ACTIVE = "active";
+        String ROLE = "role_";
+        String LANGUAGE = "language_";
+        String USER_LEVEL = "user_level";
+        String AVTAR = "avtar";
+
     }
 
     public final long userId = 1;
@@ -68,5 +73,6 @@ public interface Constant {
         String USER_SELECTED_LANGUAGE="userSelectedLanguage"; //SelectLanuguageAdapter.java
         String USER_SELECTED_GOALS = "userSelectedGoals"; //DailyGoal.java -> goalContinue()
         String USER_SELECTED_LEVEL = "userSelectedlevel";
+        String USER_SELECTED_LEVEL_NAME = "userSelectedlevelName";
     }
 }

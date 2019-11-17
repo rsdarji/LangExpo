@@ -56,6 +56,7 @@ public class Levels extends AppCompatActivity {
             selectedId = rg.getCheckedRadioButtonId();
             selectedRadioButton = (RadioButton)findViewById(selectedId);
             Session.set(Constant.Session.USER_SELECTED_LEVEL,String.valueOf(selectedId));
+            Session.set(Constant.Session.USER_SELECTED_LEVEL_NAME,selectedRadioButton.getText().toString());
             //Toast.makeText(getApplicationContext(), selectedRadioButton.getText().toString()+" is selected", Toast.LENGTH_SHORT).show();
         }
         Intent intent=new Intent (this,CreateProfile.class);

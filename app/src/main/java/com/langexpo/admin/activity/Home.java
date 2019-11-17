@@ -44,14 +44,14 @@ public class Home extends NavigationDrawer {
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view1);
-        if (savedInstanceState == null && Boolean.parseBoolean(Session.get("admin").toString())) {
+        if (savedInstanceState == null && Session.get(Constant.User.ROLE).equalsIgnoreCase("1")) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
+                    new FragmentUserHome()).commit();
+            //Toast.makeText(Home.this, "Not admin",Toast.LENGTH_LONG).show();
+        }else{
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                     new FragmentHome()).commit();
             navigationView.setCheckedItem(R.id.nav_home);
-        }else{
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
-                    new FragmentUserHome()).commit();
-            Toast.makeText(Home.this, "Not admin",Toast.LENGTH_LONG).show();
         }
     }
 

@@ -26,6 +26,7 @@ import com.langexpo.model.Favorite;
 import com.langexpo.model.Lecture;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.LangExpoAlertDialog;
+import com.langexpo.utility.Session;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -82,7 +83,7 @@ public class FavoriteAdaptor extends RecyclerView.Adapter<FavoriteAdaptor.Favori
             if(holder.unfavourite.getDrawable().getConstantState() == mCtx.getDrawable( R.drawable.ic_favorite).getConstantState()){
                 holder.unfavourite.setImageResource(R.drawable.ic_favorite_filled);
 
-                new AddFavoriteAsyncTask(mCtx, Constant.userId, true,
+                new AddFavoriteAsyncTask(mCtx, Long.parseLong(Session.get(Constant.User.USER_ID)), true,
                         holder.word.getText().toString(), holder.resultWord.getText().toString(),holder,
                         position).execute();
             }else{
@@ -95,7 +96,7 @@ public class FavoriteAdaptor extends RecyclerView.Adapter<FavoriteAdaptor.Favori
 
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 //Toast.makeText(AddLanguage.this, "Yaay", Toast.LENGTH_SHORT).show();
-                                new AddFavoriteAsyncTask(mCtx, Constant.userId, false,
+                                new AddFavoriteAsyncTask(mCtx, Long.parseLong(Session.get(Constant.User.USER_ID)), false,
                                         holder.word.getText().toString(), holder.resultWord.getText().toString(), holder,
                                         position).execute();
 
@@ -232,7 +233,7 @@ public class FavoriteAdaptor extends RecyclerView.Adapter<FavoriteAdaptor.Favori
 
 
             try {
-                String urlParameters  = "userId="+Constant.userId+"&favorite="+favorite+
+                String urlParameters  = "userId="+Long.parseLong(Session.get(Constant.User.USER_ID))+"&favorite="+favorite+
                         "&searchWord="+searchWord+"&resultWord="+translatedText;
 
                 byte[] postData       = urlParameters.getBytes();

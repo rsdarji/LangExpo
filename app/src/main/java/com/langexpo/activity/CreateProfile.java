@@ -93,6 +93,8 @@ public class CreateProfile extends AppCompatActivity {
         profileImgId = R.id.img_create_profile_img;
         registerBT = (Button)findViewById(R.id.profile_register_bt);
         skipBT = (Button)findViewById(R.id.profile_skip_bt);
+
+        firstNameET.setText(Session.get(Constant.User.FIRST_NAME));
     }
 
     @Override

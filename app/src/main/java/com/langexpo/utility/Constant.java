@@ -77,4 +77,5 @@ public interface Constant {
     }
 
     String NO_INTERNET_ERROR_MESSAGE = "Please connect to internet and try again.";
+
 }

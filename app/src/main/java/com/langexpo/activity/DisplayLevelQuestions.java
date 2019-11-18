@@ -7,11 +7,18 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.langexpo.R;
 import com.langexpo.admin.activity.AddLevel;
 import com.langexpo.admin.activity.LevelList;
+import com.langexpo.customfunction.CustomRadioGroupView;
+import com.langexpo.fragments.FragmentFillingTheBlanks;
+import com.langexpo.fragments.FragmentMultipleOption;
+import com.langexpo.fragments.FragmentUserHome;
 import com.langexpo.model.Lecture;
 import com.langexpo.model.QuestionModel;
 import com.langexpo.utility.Constant;
@@ -29,16 +36,21 @@ import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DisplayLevelQuestions extends AppCompatActivity {
 
     long levelId;
-    List<QuestionModel> questionList;
+    public List<QuestionModel> questionList;
+    String checkedRadioButtonText = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_level_questions);
+        getIncomingIntent();
+
+
 
 
     }
@@ -66,12 +78,16 @@ public class DisplayLevelQuestions extends AppCompatActivity {
                 new gelAllQuestionByCourseLevel(DisplayLevelQuestions.this, levelId).execute();
             }
 
+
         }
     }
+
+
 
     private class gelAllQuestionByCourseLevel extends AsyncTask<Void, Void, String> {
         private ProgressDialog progressBar;
         private long levelId;
+
 
         public gelAllQuestionByCourseLevel(Activity activity, long levelId){
             progressBar = new ProgressDialog(activity);
@@ -182,9 +198,10 @@ public class DisplayLevelQuestions extends AppCompatActivity {
                 if(loginResponse.length()!=0 &&
                         loginResponse.get("status").toString().equalsIgnoreCase("ok") ) {
 
-                    JSONArray questions = loginResponse.getJSONArray("lectures");
+                    JSONArray questions = loginResponse.getJSONArray("questions");
                     questions = questions.getJSONArray(0);
                     JSONObject question;
+                    questionList = new ArrayList<QuestionModel>(questions.length());
                     //languages.getJSONObject(i).getString("languageId");
                     for(int i = 0; i<questions.length();i++){
                         question = questions.getJSONObject(i);
@@ -197,14 +214,19 @@ public class DisplayLevelQuestions extends AppCompatActivity {
                                 question.getLong("questionType"),
                                 question.getLong("courseLevel")));
                     }
+
+                    if(questionList.size()!=0){
+                        nextQuestion(questionList);
+                    }
+
                     /*adapter = new UserLectureListAdapter(UserLectureList.this, lectureList);
                     recyclerView.setAdapter(adapter);*/
                     progressBar.dismiss();
                     /*refreshLayout.setRefreshing(false);*/
 
                     Toast toast = Toast.makeText(DisplayLevelQuestions.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
-                    Intent intent = new Intent(DisplayLevelQuestions.this, LevelList.class);
-                    startActivity(intent);
+                    /*Intent intent = new Intent(DisplayLevelQuestions.this, LevelList.class);
+                    startActivity(intent);*/
                     progressBar.dismiss();
                     toast.show();
                 }
@@ -219,6 +241,22 @@ public class DisplayLevelQuestions extends AppCompatActivity {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    public void nextQuestion(List<QuestionModel> questionList){
+        if(questionList.isEmpty()){
+            Toast toast = Toast.makeText(DisplayLevelQuestions.this,"Congratulations! you have completed level 1",Toast.LENGTH_LONG);
+        }else {
+            QuestionModel q = questionList.get(0);
+            if (q.getQuestionType() == 1) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.question_conainer,
+                        new FragmentMultipleOption(questionList)).commit();
+            }
+            if (q.getQuestionType() == 2) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.question_conainer,
+                        new FragmentFillingTheBlanks()).commit();
             }
         }
     }

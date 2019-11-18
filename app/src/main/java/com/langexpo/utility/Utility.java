@@ -19,11 +19,23 @@ import androidx.core.content.ContentResolverCompat;
 
 import com.langexpo.R;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class Utility {
     public static int getValue(String value, int defaultValue){
         if(!value.equalsIgnoreCase("")){
             return Integer.parseInt(value);
         }
         return defaultValue;
+    }
+
+    public static Object[] shuffleArrayValues(Object[] options ){
+        List<Object> strList = Arrays.asList(options);
+        Collections.shuffle(strList);
+        options = strList.toArray(new String[strList.size()]);
+
+        return options;
     }
 }

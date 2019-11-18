@@ -114,6 +114,7 @@
             android:layout_weight="5"
             android:layout_marginRight="5dp"
             android:text="Update Profile"
+            android:onClick="update"
             android:textStyle="bold" />
 
         </LinearLayout>

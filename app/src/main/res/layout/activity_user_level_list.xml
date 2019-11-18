@@ -31,7 +31,7 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <com.langexpo.customfunction.CustomButton
+    <!--<com.langexpo.customfunction.CustomButton
         android:id="@+id/user_button_add_level"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,6 +40,6 @@
         android:layout_margin="15dp"
         android:text="Add Level"
         android:onClick="goToAddLevel"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"/>-->
 
 </RelativeLayout>

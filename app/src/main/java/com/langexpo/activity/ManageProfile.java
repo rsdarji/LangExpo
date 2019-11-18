@@ -35,6 +35,7 @@ import com.langexpo.utility.ImagePickerActivity;
 import com.langexpo.utility.LangExpoAlertDialog;
 import com.langexpo.utility.Session;
 import com.langexpo.utility.UploadImageToCloud;
+import com.langexpo.utility.Utility;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -63,6 +64,7 @@ public class ManageProfile extends AppCompatActivity {
     int profileImgId;
     byte[] byteArray;
     public static final int REQUEST_IMAGE = 100;
+    long userId = Utility.getValue(Session.get(Constant.User.USER_ID), 0) ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,12 +135,12 @@ public class ManageProfile extends AppCompatActivity {
             return;
         }
 
-        if(!password.trim().equalsIgnoreCase(confirmPassword.trim())){
+        /*if(!password.trim().equalsIgnoreCase(confirmPassword.trim())){
             LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(ManageProfile.this, ManageProfile.this);
             alertDialog.alertDialog("Error", "password and confirm password must be same.");
             confirmPasswordET.requestFocus();
             return;
-        }
+        }*/
 
         //validation end
 
@@ -148,7 +150,7 @@ public class ManageProfile extends AppCompatActivity {
                     profileImageFileName, Constant.PNG);
         }
 
-        new ManageProfile.ManageProfileAsyncTask(ManageProfile.this, firstName, lastName, email,
+        new ManageProfileAsyncTask(ManageProfile.this, firstName, lastName, email,
                 phone, url).execute();
     }
 
@@ -226,7 +228,7 @@ public class ManageProfile extends AppCompatActivity {
                 }
                 String urlParameters = "firstName="+firstName+"&lastName="+lastName+"&email="+email+
                         "&phone="+phone+"&profileImageURL="+profileImageURL+"&language="+language+
-                        "&userGoals="+userGoals.toString()+"&userLevels="+userLevels;
+                        "&userGoals="+userGoals.toString()+"&userLevels="+userLevels+"&userId="+userId;
 
                 byte[] postData       = urlParameters.getBytes();
                 int    postDataLength = postData.length;

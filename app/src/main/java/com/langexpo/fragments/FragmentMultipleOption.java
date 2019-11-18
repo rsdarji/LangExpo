@@ -118,13 +118,20 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
                     final MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.correct_answer);
                     mp.start();
                     verifyAnswerBT.setVisibility(View.GONE);
+                    nextQuestionBT.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_gradient_green));
                     verifiedQuestionLayout.setVisibility(View.VISIBLE);
-                    //DisplayLevelQuestions displayLevelQuestions = new DisplayLevelQuestions();
-                    questionList.remove(q);
-                    ((DisplayLevelQuestions)getActivity()).nextQuestion(questionList);
-                    //displayLevelQuestions.nextQuestion(questionList);
-                }
 
+                    questionList.remove(q);
+                    //((DisplayLevelQuestions)getActivity()).nextQuestion(questionList);
+
+                }
+            }
+        });
+
+        nextQuestionBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((DisplayLevelQuestions)getActivity()).nextQuestion(questionList);
             }
         });
         return view;

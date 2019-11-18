@@ -196,6 +196,16 @@ public class AddGoal extends AppCompatActivity {
                 System.out.println("response: "+stringBuilder.toString());
             }
             catch (Exception e) {
+                if(e instanceof ConnectException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(AddGoal.this, AddGoal.this);
+                    alertDialog.alertDialog("Network issue", Constant.NO_INTERNET_ERROR_MESSAGE);
+
+                }else if(e instanceof SocketTimeoutException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(AddGoal.this, AddGoal.this);
+                    alertDialog.alertDialog("Time out", "Please try again.");
+                }
                 e.printStackTrace();
                 try {
                     throw e;

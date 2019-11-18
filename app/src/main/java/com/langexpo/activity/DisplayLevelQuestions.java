@@ -1,6 +1,7 @@
 package com.langexpo.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -41,20 +43,34 @@ import java.util.List;
 
 public class DisplayLevelQuestions extends AppCompatActivity {
 
+
+    Toolbar myToolbar;
+    private ProgressBar progressBar;
     long levelId;
     public List<QuestionModel> questionList;
     String checkedRadioButtonText = "";
+    int totalQuestions=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_level_questions);
+
+        myToolbar = (Toolbar) findViewById(R.id.question_container_toolbar);
+        setSupportActionBar(myToolbar);
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        progressBar = (ProgressBar) findViewById(R.id.question_progress);
         getIncomingIntent();
-
-
-
-
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
     private void getIncomingIntent() {
         if (getIntent().hasExtra("levelId") &&
                 getIntent().hasExtra("levelName") &&
@@ -81,8 +97,6 @@ public class DisplayLevelQuestions extends AppCompatActivity {
 
         }
     }
-
-
 
     private class gelAllQuestionByCourseLevel extends AsyncTask<Void, Void, String> {
         private ProgressDialog progressBar;
@@ -214,8 +228,8 @@ public class DisplayLevelQuestions extends AppCompatActivity {
                                 question.getLong("questionType"),
                                 question.getLong("courseLevel")));
                     }
-
-                    if(questionList.size()!=0){
+                    totalQuestions = questionList.size();
+                    if(totalQuestions!=0){
                         nextQuestion(questionList);
                     }
 
@@ -224,11 +238,11 @@ public class DisplayLevelQuestions extends AppCompatActivity {
                     progressBar.dismiss();
                     /*refreshLayout.setRefreshing(false);*/
 
-                    Toast toast = Toast.makeText(DisplayLevelQuestions.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
+                    //Toast toast = Toast.makeText(DisplayLevelQuestions.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG).show();
                     /*Intent intent = new Intent(DisplayLevelQuestions.this, LevelList.class);
                     startActivity(intent);*/
                     progressBar.dismiss();
-                    toast.show();
+
                 }
                 else if(loginResponse.get("status").toString().equalsIgnoreCase("error")){
                     if(loginResponse.get("code").toString().equalsIgnoreCase("LE_D_411")) {
@@ -246,6 +260,12 @@ public class DisplayLevelQuestions extends AppCompatActivity {
     }
 
     public void nextQuestion(List<QuestionModel> questionList){
+        try{
+            progressBar.setProgress(progressBar.getProgress()+ (100/totalQuestions));
+        }catch (ArithmeticException e){
+            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(DisplayLevelQuestions.this, DisplayLevelQuestions.this);
+            alertDialog.alertDialog("No Question", "No questions, Please contact Admin.".toString());
+        }
         if(questionList.isEmpty()){
             Toast toast = Toast.makeText(DisplayLevelQuestions.this,"Congratulations! you have completed level 1",Toast.LENGTH_LONG);
         }else {
@@ -254,7 +274,7 @@ public class DisplayLevelQuestions extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.question_conainer,
                         new FragmentMultipleOption(questionList)).commit();
             }
-            if (q.getQuestionType() == 2) {
+            else if (q.getQuestionType() == 2) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.question_conainer,
                         new FragmentFillingTheBlanks()).commit();
             }

@@ -18,8 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.langexpo.R;
+import com.langexpo.admin.activity.AddLevel;
 import com.langexpo.admin.activity.Home;
 import com.langexpo.utility.Constant;
+import com.langexpo.utility.LangExpoAlertDialog;
 import com.langexpo.utility.Session;
 
 import org.json.JSONException;
@@ -30,7 +32,9 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
@@ -205,6 +209,16 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("response: "+stringBuilder.toString());
                 }
                 catch (Exception e) {
+                    if(e instanceof ConnectException){
+                        progressBar.dismiss();
+                        LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(MainActivity.this, MainActivity.this);
+                        alertDialog.alertDialog("Network issue", Constant.NO_INTERNET_ERROR_MESSAGE);
+
+                    }else if(e instanceof SocketTimeoutException){
+                        progressBar.dismiss();
+                        LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(MainActivity.this, MainActivity.this);
+                        alertDialog.alertDialog("Time out", "Please try again.");
+                    }
                     e.printStackTrace();
                     try {
                         throw e;

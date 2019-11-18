@@ -3,10 +3,10 @@ package com.langexpo.utility;
 public interface Constant {
 
     //String WEB_SERVICE_HOST = "192.168.43.73";
-    //String WEB_SERVICE_HOST = "35.184.35.177"; //GOOGLE CLOUD INSTANCE
-    String WEB_SERVICE_HOST = "10.0.2.2";
-    String WEB_SERVICE_PORT= "8084";
-    //String WEB_SERVICE_PORT= "8080"; // GOOGLE CLOUD TOMCAT PORT
+    String WEB_SERVICE_HOST = "35.184.35.177"; //GOOGLE CLOUD INSTANCE
+    //String WEB_SERVICE_HOST = "10.0.2.2";
+    //String WEB_SERVICE_PORT= "8084";
+    String WEB_SERVICE_PORT= "8080"; // GOOGLE CLOUD TOMCAT PORT
 
     String CONTEXT_PATH = "WebApplication5";
     String APPLICATION_PATH = "webresources";
@@ -75,4 +75,6 @@ public interface Constant {
         String USER_SELECTED_LEVEL = "userSelectedlevel";
         String USER_SELECTED_LEVEL_NAME = "userSelectedlevelName";
     }
+
+    String NO_INTERNET_ERROR_MESSAGE = "Please connect to internet and try again.";
 }

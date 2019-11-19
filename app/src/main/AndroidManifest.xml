@@ -21,6 +21,7 @@
         <activity android:name=".activity.UserQuizList" />
         <activity android:name=".activity.DisplayLevelQuestions" />
         <activity android:name=".activity.ManageProfile" />
+        <activity android:name=".activity.UserProgressList"></activity>
         <activity android:name=".activity.UserLevelList" />
         <activity android:name=".activity.UserLectureList" />
         <activity android:name=".activity.DisplayLecture" />

@@ -325,6 +325,17 @@ public class AddLecture extends AppCompatActivity {
                 System.out.println("response: "+stringBuilder.toString());
             }
             catch (Exception e) {
+                if(e instanceof ConnectException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(AddLecture.this, AddLecture.this);
+                    alertDialog.alertDialog("Network issue", Constant.NO_INTERNET_ERROR_MESSAGE);
+
+                }else if(e instanceof SocketTimeoutException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(AddLecture.this, AddLecture.this);
+                    alertDialog.alertDialog("Time out", "Please try again.");
+                }
+
                 e.printStackTrace();
                 try {
                     throw e;
@@ -468,7 +479,7 @@ public class AddLecture extends AppCompatActivity {
                 if(e instanceof ConnectException){
                     progressBar.dismiss();
                     LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(AddLecture.this, AddLecture.this);
-                    alertDialog.alertDialog("Network issue", "Due to maintenance, currently service unavailable");
+                    alertDialog.alertDialog("Network issue", Constant.NO_INTERNET_ERROR_MESSAGE);
 
                 }else if(e instanceof SocketTimeoutException){
                     progressBar.dismiss();
@@ -583,6 +594,17 @@ public class AddLecture extends AppCompatActivity {
                 System.out.println("response: "+stringBuilder.toString());
             }
             catch (Exception e) {
+                if(e instanceof ConnectException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(AddLecture.this, AddLecture.this);
+                    alertDialog.alertDialog("Network issue", Constant.NO_INTERNET_ERROR_MESSAGE);
+
+                }else if(e instanceof SocketTimeoutException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(AddLecture.this, AddLecture.this);
+                    alertDialog.alertDialog("Time out", "Please try again.");
+                }
+
                 e.printStackTrace();
                 try {
                     throw e;
@@ -701,6 +723,17 @@ public class AddLecture extends AppCompatActivity {
                 System.out.println("response: "+stringBuilder.toString());
             }
             catch (Exception e) {
+                if(e instanceof ConnectException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(AddLecture.this, AddLecture.this);
+                    alertDialog.alertDialog("Network issue", Constant.NO_INTERNET_ERROR_MESSAGE);
+
+                }else if(e instanceof SocketTimeoutException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(AddLecture.this, AddLecture.this);
+                    alertDialog.alertDialog("Time out", "Please try again.");
+                }
+
                 e.printStackTrace();
                 try {
                     throw e;

@@ -257,6 +257,16 @@ public class AddLevel extends AppCompatActivity {
                 System.out.println("response: "+stringBuilder.toString());
             }
             catch (Exception e) {
+                if(e instanceof ConnectException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(AddLevel.this, AddLevel.this);
+                    alertDialog.alertDialog("Network issue", Constant.NO_INTERNET_ERROR_MESSAGE);
+
+                }else if(e instanceof SocketTimeoutException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(AddLevel.this, AddLevel.this);
+                    alertDialog.alertDialog("Time out", "Please try again.");
+                }
                 e.printStackTrace();
                 try {
                     throw e;
@@ -505,10 +515,22 @@ public class AddLevel extends AppCompatActivity {
                 System.out.println("response: "+stringBuilder.toString());
             }
             catch (Exception e) {
+                if(e instanceof ConnectException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(AddLevel.this, AddLevel.this);
+                    alertDialog.alertDialog("Network issue", Constant.NO_INTERNET_ERROR_MESSAGE);
+
+                }else if(e instanceof SocketTimeoutException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(AddLevel.this, AddLevel.this);
+                    alertDialog.alertDialog("Time out", "Please try again.");
+                }
+
                 e.printStackTrace();
                 try {
                     throw e;
                 } catch (IOException e1) {
+
                     e1.printStackTrace();
                 }
             }

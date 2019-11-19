@@ -186,7 +186,7 @@ public class LectureList extends AppCompatActivity {
                 if(e instanceof ConnectException){
                     progressBar.dismiss();
                     LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(LectureList.this, LectureList.this);
-                    alertDialog.alertDialog("Network issue", "Due to maintenance, currently service unavailable");
+                    alertDialog.alertDialog("Network issue", Constant.NO_INTERNET_ERROR_MESSAGE);
 
                 }else if(e instanceof SocketTimeoutException){
                     progressBar.dismiss();

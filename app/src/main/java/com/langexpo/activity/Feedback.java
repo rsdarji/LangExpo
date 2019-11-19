@@ -18,6 +18,7 @@ import com.langexpo.R;
 import com.langexpo.admin.activity.AddLanguage;
 import com.langexpo.admin.activity.LanguageList;
 import com.langexpo.utility.Constant;
+import com.langexpo.utility.LangExpoAlertDialog;
 import com.langexpo.utility.Session;
 import com.langexpo.utility.UploadImageToCloud;
 
@@ -28,7 +29,9 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 
 public class Feedback extends AppCompatActivity {
@@ -201,6 +204,17 @@ public class Feedback extends AppCompatActivity {
                 System.out.println("response: "+stringBuilder.toString());
             }
             catch (Exception e) {
+                if(e instanceof ConnectException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(Feedback.this, Feedback.this);
+                    alertDialog.alertDialog("Network issue", Constant.NO_INTERNET_ERROR_MESSAGE);
+
+                }else if(e instanceof SocketTimeoutException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(Feedback.this, Feedback.this);
+                    alertDialog.alertDialog("Time out", "Please try again.");
+                }
+
                 e.printStackTrace();
                 try {
                     throw e;

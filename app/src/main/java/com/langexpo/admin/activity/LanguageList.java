@@ -18,6 +18,7 @@ import com.langexpo.R;
 import com.langexpo.activity.MainActivity;
 import com.langexpo.model.Language;
 import com.langexpo.utility.Constant;
+import com.langexpo.utility.LangExpoAlertDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +27,9 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -134,6 +137,17 @@ public class LanguageList extends AppCompatActivity {
                 System.out.println("response: "+stringBuilder.toString());
             }
             catch (Exception e) {
+                if(e instanceof ConnectException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(LanguageList.this, LanguageList.this);
+                    alertDialog.alertDialog("Network issue", Constant.NO_INTERNET_ERROR_MESSAGE);
+
+                }else if(e instanceof SocketTimeoutException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(LanguageList.this, LanguageList.this);
+                    alertDialog.alertDialog("Time out", "Please try again.");
+                }
+
                 e.printStackTrace();
                 try {
                     throw e;

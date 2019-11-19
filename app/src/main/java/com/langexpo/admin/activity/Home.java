@@ -22,6 +22,7 @@ import com.langexpo.fragments.AddQuestionFragment;
 import com.langexpo.fragments.AddQuizFragment;
 import com.langexpo.fragments.FragmentUserHome;
 import com.langexpo.utility.Constant;
+import com.langexpo.utility.LangExpoAlertDialog;
 import com.langexpo.utility.Session;
 
 import org.json.JSONException;
@@ -31,7 +32,9 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
@@ -213,6 +216,17 @@ public class Home extends NavigationDrawer {
 
                 System.out.println(stringBuilder.toString());
             } catch (Exception e) {
+                if(e instanceof ConnectException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(Home.this, Home.this);
+                    alertDialog.alertDialog("Network issue", Constant.NO_INTERNET_ERROR_MESSAGE);
+
+                }else if(e instanceof SocketTimeoutException){
+                    progressBar.dismiss();
+                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(Home.this, Home.this);
+                    alertDialog.alertDialog("Time out", "Please try again.");
+                }
+
                 e.printStackTrace();
                 try {
                     throw e;

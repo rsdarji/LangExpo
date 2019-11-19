@@ -4,27 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.UserLevelList">
+    tools:context=".activity.UserQuizList">
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/user_level_my_toolbar"
+        android:id="@+id/user_quiz_list_my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        app:title="Levels"
+        app:title="Quiz"
         android:hapticFeedbackEnabled="true"
         app:titleTextColor="@color/colorWhite"
         android:theme="@style/ToolbarTheme"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/user_level_list_refresh_layout"
+        android:id="@+id/user_quiz_list_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/user_level_my_toolbar"
         android:layout_marginTop="5dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/user_level_recyclerView"
+            android:id="@+id/user_quiz_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="75dp" />

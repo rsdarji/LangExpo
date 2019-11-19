@@ -3,10 +3,15 @@ package com.langexpo.model;
 public class Quiz {
     private long quizId;
     private String quizName;
+    private String userLevel;
+    private String levelIds;
 
-    public Quiz(long quizId, String quizName){
+    public Quiz(long quizId, String quizName,String userLevel,
+                String levelIds){
         this.quizId = quizId;
         this.quizName = quizName;
+        this.userLevel = userLevel;
+        this.levelIds = levelIds;
     }
 
     public long getQuizId() {
@@ -23,5 +28,21 @@ public class Quiz {
 
     public void setQuizName(String quizName) {
         this.quizName = quizName;
+    }
+
+    public String getUserLevel() {
+        return userLevel;
+    }
+
+    public void setUserLevel(String userLevel) {
+        this.userLevel = userLevel;
+    }
+
+    public String getLevelIds() {
+        return levelIds;
+    }
+
+    public void setLevelIds(String levelIds) {
+        this.levelIds = levelIds;
     }
 }

@@ -65,7 +65,7 @@
 
                                 <ImageView
                                     android:id="@+id/imageview4"
-                                    android:layout_width="250dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="50dp"
                                     android:layout_centerVertical="true"
                                     android:src="@drawable/level_user1" />
@@ -101,7 +101,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
                                 <ImageView
-                                    android:layout_width="100dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="60dp"
                                     android:src="@drawable/lecture_user"
                                     android:layout_centerInParent="true"
@@ -144,7 +144,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
                                 <ImageView
-                                    android:layout_width="100dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="50dp"
                                     android:src="@drawable/quiz_user"
                                     android:layout_centerInParent="true"
@@ -179,7 +179,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent">
                                 <ImageView
-                                    android:layout_width="60dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="50dp"
                                     android:src="@drawable/progress"
                                     android:layout_centerInParent="true"

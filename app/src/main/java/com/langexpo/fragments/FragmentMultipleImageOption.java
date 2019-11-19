@@ -1,15 +1,10 @@
 package com.langexpo.fragments;
 
 
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -25,43 +20,28 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.langexpo.R;
 import com.langexpo.activity.DisplayLevelQuestions;
-import com.langexpo.admin.activity.AddGoal;
-import com.langexpo.admin.activity.GoalList;
 import com.langexpo.customfunction.CustomRadioGroupView;
-import com.langexpo.model.Question;
 import com.langexpo.model.QuestionModel;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.LangExpoAlertDialog;
 import com.langexpo.utility.Utility;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Field;
-import java.net.ConnectException;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
-import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentMultipleOption extends Fragment implements View.OnClickListener {
+public class FragmentMultipleImageOption extends Fragment implements View.OnClickListener{
 
     String checkedRadioButtonText = "";
     Button verifyAnswerBT, nextQuestionGreenBT, nextQuestionThemeBT;
@@ -74,11 +54,11 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
 
 
 
-    public FragmentMultipleOption() {
+    public FragmentMultipleImageOption() {
         // Required empty public constructor
     }
 
-    public FragmentMultipleOption(List<QuestionModel> questionList) {
+    public FragmentMultipleImageOption(List<QuestionModel> questionList) {
         // Required empty public constructor
         this.questionList = questionList;
         this.q = questionList.get(0);
@@ -91,7 +71,7 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View view = inflater.inflate(R.layout.fragment_multiple_option, container, false);
+        View view = inflater.inflate(R.layout.fragment_multiple_image_option, container, false);
         verifiedQuestionLayout = (LinearLayout) view.findViewById(R.id.verified_question_layout);
         verifiedQuestionLayout.setVisibility(View.GONE);
 
@@ -106,23 +86,31 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
         optionSixRB = (RadioButton) view.findViewById(R.id.option_six_radio_button);
         verifyAnswerBT = (Button) view.findViewById(R.id.verify_answer_bt);
         nextQuestionGreenBT = (Button) view.findViewById(R.id.next_question_green_bt);
-        nextQuestionThemeBT = (Button) view.findViewById(R.id.next_question_theme_bt);
+            nextQuestionThemeBT = (Button) view.findViewById(R.id.next_question_theme_bt);
 
         questionVerificationResult = (TextView) view.findViewById(R.id.question_verification_result );
         correctAnswerTV = (TextView) view.findViewById(R.id.correct_answer_tv );
         correctAnswer = (TextView) view.findViewById(R.id.correct_answer );
 
-
         RadioButton[] availableOption = {optionOneRB, optionTwoRB, optionThreeRB,
                 optionFourRB, optionFiveRB, optionSixRB};
         hideComponentFromArray(availableOption);
         String[] options = q.getQuestionOption().split(",");
-        options = (String[]) Utility.shuffleArrayValues(options);
+        String[] optionImagesURL = q.getOptionImages().split(",");
+        String[][] optionsAndImages = new String[options.length][2];
+        for(int i =0;i<options.length;i++){
+            optionsAndImages[i][0] = options[i];
+            optionsAndImages[i][1] = optionImagesURL[i];
+        }
+        optionsAndImages = (String[][]) Utility.shuffleArrayValues(optionsAndImages);
 
         question.setText(q.getQuestion().toString());
-        for(int i = 0; i<options.length;i++){
+        for(int i = 0; i<optionsAndImages.length;i++){
             availableOption[i].setVisibility(View.VISIBLE);
-            availableOption[i].setText(options[i]);
+            availableOption[i].setText(optionsAndImages[i][0]);
+            new GetDrawableBitmapFromURL(availableOption[i])
+                    .execute(optionsAndImages[i][1]);
+
         }
 
         radioGroup.setOnCheckedChangeListener(new CustomRadioGroupView.OnCheckedChangeListener() {
@@ -217,5 +205,42 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
         }
     }
 
+    public static class GetDrawableBitmapFromURL extends AsyncTask<String, Void, BitmapDrawable> {
 
+        RadioButton radioButton;
+
+        public GetDrawableBitmapFromURL(RadioButton radioButton){
+            this.radioButton = radioButton;
+        }
+
+        @Override
+        protected BitmapDrawable doInBackground(String... urls) {
+            Bitmap x = null;
+            Bitmap resizedBitMap = null;
+
+            HttpURLConnection connection = null;
+            try {
+                connection = (HttpURLConnection) new URL(urls[0]).openConnection();
+
+                connection.connect();
+                InputStream input = connection.getInputStream();
+
+                x = BitmapFactory.decodeStream(input);
+                resizedBitMap = Utility.resizeBitmap(x, Constant.RADIO_BUTTON_WIDTH, Constant.RADIO_BUTTON_HEIGHT);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return new BitmapDrawable(Resources.getSystem(), resizedBitMap);
+        }
+        @Override
+
+        protected void onPostExecute(BitmapDrawable result) {
+            super.onPostExecute(result);
+
+            radioButton.setCompoundDrawablesWithIntrinsicBounds(null,result
+                    ,null,null);
+
+        }
+    }
 }

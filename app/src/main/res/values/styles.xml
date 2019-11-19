@@ -9,6 +9,28 @@
         <item name="buttonStyle">@style/CustomButton</item>
     </style>
 
+    <style name="GreenButton" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="buttonStyle">@style/CustomGreeButton</item>
+    </style>
+
+    <style name="CustomButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/custom_button</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:stateListAnimator" tools:targetApi="lollipop">@null</item>
+    </style>
+
+    <style name="CustomGreeButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/custom_button_green</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:stateListAnimator" tools:targetApi="lollipop">@null</item>
+    </style>
+
     <style name="AdminSwitch" parent="Theme.AppCompat.Light">
         <!-- active thumb & track color (30% transparency) -->
         <item name="colorControlActivated">@color/colorPrimary</item>
@@ -43,12 +65,7 @@
         <item name="android:textStyle">italic</item>
     </style>
 
-    <style name="CustomButton" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/custom_button</item>
-        <item name="android:textColor">#fff</item>
-        <item name="android:padding">10dp</item>
-        <item name="android:stateListAnimator" tools:targetApi="lollipop">@null</item>
-    </style>
+
 
     <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>

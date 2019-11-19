@@ -9,6 +9,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.langexpo.R;
+import com.langexpo.admin.activity.Home;
 import com.langexpo.admin.activity.LevelAdapter;
 import com.langexpo.admin.activity.LevelList;
 import com.langexpo.model.Level;
@@ -54,6 +56,16 @@ public class UserLevelList extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(UserLevelList.this, Home.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         //getting the recyclerview from xml
         recyclerView = (RecyclerView) findViewById(R.id.user_level_recyclerView);
         recyclerView.setHasFixedSize(true);

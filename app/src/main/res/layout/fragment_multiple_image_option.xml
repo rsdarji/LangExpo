@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.FragmentMultipleOption">
+    tools:context=".fragments.FragmentMultipleImageOption">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -12,12 +12,12 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="75dp">
-    <!-- TODO: Update blank fragment layout -->
-    <!--<TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Multiple option Fragment" />-->
+        <!-- TODO: Update blank fragment layout -->
+        <!--<TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Multiple option Fragment" />-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
 
         </RelativeLayout>
     </ScrollView>
-    
+
     <LinearLayout
         android:id="@+id/verified_question_layout"
         android:layout_width="match_parent"
@@ -130,46 +130,46 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="15dp">
-        <TextView
-            android:id="@+id/question_verification_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="helllo"
-            android:textSize="20dp"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/correct_answer_tv"
-            android:layout_below="@+id/question_verification_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Correct Answer is: "
-            android:textColor="@color/colorGreen"
-            android:textSize="20dp"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/correct_answer"
-            android:layout_toRightOf="@+id/correct_answer_tv"
-            android:layout_below="@+id/question_verification_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/colorGreen"
-            android:textSize="20dp"
-            android:textStyle="bold"/>
-        <com.langexpo.customfunction.CustomButton
-            android:id="@+id/next_question_green_bt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:theme="@style/GreenButton"
-            android:text="Next"/>
+            <TextView
+                android:id="@+id/question_verification_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="helllo"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/correct_answer_tv"
+                android:layout_below="@+id/question_verification_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Correct Answer is: "
+                android:textColor="@color/colorGreen"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/correct_answer"
+                android:layout_toRightOf="@+id/correct_answer_tv"
+                android:layout_below="@+id/question_verification_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/colorGreen"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+            <com.langexpo.customfunction.CustomButton
+                android:id="@+id/next_question_green_bt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:theme="@style/GreenButton"
+                android:text="Next"/>
 
-        <com.langexpo.customfunction.CustomButton
-            android:id="@+id/next_question_theme_bt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="Next"/>
+            <com.langexpo.customfunction.CustomButton
+                android:id="@+id/next_question_theme_bt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="Next"/>
 
         </RelativeLayout>
     </LinearLayout>

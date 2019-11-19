@@ -9,4 +9,10 @@
     <color name="colorGreen">#0f7115</color>
     <color name="colorPrimaryLight">#DBD0D4</color>
 
+    <color name="colorGreenDark">#295618</color>
+    <color name="colorGreenLight">#56b431</color>
+    <color name="colorGreenVeryLight">#dafadb</color>
+
+
+
 </resources>

@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.langexpo.R;
@@ -14,6 +15,7 @@ public class DisplayLecture extends AppCompatActivity {
 
     Toolbar myToolbar;
     TextView displayLectureTV;
+    WebView displayLectureWV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +26,8 @@ public class DisplayLecture extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        displayLectureTV = (TextView) findViewById(R.id.admin_display_lecture_content_preview);
+        /*displayLectureTV = (TextView) findViewById(R.id.admin_display_lecture_content_preview);*/
+        displayLectureWV = (WebView) findViewById(R.id.admin_display_lecture_content_preview);
 
         getIncomingIntent();
 
@@ -40,11 +43,12 @@ public class DisplayLecture extends AppCompatActivity {
         if(getIntent().hasExtra("lectureContent")) {
             String s = getIntent().getStringExtra("lectureContent");
             if (s.length() != 0) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                displayLectureWV.loadDataWithBaseURL(null, s, "text/html", "utf-8", null);
+                /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     displayLectureTV.setText(Html.fromHtml(s.toString(), Html.FROM_HTML_MODE_LEGACY));
                 } else {
                     displayLectureTV.setText(Html.fromHtml(s.toString()));
-                }
+                }*/
             }
         }
     }

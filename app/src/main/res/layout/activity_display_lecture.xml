@@ -24,7 +24,15 @@
         android:orientation="vertical"
         android:layout_below="@+id/admin_display_lecture_my_toolbar">
 
-        <TextView
+
+        <WebView
+            android:id="@+id/admin_display_lecture_content_preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            />
+        <!--<TextView
             android:id="@+id/admin_display_lecture_content_preview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -36,6 +44,6 @@
             android:scrollbars="vertical"
             android:lines="50"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:scrollHorizontally="false" />
+            android:scrollHorizontally="false" />-->
     </ScrollView>
 </RelativeLayout>

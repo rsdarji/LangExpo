@@ -106,6 +106,7 @@ public class Home extends NavigationDrawer {
     }
 
     public void goToUserProgress(View view) {
+
     }
 
     public void goToUserQuiz(View view) {

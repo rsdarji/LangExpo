@@ -20,10 +20,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContentResolverCompat;
 
 import com.langexpo.R;
+import com.langexpo.model.Question;
+import com.langexpo.model.QuestionModel;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Utility {
     public static int getValue(String value, int defaultValue){
@@ -65,5 +69,14 @@ public class Utility {
 
         return Bitmap.createBitmap(x, 0, 0, width,
                 height, matrix, true);
+    }
+
+    public static List<QuestionModel> shuffleAndReduceQuestionToTen(List<QuestionModel> questionList){
+
+        Collections.shuffle(questionList, new Random());
+        if(questionList.size()>10){
+            questionList = questionList.stream().limit(10).collect(Collectors.toList());
+        }
+        return questionList;
     }
 }

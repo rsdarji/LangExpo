@@ -1,7 +1,9 @@
 package com.langexpo.model;
 
 public class UserProgress {
+
     private long userId;
+    private String name;
     private long levelId;
     private String status;
     private long quizId;
@@ -9,9 +11,10 @@ public class UserProgress {
     private int correctAnswerCount;
     private int inCorrectAnswerCount;
 
-    public UserProgress(long userId, long levelId, String status, long quizId,
+    public UserProgress(long userId, String name, long levelId, String status, long quizId,
                         int attempt, int correctAnswerCount, int inCorrectAnswerCount){
         this.userId = userId;
+        this.name = name;
         this.levelId = levelId;
         this.status = status;
         this.quizId = quizId;
@@ -26,6 +29,14 @@ public class UserProgress {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public long getLevelId() {

@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.langexpo.R;
 import com.langexpo.activity.DisplayLevelQuestions;
+import com.langexpo.activity.DisplayQuizQuestions;
 import com.langexpo.customfunction.CustomRadioGroupView;
 import com.langexpo.model.QuestionModel;
 import com.langexpo.utility.Constant;
@@ -50,6 +51,7 @@ public class FragmentMultipleImageOption extends Fragment implements View.OnClic
     TextView question, questionVerificationResult, correctAnswerTV, correctAnswer;
     LinearLayout verifiedQuestionLayout;
     QuestionModel q;
+    boolean quiz = false;
     List<QuestionModel> questionList = new ArrayList<QuestionModel>();
 
 
@@ -58,10 +60,11 @@ public class FragmentMultipleImageOption extends Fragment implements View.OnClic
         // Required empty public constructor
     }
 
-    public FragmentMultipleImageOption(List<QuestionModel> questionList) {
+    public FragmentMultipleImageOption(List<QuestionModel> questionList, boolean quiz) {
         // Required empty public constructor
         this.questionList = questionList;
         this.q = questionList.get(0);
+        this.quiz = quiz;
 
     }
 
@@ -144,7 +147,11 @@ public class FragmentMultipleImageOption extends Fragment implements View.OnClic
                     correctAnswerTV.setVisibility(View.GONE);
                     correctAnswer.setVisibility(View.GONE);
                     nextQuestionThemeBT.setVisibility(View.GONE);
-                    DisplayLevelQuestions.correctCount+=1;
+                    if(quiz) {
+                        DisplayQuizQuestions.correctCount+=1;
+                    }else{
+                        DisplayLevelQuestions.correctCount+=1;
+                    }
 
                 }else{
                     mp = MediaPlayer.create(getContext(), R.raw.incorrect_answer);
@@ -165,7 +172,11 @@ public class FragmentMultipleImageOption extends Fragment implements View.OnClic
                         //deprecated in API 26
                         vibrator.vibrate(500);
                     }
-                    DisplayLevelQuestions.incorrectCount+=1;
+                    if(quiz) {
+                        DisplayQuizQuestions.incorrectCount+=1;
+                    }else{
+                        DisplayLevelQuestions.incorrectCount+=1;
+                    }
                 }
                 questionList.remove(q);
             }
@@ -187,7 +198,12 @@ public class FragmentMultipleImageOption extends Fragment implements View.OnClic
     }
 
     public void next(){
-        ((DisplayLevelQuestions)getActivity()).nextQuestion(questionList);
+        if(quiz){
+            ((DisplayQuizQuestions)getActivity()).nextQuestion(questionList,quiz);
+        }else{
+            ((DisplayLevelQuestions)getActivity()).nextQuestion(questionList,quiz);
+        }
+
     }
 
     @Override

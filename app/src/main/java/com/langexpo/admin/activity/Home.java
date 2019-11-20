@@ -13,6 +13,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.langexpo.R;
 import com.langexpo.activity.UserLectureList;
 import com.langexpo.activity.UserLevelList;
+import com.langexpo.activity.UserProgressList;
+import com.langexpo.activity.UserQuizList;
 import com.langexpo.com.langexpo.navigationdrawer.FragmentHome;
 import com.langexpo.com.langexpo.navigationdrawer.NavigationDrawer;
 import com.langexpo.fragments.AddGoalFragment;
@@ -109,10 +111,14 @@ public class Home extends NavigationDrawer {
     }
 
     public void goToUserProgress(View view) {
-
+        Intent i = new Intent(Home.this, UserProgressList.class);
+        startActivity(i);
     }
 
     public void goToUserQuiz(View view) {
+        Intent i = new Intent(Home.this, UserQuizList.class);
+        startActivity(i);
+
     }
 
     public void goToUserLecture(View view) {

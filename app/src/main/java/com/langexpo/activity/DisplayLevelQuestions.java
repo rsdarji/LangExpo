@@ -30,6 +30,7 @@ import com.langexpo.model.QuestionModel;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.LangExpoAlertDialog;
 import com.langexpo.utility.Session;
+import com.langexpo.utility.Utility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +45,9 @@ import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class DisplayLevelQuestions extends AppCompatActivity {
 
@@ -165,8 +168,8 @@ public class DisplayLevelQuestions extends AppCompatActivity {
                 connection.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded");
                 connection.setUseCaches( false );
                 // give it 15 seconds to respond
-                connection.setReadTimeout(15*1000);
-                connection.setConnectTimeout(15*1000);
+                connection.setReadTimeout(30*1000);
+                connection.setConnectTimeout(30*1000);
                 try( DataOutputStream wr = new DataOutputStream( connection.getOutputStream())) {
                     wr.write( postData );
                 }
@@ -201,6 +204,7 @@ public class DisplayLevelQuestions extends AppCompatActivity {
                     e1.printStackTrace();
                 }
             }
+
             finally {
                 if (reader != null) {
                     try{
@@ -240,8 +244,9 @@ public class DisplayLevelQuestions extends AppCompatActivity {
                                 question.getString("optionImages")));
                     }
                     totalQuestions = questionList.size();
+                    questionList = Utility.shuffleAndReduceQuestionToTen(questionList);
                     if(totalQuestions!=0){
-                        nextQuestion(questionList);
+                        nextQuestion(questionList, false);
 
                     }
 
@@ -249,8 +254,6 @@ public class DisplayLevelQuestions extends AppCompatActivity {
                     recyclerView.setAdapter(adapter);*/
                     progressBar.dismiss();
                     /*refreshLayout.setRefreshing(false);*/
-
-
                 }
                 else if(loginResponse.get("status").toString().equalsIgnoreCase("error")){
                     if(loginResponse.get("code").toString().equalsIgnoreCase("LE_D_411")) {
@@ -267,7 +270,7 @@ public class DisplayLevelQuestions extends AppCompatActivity {
         }
     }
 
-    public void nextQuestion(List<QuestionModel> questionList){
+    public void nextQuestion(List<QuestionModel> questionList, boolean quiz){
         try{
             questionProgressBar.setProgress(questionProgressBar.getProgress()+ (100/totalQuestions));
         }catch (ArithmeticException e){
@@ -304,17 +307,16 @@ public class DisplayLevelQuestions extends AppCompatActivity {
             QuestionModel q = questionList.get(0);
             if (q.getQuestionType() == 1) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.question_conainer,
-                        new FragmentMultipleOption(questionList)).commit();
+                        new FragmentMultipleOption(questionList, quiz)).commit();
             }else if (q.getQuestionType() == 2) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.question_conainer,
-                        new FragmentMultipleImageOption(questionList)).commit();
+                        new FragmentMultipleImageOption(questionList, quiz)).commit();
             }else if (q.getQuestionType() == 3) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.question_conainer,
                         new FragmentFillingTheBlanks()).commit();
             }
         }
     }
-
 
     private class AddUserProgressAsyncTask extends AsyncTask<Void, Void, String> {
         private ProgressDialog progressBar;

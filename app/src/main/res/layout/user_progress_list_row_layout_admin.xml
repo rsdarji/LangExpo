@@ -24,66 +24,60 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
+
             android:gravity="center_vertical"
             android:padding="8dp">
 
             <com.elyeproj.loaderviewlibrary.LoaderTextView
-                android:id="@+id/user_progress__row_layout_user_lecture3f_name"
+                android:id="@+id/user_progress_level_or_quiz_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily=""
-                android:text="Lecture Name"
+                android:text="Level/Quiz Name"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimary"/>
+
+            <com.elyeproj.loaderviewlibrary.LoaderTextView
+                android:id="@+id/user_progress_level_or_quiz_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily=""
+                android:layout_alignParentRight="true"
+                android:text="Status"
+                android:textColor="@color/colorPrimary"/>
+
+            <com.elyeproj.loaderviewlibrary.LoaderTextView
+                android:id="@+id/user_progress_level_or_quiz_attempt_tv"
+                android:layout_below="@+id/user_progress_level_or_quiz_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily=""
+                android:text="Attempt: "
+                android:textColor="@color/colorPrimary"/>
+            <com.elyeproj.loaderviewlibrary.LoaderTextView
+                android:id="@+id/user_progress_level_or_quiz_attempt"
+                android:layout_below="@+id/user_progress_level_or_quiz_name"
+                android:layout_toRightOf="@+id/user_progress_level_or_quiz_attempt_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily=""
+                android:text="1"
+                android:textColor="@color/colorPrimary"/>
+
+            <com.elyeproj.loaderviewlibrary.LoaderTextView
+                android:id="@+id/user_progress_level_or_quiz_score"
+                android:layout_below="@+id/user_progress_level_or_quiz_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily=""
+                android:layout_alignParentRight="true"
+                android:text="60%"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"/>
 
-            <!--<com.elyeproj.loaderviewlibrary.LoaderTextView
-                android:id="@+id/lecture_row_layout_user_level_name_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily=""
-                android:text="Level: "
-                android:layout_marginTop="3dp"
-                android:layout_below="@+id/lecture_row_layout_user_lecture3f_name"
-                android:textColor="@color/colorPrimary"/>
 
-            <com.elyeproj.loaderviewlibrary.LoaderTextView
-                android:id="@+id/lecture_row_layout_user_level_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily=""
-                android:text=""
-                android:layout_marginTop="3dp"
-                android:layout_below="@+id/lecture_row_layout_user_lecture3f_name"
-                android:layout_toRightOf="@+id/lecture_row_layout_admin_level_name_tv"
-                android:textColor="@color/colorPrimary"/>
-
-            <com.elyeproj.loaderviewlibrary.LoaderTextView
-                android:id="@+id/lecture_row_layout_user_sequence_number_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily=""
-                android:text="Seq. : "
-                android:layout_marginTop="3dp"
-                android:layout_below="@+id/lecture_row_layout_user_level_name_tv"
-                android:textColor="@color/colorPrimary"/>
-            <com.elyeproj.loaderviewlibrary.LoaderTextView
-                android:id="@+id/lecture_row_layout_user_sequence_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily=""
-                android:text=""
-                android:layout_marginTop="3dp"
-                android:textColor="@color/colorPrimary"/>-->
-
-            <com.elyeproj.loaderviewlibrary.LoaderTextView
-                android:id="@+id/user_progress__row_layout_report"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily=""
-                android:text="Language"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/colorPrimary"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

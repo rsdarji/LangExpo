@@ -83,6 +83,8 @@ public class UserQuizList extends AppCompatActivity {
                 new GetUserQuizList(UserQuizList.this, UserQuizList.this).execute();
             }
         });
+        //to get quiz list
+        new GetUserQuizList(UserQuizList.this, UserQuizList.this).execute();
     }
 
     @Override

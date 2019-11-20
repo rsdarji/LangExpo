@@ -31,6 +31,7 @@ import android.widget.Toast;
 
 import com.langexpo.R;
 import com.langexpo.activity.DisplayLevelQuestions;
+import com.langexpo.activity.DisplayQuizQuestions;
 import com.langexpo.admin.activity.AddGoal;
 import com.langexpo.admin.activity.GoalList;
 import com.langexpo.customfunction.CustomRadioGroupView;
@@ -71,17 +72,18 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
     LinearLayout verifiedQuestionLayout;
     QuestionModel q;
     List<QuestionModel> questionList = new ArrayList<QuestionModel>();
-
+    boolean quiz = false;
 
 
     public FragmentMultipleOption() {
         // Required empty public constructor
     }
 
-    public FragmentMultipleOption(List<QuestionModel> questionList) {
+    public FragmentMultipleOption(List<QuestionModel> questionList, boolean quiz) {
         // Required empty public constructor
         this.questionList = questionList;
         this.q = questionList.get(0);
+        this.quiz = quiz;
 
     }
 
@@ -156,7 +158,11 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
                     correctAnswerTV.setVisibility(View.GONE);
                     correctAnswer.setVisibility(View.GONE);
                     nextQuestionThemeBT.setVisibility(View.GONE);
-                    DisplayLevelQuestions.correctCount+=1;
+                    if(quiz) {
+                        DisplayQuizQuestions.correctCount += 1;
+                    }else{
+                        DisplayLevelQuestions.correctCount += 1;
+                    }
 
                 }else{
                     mp = MediaPlayer.create(getContext(), R.raw.incorrect_answer);
@@ -177,7 +183,12 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
                         //deprecated in API 26
                         vibrator.vibrate(500);
                     }
-                    DisplayLevelQuestions.incorrectCount+=1;
+                    if(quiz) {
+                        DisplayQuizQuestions.incorrectCount+=1;
+                    }else{
+                        DisplayLevelQuestions.incorrectCount+=1;
+                    }
+
                 }
                 questionList.remove(q);
             }
@@ -199,7 +210,11 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
     }
 
     public void next(){
-        ((DisplayLevelQuestions)getActivity()).nextQuestion(questionList);
+        if(quiz){
+            ((DisplayQuizQuestions)getActivity()).nextQuestion(questionList,quiz);
+        }else{
+            ((DisplayLevelQuestions)getActivity()).nextQuestion(questionList,quiz);
+        }
     }
 
     @Override

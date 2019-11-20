@@ -20,7 +20,7 @@
         android:id="@+id/user_quiz_list_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/user_level_my_toolbar"
+        android:layout_below="@+id/user_quiz_list_my_toolbar"
         android:layout_marginTop="5dp">
 
         <androidx.recyclerview.widget.RecyclerView

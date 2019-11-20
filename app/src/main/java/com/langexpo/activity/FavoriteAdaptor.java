@@ -269,16 +269,18 @@ public class FavoriteAdaptor extends RecyclerView.Adapter<FavoriteAdaptor.Favori
                 System.out.println("response: "+stringBuilder.toString());
             }
             catch (Exception e) {
-                /*if(e instanceof ConnectException){
+                if(e instanceof ConnectException){
                     progressBar.dismiss();
-                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(Dictionary.this, Dictionary.this);
-                    alertDialog.alertDialog("Network issue", "Due to maintenance, currently service unavailable");
+                    LangExpoAlertDialog alertDialog =
+                            new LangExpoAlertDialog(mCtx, activity);
+                    alertDialog.alertDialog("Network issue", Constant.NO_INTERNET_ERROR_MESSAGE);
 
                 }else if(e instanceof SocketTimeoutException){
                     progressBar.dismiss();
-                    LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(Dictionary.this, Dictionary.this);
+                    LangExpoAlertDialog alertDialog =
+                            new LangExpoAlertDialog(mCtx, activity);
                     alertDialog.alertDialog("Time out", "Please try again.");
-                }*/
+                }
                 e.printStackTrace();
                 try {
                     throw e;

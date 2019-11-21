@@ -49,7 +49,7 @@
                     android:background="@drawable/radio_button_custom"
                     android:layout_marginRight="5dp"
                     android:padding="10dp"
-                    android:drawableTop="@drawable/placeholder"
+                    android:drawableTop="@drawable/placeholder_round"
                     android:text="Option1" />
 
                 <com.langexpo.customfunction.CustomRadioButton
@@ -62,7 +62,7 @@
                     android:background="@drawable/radio_button_custom"
                     android:layout_marginLeft="5dp"
                     android:padding="10dp"
-                    android:drawableTop="@drawable/placeholder"
+                    android:drawableTop="@drawable/placeholder_round"
                     android:text="Option2" />
 
                 <com.langexpo.customfunction.CustomRadioButton
@@ -76,7 +76,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="5dp"
                     android:padding="10dp"
-                    android:drawableTop="@drawable/placeholder"
+                    android:drawableTop="@drawable/placeholder_round"
                     android:text="Option3" />
 
                 <com.langexpo.customfunction.CustomRadioButton
@@ -91,7 +91,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="5dp"
                     android:padding="10dp"
-                    android:drawableTop="@drawable/placeholder"
+                    android:drawableTop="@drawable/placeholder_round"
                     android:text="Option4" />
 
                 <com.langexpo.customfunction.CustomRadioButton
@@ -105,7 +105,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="5dp"
                     android:padding="10dp"
-                    android:drawableTop="@drawable/placeholder"
+                    android:drawableTop="@drawable/placeholder_round"
                     android:text="Option5" />
 
                 <com.langexpo.customfunction.CustomRadioButton
@@ -120,7 +120,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="5dp"
                     android:padding="10dp"
-                    android:drawableTop="@drawable/placeholder"
+                    android:drawableTop="@drawable/placeholder_round"
                     android:text="Option6" />
 
             </com.langexpo.customfunction.CustomRadioGroupView>

@@ -1,22 +1,9 @@
 package com.langexpo.fragments;
 
 
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.LayoutInflater;
@@ -25,38 +12,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.langexpo.R;
 import com.langexpo.activity.DisplayLevelQuestions;
 import com.langexpo.activity.DisplayQuizQuestions;
-import com.langexpo.admin.activity.AddGoal;
-import com.langexpo.admin.activity.GoalList;
 import com.langexpo.customfunction.CustomRadioGroupView;
-import com.langexpo.model.Question;
 import com.langexpo.model.QuestionModel;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.LangExpoAlertDialog;
 import com.langexpo.utility.Utility;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Field;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.SocketTimeoutException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -70,8 +39,8 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
     RadioButton optionOneRB, optionTwoRB, optionThreeRB, optionFourRB, optionFiveRB, optionSixRB;
     TextView question, questionVerificationResult, correctAnswerTV, correctAnswer;
     LinearLayout verifiedQuestionLayout;
-    QuestionModel q;
-    List<QuestionModel> questionList = new ArrayList<QuestionModel>();
+    QuestionModel questionModel;
+    List<Long> questionIdList = new ArrayList<Long>();
     boolean quiz = false;
 
 
@@ -79,10 +48,11 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
         // Required empty public constructor
     }
 
-    public FragmentMultipleOption(List<QuestionModel> questionList, boolean quiz) {
+    public FragmentMultipleOption(QuestionModel questionModel,
+                                  List<Long> questionIdList, boolean quiz) {
         // Required empty public constructor
-        this.questionList = questionList;
-        this.q = questionList.get(0);
+        this.questionIdList = questionIdList;
+        this.questionModel = questionModel;
         this.quiz = quiz;
 
     }
@@ -94,35 +64,35 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_multiple_option, container, false);
-        verifiedQuestionLayout = (LinearLayout) view.findViewById(R.id.verified_question_layout);
+        verifiedQuestionLayout = view.findViewById(R.id.verified_question_layout);
         verifiedQuestionLayout.setVisibility(View.GONE);
 
 
-        question = (TextView) view.findViewById(R.id.multiple_option_question );
-        radioGroup = (CustomRadioGroupView) view.findViewById(R.id.multiple_question_radio_group);
-        optionOneRB = (RadioButton) view.findViewById(R.id.option_one_radio_button);
-        optionTwoRB = (RadioButton) view.findViewById(R.id.option_two_radio_button);
-        optionThreeRB = (RadioButton) view.findViewById(R.id.option_three_radio_button);
-        optionFourRB = (RadioButton) view.findViewById(R.id.option_four_radio_button);
-        optionFiveRB = (RadioButton) view.findViewById(R.id.option_five_radio_button);
-        optionSixRB = (RadioButton) view.findViewById(R.id.option_six_radio_button);
-        verifyAnswerBT = (Button) view.findViewById(R.id.verify_answer_bt);
-        nextQuestionGreenBT = (Button) view.findViewById(R.id.next_question_green_bt);
-        nextQuestionThemeBT = (Button) view.findViewById(R.id.next_question_theme_bt);
+        question = view.findViewById(R.id.multiple_option_question);
+        radioGroup = view.findViewById(R.id.multiple_question_radio_group);
+        optionOneRB = view.findViewById(R.id.option_one_radio_button);
+        optionTwoRB = view.findViewById(R.id.option_two_radio_button);
+        optionThreeRB = view.findViewById(R.id.option_three_radio_button);
+        optionFourRB = view.findViewById(R.id.option_four_radio_button);
+        optionFiveRB = view.findViewById(R.id.option_five_radio_button);
+        optionSixRB = view.findViewById(R.id.option_six_radio_button);
+        verifyAnswerBT = view.findViewById(R.id.verify_answer_bt);
+        nextQuestionGreenBT = view.findViewById(R.id.next_question_green_bt);
+        nextQuestionThemeBT = view.findViewById(R.id.next_question_theme_bt);
 
-        questionVerificationResult = (TextView) view.findViewById(R.id.question_verification_result );
-        correctAnswerTV = (TextView) view.findViewById(R.id.correct_answer_tv );
-        correctAnswer = (TextView) view.findViewById(R.id.correct_answer );
+        questionVerificationResult = view.findViewById(R.id.question_verification_result);
+        correctAnswerTV = view.findViewById(R.id.correct_answer_tv);
+        correctAnswer = view.findViewById(R.id.correct_answer);
 
 
         RadioButton[] availableOption = {optionOneRB, optionTwoRB, optionThreeRB,
                 optionFourRB, optionFiveRB, optionSixRB};
         hideComponentFromArray(availableOption);
-        String[] options = q.getQuestionOption().split(",");
+        String[] options = questionModel.getQuestionOption().split(",");
         options = (String[]) Utility.shuffleArrayValues(options);
 
-        question.setText(q.getQuestion().toString());
-        for(int i = 0; i<options.length;i++){
+        question.setText(questionModel.getQuestion());
+        for (int i = 0; i < options.length; i++) {
             availableOption[i].setVisibility(View.VISIBLE);
             availableOption[i].setText(options[i]);
         }
@@ -139,7 +109,7 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
             @Override
             public void onClick(View v) {
                 //Toast.makeText(getActivity().getApplicationContext(),"clicked multiple option continue button: ",Toast.LENGTH_LONG).show();
-                if(checkedRadioButtonText.equalsIgnoreCase("")){
+                if (checkedRadioButtonText.equalsIgnoreCase("")) {
                     LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(getContext(), getActivity());
                     alertDialog.alertDialog("Error", Constant.CHOOSE_ANSWER_ERROR_MESSAGE);
                     return;
@@ -147,7 +117,7 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
                 verifyAnswerBT.setVisibility(View.GONE);
                 verifiedQuestionLayout.setVisibility(View.VISIBLE);
                 MediaPlayer mp;
-                if(checkedRadioButtonText.equalsIgnoreCase(q.getAnswer())){
+                if (checkedRadioButtonText.equalsIgnoreCase(questionModel.getAnswer())) {
                     mp = MediaPlayer.create(getContext(), R.raw.correct_answer);
                     mp.start();
 
@@ -158,13 +128,13 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
                     correctAnswerTV.setVisibility(View.GONE);
                     correctAnswer.setVisibility(View.GONE);
                     nextQuestionThemeBT.setVisibility(View.GONE);
-                    if(quiz) {
+                    if (quiz) {
                         DisplayQuizQuestions.correctCount += 1;
-                    }else{
+                    } else {
                         DisplayLevelQuestions.correctCount += 1;
                     }
 
-                }else{
+                } else {
                     mp = MediaPlayer.create(getContext(), R.raw.incorrect_answer);
                     mp.start();
                     verifiedQuestionLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
@@ -173,7 +143,7 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
                     questionVerificationResult.setTextColor(getResources().getColor(R.color.colorPrimary));
                     correctAnswerTV.setVisibility(View.VISIBLE);
                     correctAnswer.setVisibility(View.VISIBLE);
-                    correctAnswer.setText(q.getAnswer());
+                    correctAnswer.setText(questionModel.getAnswer());
 
                     Vibrator vibrator = (Vibrator) getContext().getSystemService(getContext().VIBRATOR_SERVICE);
                     // Vibrate for 500 milliseconds
@@ -183,14 +153,14 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
                         //deprecated in API 26
                         vibrator.vibrate(500);
                     }
-                    if(quiz) {
-                        DisplayQuizQuestions.incorrectCount+=1;
-                    }else{
-                        DisplayLevelQuestions.incorrectCount+=1;
+                    if (quiz) {
+                        DisplayQuizQuestions.incorrectCount += 1;
+                    } else {
+                        DisplayLevelQuestions.incorrectCount += 1;
                     }
 
                 }
-                questionList.remove(q);
+                questionIdList.remove(questionModel.getQuestionId());
             }
         });
 
@@ -209,28 +179,26 @@ public class FragmentMultipleOption extends Fragment implements View.OnClickList
         return view;
     }
 
-    public void next(){
-        if(quiz){
-            ((DisplayQuizQuestions)getActivity()).nextQuestion(questionList,quiz);
-        }else{
-            ((DisplayLevelQuestions)getActivity()).nextQuestion(questionList,quiz);
+    public void next() {
+        if (quiz) {
+            ((DisplayQuizQuestions)getActivity()).nextQuestion(questionIdList,quiz);
+        } else {
+            ((DisplayLevelQuestions) getActivity()).nextQuestion(questionIdList, quiz);
         }
     }
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
 
         }
     }
 
-    public void hideComponentFromArray(Object[] o){
-        for(int i=0;i<o.length;i++){
-            if(o instanceof RadioButton[]){
-                ((RadioButton)o[i]).setVisibility(View.GONE);
+    public void hideComponentFromArray(Object[] o) {
+        for (int i = 0; i < o.length; i++) {
+            if (o instanceof RadioButton[]) {
+                ((RadioButton) o[i]).setVisibility(View.GONE);
             }
         }
     }
-
-
 }

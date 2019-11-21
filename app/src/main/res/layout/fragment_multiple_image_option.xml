@@ -39,7 +39,7 @@
                 android:gravity="center"
                 android:layout_below="@+id/multiple_option_question">
 
-                <RadioButton
+                <com.langexpo.customfunction.CustomRadioButton
                     android:id="@+id/option_one_radio_button"
                     android:layout_alignParentLeft="true"
                     android:layout_width="150dp"
@@ -49,9 +49,10 @@
                     android:background="@drawable/radio_button_custom"
                     android:layout_marginRight="5dp"
                     android:padding="10dp"
+                    android:drawableTop="@drawable/placeholder"
                     android:text="Option1" />
 
-                <RadioButton
+                <com.langexpo.customfunction.CustomRadioButton
                     android:id="@+id/option_two_radio_button"
                     android:layout_toRightOf="@+id/option_one_radio_button"
                     android:layout_width="150dp"
@@ -60,9 +61,11 @@
                     android:button="@android:color/transparent"
                     android:background="@drawable/radio_button_custom"
                     android:layout_marginLeft="5dp"
+                    android:padding="10dp"
+                    android:drawableTop="@drawable/placeholder"
                     android:text="Option2" />
 
-                <RadioButton
+                <com.langexpo.customfunction.CustomRadioButton
                     android:id="@+id/option_three_radio_button"
                     android:layout_below="@id/option_one_radio_button"
                     android:layout_width="150dp"
@@ -72,9 +75,11 @@
                     android:background="@drawable/radio_button_custom"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="5dp"
+                    android:padding="10dp"
+                    android:drawableTop="@drawable/placeholder"
                     android:text="Option3" />
 
-                <RadioButton
+                <com.langexpo.customfunction.CustomRadioButton
                     android:id="@+id/option_four_radio_button"
                     android:layout_below="@id/option_two_radio_button"
                     android:layout_toRightOf="@+id/option_three_radio_button"
@@ -85,9 +90,11 @@
                     android:background="@drawable/radio_button_custom"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="5dp"
+                    android:padding="10dp"
+                    android:drawableTop="@drawable/placeholder"
                     android:text="Option4" />
 
-                <RadioButton
+                <com.langexpo.customfunction.CustomRadioButton
                     android:id="@+id/option_five_radio_button"
                     android:layout_below="@id/option_three_radio_button"
                     android:layout_width="150dp"
@@ -97,9 +104,11 @@
                     android:background="@drawable/radio_button_custom"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="5dp"
+                    android:padding="10dp"
+                    android:drawableTop="@drawable/placeholder"
                     android:text="Option5" />
 
-                <RadioButton
+                <com.langexpo.customfunction.CustomRadioButton
                     android:id="@+id/option_six_radio_button"
                     android:layout_below="@id/option_three_radio_button"
                     android:layout_toRightOf="@+id/option_five_radio_button"
@@ -110,6 +119,8 @@
                     android:background="@drawable/radio_button_custom"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="5dp"
+                    android:padding="10dp"
+                    android:drawableTop="@drawable/placeholder"
                     android:text="Option6" />
 
             </com.langexpo.customfunction.CustomRadioGroupView>

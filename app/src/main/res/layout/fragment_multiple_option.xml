@@ -60,6 +60,7 @@
                     android:button="@android:color/transparent"
                     android:background="@drawable/radio_button_custom"
                     android:layout_marginLeft="5dp"
+                    android:padding="10dp"
                     android:text="Option2" />
 
                 <RadioButton
@@ -72,6 +73,7 @@
                     android:background="@drawable/radio_button_custom"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="5dp"
+                    android:padding="10dp"
                     android:text="Option3" />
 
                 <RadioButton
@@ -85,6 +87,7 @@
                     android:background="@drawable/radio_button_custom"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="5dp"
+                    android:padding="10dp"
                     android:text="Option4" />
 
                 <RadioButton
@@ -97,6 +100,7 @@
                     android:background="@drawable/radio_button_custom"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="5dp"
+                    android:padding="10dp"
                     android:text="Option5" />
 
                 <RadioButton
@@ -110,6 +114,7 @@
                     android:background="@drawable/radio_button_custom"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="5dp"
+                    android:padding="10dp"
                     android:text="Option6" />
 
             </com.langexpo.customfunction.CustomRadioGroupView>

@@ -71,11 +71,13 @@ public class Utility {
                 height, matrix, true);
     }
 
-    public static List<QuestionModel> shuffleAndReduceQuestionToTen(List<QuestionModel> questionList){
+    public static List<?> shuffleAndReduceQuestionToTen(List<?> questionList){
 
-        Collections.shuffle(questionList, new Random());
-        if(questionList.size()>10){
-            questionList = questionList.stream().limit(10).collect(Collectors.toList());
+        if(questionList!=null) {
+            Collections.shuffle(questionList, new Random());
+            if (questionList.size() > 10) {
+                questionList = questionList.stream().limit(10).collect(Collectors.toList());
+            }
         }
         return questionList;
     }

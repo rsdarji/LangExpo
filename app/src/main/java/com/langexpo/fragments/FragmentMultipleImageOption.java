@@ -50,9 +50,9 @@ public class FragmentMultipleImageOption extends Fragment implements View.OnClic
     RadioButton optionOneRB, optionTwoRB, optionThreeRB, optionFourRB, optionFiveRB, optionSixRB;
     TextView question, questionVerificationResult, correctAnswerTV, correctAnswer;
     LinearLayout verifiedQuestionLayout;
-    QuestionModel q;
+    QuestionModel questionModel;
     boolean quiz = false;
-    List<QuestionModel> questionList = new ArrayList<QuestionModel>();
+    List<Long> questionIdList = new ArrayList<Long>();
 
 
 
@@ -60,10 +60,11 @@ public class FragmentMultipleImageOption extends Fragment implements View.OnClic
         // Required empty public constructor
     }
 
-    public FragmentMultipleImageOption(List<QuestionModel> questionList, boolean quiz) {
+    public FragmentMultipleImageOption(QuestionModel questionModel,
+                                       List<Long> questionIdList, boolean quiz) {
         // Required empty public constructor
-        this.questionList = questionList;
-        this.q = questionList.get(0);
+        this.questionIdList = questionIdList;
+        this.questionModel = questionModel;
         this.quiz = quiz;
 
     }
@@ -98,8 +99,8 @@ public class FragmentMultipleImageOption extends Fragment implements View.OnClic
         RadioButton[] availableOption = {optionOneRB, optionTwoRB, optionThreeRB,
                 optionFourRB, optionFiveRB, optionSixRB};
         hideComponentFromArray(availableOption);
-        String[] options = q.getQuestionOption().split(",");
-        String[] optionImagesURL = q.getOptionImages().split(",");
+        String[] options = questionModel.getQuestionOption().split(",");
+        String[] optionImagesURL = questionModel.getOptionImages().split(",");
         String[][] optionsAndImages = new String[options.length][2];
         for(int i =0;i<options.length;i++){
             optionsAndImages[i][0] = options[i];
@@ -107,7 +108,7 @@ public class FragmentMultipleImageOption extends Fragment implements View.OnClic
         }
         optionsAndImages = (String[][]) Utility.shuffleArrayValues(optionsAndImages);
 
-        question.setText(q.getQuestion().toString());
+        question.setText(questionModel.getQuestion().toString());
         for(int i = 0; i<optionsAndImages.length;i++){
             availableOption[i].setVisibility(View.VISIBLE);
             availableOption[i].setText(optionsAndImages[i][0]);
@@ -136,7 +137,7 @@ public class FragmentMultipleImageOption extends Fragment implements View.OnClic
                 verifyAnswerBT.setVisibility(View.GONE);
                 verifiedQuestionLayout.setVisibility(View.VISIBLE);
                 MediaPlayer mp;
-                if(checkedRadioButtonText.equalsIgnoreCase(q.getAnswer())){
+                if(checkedRadioButtonText.equalsIgnoreCase(questionModel.getAnswer())){
                     mp = MediaPlayer.create(getContext(), R.raw.correct_answer);
                     mp.start();
 
@@ -162,7 +163,7 @@ public class FragmentMultipleImageOption extends Fragment implements View.OnClic
                     questionVerificationResult.setTextColor(getResources().getColor(R.color.colorPrimary));
                     correctAnswerTV.setVisibility(View.VISIBLE);
                     correctAnswer.setVisibility(View.VISIBLE);
-                    correctAnswer.setText(q.getAnswer());
+                    correctAnswer.setText(questionModel.getAnswer());
 
                     Vibrator vibrator = (Vibrator) getContext().getSystemService(getContext().VIBRATOR_SERVICE);
                     // Vibrate for 500 milliseconds
@@ -178,7 +179,7 @@ public class FragmentMultipleImageOption extends Fragment implements View.OnClic
                         DisplayLevelQuestions.incorrectCount+=1;
                     }
                 }
-                questionList.remove(q);
+                questionIdList.remove(questionModel.getQuestionId());
             }
         });
 
@@ -199,11 +200,10 @@ public class FragmentMultipleImageOption extends Fragment implements View.OnClic
 
     public void next(){
         if(quiz){
-            ((DisplayQuizQuestions)getActivity()).nextQuestion(questionList,quiz);
+            ((DisplayQuizQuestions)getActivity()).nextQuestion(questionIdList,quiz);
         }else{
-            ((DisplayLevelQuestions)getActivity()).nextQuestion(questionList,quiz);
+            ((DisplayLevelQuestions)getActivity()).nextQuestion(questionIdList,quiz);
         }
-
     }
 
     @Override

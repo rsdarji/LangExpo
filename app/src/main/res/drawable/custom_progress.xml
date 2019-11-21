@@ -14,8 +14,12 @@
     </item>
 
     <!-- Define the progress properties like start color, end color etc -->
-    <item android:id="@android:id/progress" >
-        <clip>
+    <item android:id="@android:id/progress"
+        android:top="4dp"
+        android:bottom="4dp"
+        android:left="4dp"
+        android:right="4dp">
+        <scale android:scaleWidth="100%">
             <shape>
                 <gradient android:gradientRadius="100dp"
                     android:startColor="#460d1e"
@@ -25,6 +29,6 @@
                 <corners
                     android:radius="100dp" />
             </shape>
-        </clip>
+        </scale>
     </item>
 </layer-list>

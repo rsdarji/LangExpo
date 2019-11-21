@@ -76,7 +76,7 @@
             android:text="New User"
             android:onClick="newuser"/>
 
-        <Switch
+        <!--<Switch
             android:id="@+id/admin_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
             android:text="Admin?"
             android:checked="false"
             android:textOff="No"
-            android:textOn="YES"/>
+            android:textOn="YES"/>-->
 
         <TextView
             android:id="@+id/tv_forgot_password"

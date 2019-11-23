@@ -7,23 +7,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.CreateProfile">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/user_create_profile_my_toolbar"
+    <LinearLayout
+        android:id="@+id/progressbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        app:title="Create Profile"
-        android:hapticFeedbackEnabled="true"
-        app:titleTextColor="@color/colorWhite"
-        android:theme="@style/ToolbarTheme"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp">
 
+        <ImageView
+            android:id="@+id/back"
+            android:layout_height="50dp"
+            android:layout_width="50dp"
+            android:src="@drawable/ic_keyboard_backspace_black_24dp"
+            android:onClick="back">
+
+        </ImageView>
+
+
+        <ProgressBar
+            android:id="@+id/pb"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/back"
+            android:max="100"
+            android:progress="100"
+            android:progressDrawable="@drawable/custom_progress"
+            android:visibility="visible"/>
+    </LinearLayout>
     <ScrollView
         android:id="@+id/create_profile_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_marginBottom="75dp"
-        android:layout_below="@+id/my_toolbar">
+        android:layout_below="@+id/progressbar_layout">
         <RelativeLayout
             android:id="@+id/create_profile_inner_relative_layout"
             android:layout_width="match_parent"
@@ -41,9 +59,9 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:onClick="changeProfileImg"
-                android:src="@drawable/ic_user"
+                android:src="@drawable/ic_user_theme"
+                app:civ_circle_background_color="@color/colorPrimaryLight"
                 app:civ_border_width="2dp"
-                android:layout_marginTop="70dp"
                 app:civ_border_color="#460d1e"/>
 
             <TextView
@@ -52,6 +70,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/img_create_profile_img"
                 android:text="Profile Image"
+                android:layout_marginTop="5dp"
+                android:textSize="16dp"
                 android:layout_centerHorizontal="true"
                 android:textColor="@color/colorPrimary"/>
 
@@ -115,11 +135,8 @@
                 android:hint="Confirm Password"
                 android:gravity="center"
                 android:inputType="textPassword"/>
-
-            </RelativeLayout>
-
+        </RelativeLayout>
     </ScrollView>
-
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -12,7 +12,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        app:title="Create Profile"
+        app:title="Manage Profile"
         android:hapticFeedbackEnabled="true"
         app:titleTextColor="@color/colorWhite"
         android:theme="@style/ToolbarTheme"/>
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_marginBottom="75dp"
-        android:layout_below="@+id/my_toolbar">
+        android:layout_below="@+id/user_manage_profile_my_toolbar">
         <RelativeLayout
             android:id="@+id/manage_profile_inner_relative_layout"
             android:layout_width="match_parent"
@@ -32,32 +32,31 @@
             android:paddingLeft="15dp"
             android:paddingTop="15dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <!--<de.hdodenhof.circleimageview.CircleImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/img_create_profile_img"
                 android:layout_below="@+id/img_language"
                 android:layout_centerHorizontal="true"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/ic_user"
+                android:src="@drawable/ic_user_theme"
                 app:civ_border_width="2dp"
                 android:layout_marginTop="70dp"
-                app:civ_border_color="#460d1e"/>
+                app:civ_border_color="#460d1e"/>-->
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/profile_img_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/img_create_profile_img"
                 android:text="Profile Image"
                 android:layout_centerHorizontal="true"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"/>-->
 
             <EditText
                 android:id="@+id/profile_firstname_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/profile_img_tv"
                 android:layout_marginTop="10dp"
                 android:hint="First Name"
                 android:gravity="center"

@@ -41,6 +41,7 @@ import com.langexpo.utility.ImagePickerActivity;
 import com.langexpo.utility.LangExpoAlertDialog;
 import com.langexpo.utility.Session;
 import com.langexpo.utility.UploadImageToCloud;
+import com.langexpo.utility.Utility;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -68,9 +69,9 @@ public class CreateProfile extends AppCompatActivity {
     EditText firstNameET, lastNameET, emailET, phoneET, passwordET, confirmPasswordET;
     TextView profileImgTV;
     Button registerBT, skipBT;
-    String firstName, lastName, email, password, confirmPassword, profileImageFileName, url;
-    long phone;
-    Toolbar myToolbar;
+    String firstName, lastName, email, password, confirmPassword, profileImageFileName, imageURL;
+    String phone;
+    //Toolbar myToolbar;
     int profileImgId;
     byte[] byteArray;
     public static final int REQUEST_IMAGE = 100;
@@ -79,10 +80,10 @@ public class CreateProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_profile);
 
-        myToolbar = (Toolbar) findViewById(R.id.user_create_profile_my_toolbar);
+        /*myToolbar = (Toolbar) findViewById(R.id.user_create_profile_my_toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);*/
 
 
         profileImg = (ImageView) findViewById(R.id.img_create_profile_img);
@@ -100,10 +101,14 @@ public class CreateProfile extends AppCompatActivity {
         firstNameET.setText(Session.get(Constant.User.FIRST_NAME));
     }
 
-    @Override
+    /*@Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }*/
+
+    public void back(View view){
+        startActivity(new Intent(CreateProfile.this, Levels.class));
     }
 
     public void skip(View view) {
@@ -114,7 +119,7 @@ public class CreateProfile extends AppCompatActivity {
         firstName = firstNameET.getText().toString();
         lastName = lastNameET.getText().toString();
         email = emailET.getText().toString();
-        phone = Long.parseLong(phoneET.getText().toString());
+        phone = phoneET.getText().toString();
         password = passwordET.getText().toString();
         confirmPassword = confirmPasswordET.getText().toString();
 
@@ -164,15 +169,14 @@ public class CreateProfile extends AppCompatActivity {
         }
 
         //validation end
-
-        if(byteArray.length!=0) {
-            profileImageFileName = "profile"+String.valueOf(phone);
-            url = UploadImageToCloud.uploadImage(CreateProfile.this, byteArray, Constant.IMAGE_FOLDER,
+        if(byteArray!=null && byteArray.length!=0) {
+            profileImageFileName = Utility.createProfileImageName(phone);
+            imageURL = UploadImageToCloud.uploadImage(CreateProfile.this, byteArray, Constant.IMAGE_FOLDER,
                     profileImageFileName, Constant.PNG);
         }
 
         new CreateProfileAsyncTask(CreateProfile.this, firstName, lastName, email,
-                phone, password, url).execute();
+                Long.parseLong(phone), password, imageURL).execute();
     }
 
     public void changeProfileImg(View view){
@@ -317,7 +321,7 @@ public class CreateProfile extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            System.out.println("addUpdateLanguage: "+result);
+            System.out.println("createProfile: "+result);
             try {
                 JSONObject loginResponse = new JSONObject(result);
                 if(loginResponse.length()!=0 &&
@@ -343,7 +347,9 @@ public class CreateProfile extends AppCompatActivity {
                         LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(CreateProfile.this, CreateProfile.this);
                         alertDialog.alertDialog("Duplicate", loginResponse.get("message").toString());
                     }
-
+                    if(profileImageURL!=null) {
+                        UploadImageToCloud.deleteStorageFile(profileImageURL);
+                    }
                     Toast toast = Toast.makeText(CreateProfile.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
 
                     progressBar.dismiss();

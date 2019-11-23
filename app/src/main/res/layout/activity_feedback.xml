@@ -48,6 +48,7 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:hint="Phone"
+        android:maxLength="10"
         android:inputType="phone" />
 
     <TextView
@@ -98,7 +99,7 @@
         android:inputType="textMultiLine"
         android:singleLine="false" />
 
-    <Button
+    <com.langexpo.customfunction.CustomButton
         android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -106,6 +107,7 @@
         android:elevation="4dp"
         android:paddingLeft="70dp"
         android:paddingRight="70dp"
+        android:onClick="submit"
         android:text="Submit"
         />
 

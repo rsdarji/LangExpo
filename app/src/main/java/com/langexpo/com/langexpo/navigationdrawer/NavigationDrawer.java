@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -50,6 +52,9 @@ import com.langexpo.utility.ImagePickerActivity;
 import com.langexpo.utility.Session;
 import com.langexpo.utility.SetURLImageToImageview;
 import com.langexpo.utility.UploadImageToCloud;
+import com.langexpo.utility.Utility;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -75,6 +80,8 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
     ImageView nav_avtar;
     String imageFileName;
     int imageId;
+    TextView userName, email;
+
 
 
     @Override
@@ -108,10 +115,24 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
         // call this once the bitmap(s) usage is over
         ImagePickerActivity.clearCache(this);
 
-        /*new SetURLImageToImageview(NavigationDrawer.this, R.id.nav_avtar)
-                .execute("https://firebasestorage.googleapis.com/v0/b/langexpo.appspot.com/o/temp%2F1fd3fcba-eb93-46fa-976c-7b43b9c72cfd.png?alt=media&token=5c4fb7d9-88f8-484d-9ca8-1cbe38718ef9");
-*/
+
+        NavigationView nav = (NavigationView) findViewById(R.id.nav_view1);
+        View header = nav.getHeaderView(0);
+        nav_avtar = (ImageView) header.findViewById(R.id.nav_avtar);
+        userName = (TextView) header.findViewById(R.id.nav_user_name);
+        email = (TextView) header.findViewById(R.id.nav_user_email);
+        if(!Session.get(Constant.User.AVTAR).equalsIgnoreCase("")){
+            Picasso.get()
+                    .load(Session.get(Constant.User.AVTAR))
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+                    .into(nav_avtar);
+        }
+        userName.setText(Session.get(Constant.User.FIRST_NAME)+" "+Session.get(Constant.User.LAST_NAME));
+        email.setText(Session.get(Constant.User.EMAIL));
+
     }
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -232,11 +253,12 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
     }
 
     public void changeAvtar(View view) {
-        Toast toast = Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_LONG);
-        toast.show();
+        /*Toast toast = Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_LONG);
+        toast.show();*/
         imageId = R.id.nav_avtar;
-        imageFileName = Session.get(Constant.User.USER_ID);
+        imageFileName = Utility.createProfileImageName(String.valueOf(Session.get(Constant.User.PHONE)));
         checkPermission();
+
     }
 
     /*public void changeLanguageFlag(View view){
@@ -362,6 +384,12 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
                     Session.set(Constant.UPLOADED_ITEM_URL,url);
                     Log.d("method return url: ", url);
 
+                    if(Session.get(Constant.User.AVTAR).equalsIgnoreCase("")){
+                        new updateUserProfileImage(NavigationDrawer.this,
+                                Long.parseLong(Session.get(Constant.User.USER_ID)),
+                                url).execute();
+                    }
+
                     // loading profile image from local cache
                     ((ImageView) findViewById(imageId)).setImageBitmap(BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length));
 
@@ -377,6 +405,132 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
      * END - Image (Crop, camera, gallery)
      */
 
+    //start code for update user's profile image
+    private class updateUserProfileImage extends AsyncTask<Void, Void, String> {
+        private ProgressDialog progressBar;
+        private long userId;
+        private String profileImageURL;
+
+        public updateUserProfileImage(Activity activity,
+                                      long userId, String profileImageURL){
+            progressBar = new ProgressDialog(activity);
+            this.userId = userId;
+            this.profileImageURL = profileImageURL;
+        }
+
+        protected void onPreExecute(){
+            progressBar.setMessage("Loading...");
+            progressBar.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            URL url = null;
+            BufferedReader reader = null;
+            StringBuilder stringBuilder = new StringBuilder();
+
+            String methodName = "updateProfileImage";
+            stringBuilder.append(Constant.PROTOCOL);
+            stringBuilder.append(Constant.COLON);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(Constant.WEB_SERVICE_HOST);
+            stringBuilder.append(Constant.COLON);
+            stringBuilder.append(Constant.WEB_SERVICE_PORT);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(Constant.CONTEXT_PATH);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(Constant.APPLICATION_PATH);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(Constant.CLASS_PATH);
+            stringBuilder.append(Constant.FORWARD_SLASH);
+            stringBuilder.append(methodName);
+
+
+            try {
+
+                String urlParameters  = "userId="+userId+"&profileImageURL="+profileImageURL;
+
+
+                byte[] postData       = urlParameters.getBytes();
+                int    postDataLength = postData.length;
+                url = new URL(stringBuilder.toString());
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                // uncomment this if you want to write output to this url
+                connection.setDoOutput(true);
+                connection.setDoInput(true);
+                connection.setInstanceFollowRedirects( false );
+                connection.setRequestProperty( "charset", "utf-8");
+                connection.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+                connection.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded");
+                connection.setUseCaches( false );
+                // give it 15 seconds to respond
+                connection.setReadTimeout(45*1000);
+
+                try( DataOutputStream wr = new DataOutputStream( connection.getOutputStream())) {
+                    wr.write( postData );
+                }
+
+                connection.connect();
+
+                // read the output from the server
+                stringBuilder = new StringBuilder();
+                reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+
+                System.out.println("response: "+stringBuilder.toString());
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                try {
+                    throw e;
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            finally {
+                if (reader != null) {
+                    try{
+                        reader.close();
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            return stringBuilder.toString();
+        }
+        @Override
+
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            System.out.println("updateProfileImage: "+result);
+            try {
+                JSONObject loginResponse = new JSONObject(result);
+                if(loginResponse.length()!=0 &&
+                        loginResponse.get("status").toString().equalsIgnoreCase("ok") ) {
+
+                    //UploadImageToCloud.deleteStorageFile(Session.get(Constant.UPLOADED_ITEM_URL));
+                    Session.set(Constant.User.AVTAR,profileImageURL);
+                    Toast toast = Toast.makeText(NavigationDrawer.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
+                    progressBar.dismiss();
+                    toast.show();
+                }
+                else if(loginResponse.get("status").toString().equalsIgnoreCase("error")){
+                    Toast toast = Toast.makeText(NavigationDrawer.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
+                    progressBar.dismiss();
+                    toast.show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    //end code for update user's profile image
 
     //start code for deactivate account assync task
     private class DeactivateAccountAsyncTask extends AsyncTask<Void, Void, String> {
@@ -484,7 +638,7 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
                 if(loginResponse.length()!=0 &&
                         loginResponse.get("status").toString().equalsIgnoreCase("ok") ) {
 
-                    UploadImageToCloud.deleteStorageFile(Session.get(Constant.UPLOADED_ITEM_URL));
+                    //UploadImageToCloud.deleteStorageFile(Session.get(Constant.UPLOADED_ITEM_URL));
 
                     Toast toast = Toast.makeText(NavigationDrawer.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
                     Intent intent = new Intent(NavigationDrawer.this, LanguageList.class);

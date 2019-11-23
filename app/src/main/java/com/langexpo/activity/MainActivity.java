@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import com.langexpo.admin.activity.Home;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.LangExpoAlertDialog;
 import com.langexpo.utility.Session;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -243,6 +245,8 @@ public class MainActivity extends AppCompatActivity {
                         session.set(Constant.User.LANGUAGE,loginResponse.get("language").toString());
                         session.set(Constant.User.USER_LEVEL,loginResponse.get("userLevel").toString());
                         session.set(Constant.User.AVTAR,loginResponse.get("avtar").toString());
+
+
                     }
 
 
@@ -257,7 +261,10 @@ public class MainActivity extends AppCompatActivity {
                     progressBar.dismiss();
                 }
                 else{
-                    Toast toast = Toast.makeText(getApplicationContext(),"Please enter correct credentials",Toast.LENGTH_LONG);
+                    Toast toast = Toast
+                            .makeText(getApplicationContext(),
+                                    "Please enter correct credentials",
+                                    Toast.LENGTH_LONG);
                     uname.setText("");
                     uname.requestFocus();
                     pass.setText("");

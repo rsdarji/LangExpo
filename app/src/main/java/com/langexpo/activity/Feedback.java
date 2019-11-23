@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.langexpo.R;
 import com.langexpo.admin.activity.AddLanguage;
+import com.langexpo.admin.activity.Home;
 import com.langexpo.admin.activity.LanguageList;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.LangExpoAlertDialog;
@@ -39,9 +40,11 @@ public class Feedback extends AppCompatActivity {
     private RatingBar ratingBar;
 
     private TextView tvRateCount,tvRateMessage;
-    private EditText name,email,yr_msg;
+    private EditText name,email,yr_msg, phoneET;
     String user_name,user_email,user_msg,user_rating;
+    long phone;
     private float ratedValue,user_rating_value;
+    long userId = Long.parseLong(Session.get(Constant.User.USER_ID));
 
 
 
@@ -57,6 +60,7 @@ public class Feedback extends AppCompatActivity {
         name =(EditText)findViewById(R.id.editText_name);
         email =(EditText)findViewById(R.id.editText_email_feedback);
         yr_msg =(EditText)findViewById(R.id.editText_message);
+        phoneET = (EditText)findViewById(R.id.editText_phone);
 
         tvRateCount = (TextView) findViewById(R.id.textView_yr_ratings);
 
@@ -106,8 +110,8 @@ public class Feedback extends AppCompatActivity {
 
         });
 
-    }
 
+    }
 
     public void submit(View view){
         user_name=name.getText().toString();
@@ -116,6 +120,40 @@ public class Feedback extends AppCompatActivity {
         user_rating_value=ratingBar.getRating();
         String.valueOf(user_rating_value);
 
+        if(user_name.equalsIgnoreCase("")){
+            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(Feedback.this, Feedback.this);
+            alertDialog.alertDialog("Error", "Please enter name.");
+            name.requestFocus();
+            return;
+        }
+        if(user_email.equalsIgnoreCase("") || !user_email.contains("@")){
+            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(Feedback.this, Feedback.this);
+            alertDialog.alertDialog("Error", "Please enter correct email.");
+            email.requestFocus();
+            return;
+        }
+        if(phoneET.getText().toString().equalsIgnoreCase("") ||
+            phoneET.getText().length()<10){
+            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(Feedback.this, Feedback.this);
+            alertDialog.alertDialog("Error", "Phone number should not empty or less than 10 digit.");
+            email.requestFocus();
+            return;
+        }
+        if(user_msg.equalsIgnoreCase("")){
+            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(Feedback.this, Feedback.this);
+            alertDialog.alertDialog("Error", "Please enter message.");
+            yr_msg.requestFocus();
+            return;
+        }
+        if(ratedValue==0){
+            LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(Feedback.this, Feedback.this);
+            alertDialog.alertDialog("Error", "Please select rating.");
+            ratingBar.requestFocus();
+            return;
+        }
+
+        new FeedbackAsyncTask(Feedback.this, userId,
+                String.valueOf(ratedValue), user_msg).execute();
     }
 
     @Override
@@ -148,7 +186,7 @@ public class Feedback extends AppCompatActivity {
             BufferedReader reader = null;
             StringBuilder stringBuilder = new StringBuilder();
 
-            String methodName = "feedback";
+            String methodName = "addUpdateFeedback";
             stringBuilder.append(Constant.PROTOCOL);
             stringBuilder.append(Constant.COLON);
             stringBuilder.append(Constant.FORWARD_SLASH);
@@ -165,11 +203,9 @@ public class Feedback extends AppCompatActivity {
             stringBuilder.append(Constant.FORWARD_SLASH);
             stringBuilder.append(methodName);
 
-
             try {
 
-                String urlParameters  = "userId="+userId+"&rating="+rating+"&msg="+msg;
-
+                String urlParameters = "userId="+userId+"&rating="+rating+"&message="+msg;
 
                 byte[] postData       = urlParameters.getBytes();
                 int    postDataLength = postData.length;
@@ -238,16 +274,14 @@ public class Feedback extends AppCompatActivity {
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            System.out.println("feedback: "+result);
+            System.out.println("addUpdateFeedback: "+result);
             try {
                 JSONObject loginResponse = new JSONObject(result);
                 if(loginResponse.length()!=0 &&
                         loginResponse.get("status").toString().equalsIgnoreCase("ok") ) {
 
-                    UploadImageToCloud.deleteStorageFile(Session.get(Constant.UPLOADED_ITEM_URL));
-
                     Toast toast = Toast.makeText(Feedback.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
-                    Intent intent = new Intent(Feedback.this, LanguageList.class);
+                    Intent intent = new Intent(Feedback.this, Home.class);
                     startActivity(intent);
                     progressBar.dismiss();
                     toast.show();

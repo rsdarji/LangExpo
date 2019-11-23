@@ -30,6 +30,7 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.langexpo.R;
+import com.langexpo.admin.activity.Home;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.ImagePickerActivity;
 import com.langexpo.utility.LangExpoAlertDialog;
@@ -60,8 +61,8 @@ public class ManageProfile extends AppCompatActivity {
     EditText firstNameET, lastNameET, emailET, phoneET, passwordET, confirmPasswordET;
     TextView profileImgTV;
     Button updateBT, skipBT;
-    String firstName, lastName, email, password, confirmPassword, profileImageFileName, url;
-    long phone;
+    String firstName, lastName, email, oldEmail, profileImageFileName, oldProfileImageFileName, url, phone, oldPhone;
+    boolean isUserHaveProfileImage = false;
     Toolbar myToolbar;
     int profileImgId;
     byte[] byteArray;
@@ -76,14 +77,14 @@ public class ManageProfile extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        profileImgTV = (TextView) findViewById(R.id.profile_img_tv);
+        /*profileImgTV = (TextView) findViewById(R.id.profile_img_tv);*/
         firstNameET = (EditText) findViewById(R.id.profile_firstname_et);
         lastNameET = (EditText) findViewById(R.id.profile_lastname_et);
         emailET = (EditText) findViewById(R.id.profile_email_et);
         phoneET = (EditText) findViewById(R.id.profile_phone_et);
         passwordET = (EditText) findViewById(R.id.profile_password_et);
         confirmPasswordET = (EditText) findViewById(R.id.profile_confirm_password_et);
-        profileImgId = R.id.img_create_profile_img;
+        /*profileImgId = R.id.img_create_profile_img;*/
         updateBT = (Button)findViewById(R.id.profile_update_bt);
 
 
@@ -91,9 +92,12 @@ public class ManageProfile extends AppCompatActivity {
         lastNameET.setText(Session.get(Constant.User.LAST_NAME));
         emailET.setText(Session.get(Constant.User.EMAIL));
         phoneET.setText(Session.get(Constant.User.PHONE));
-        Picasso.get()
+        /*Picasso.get()
                 .load(Session.get(Constant.User.AVTAR))
                 .into((ImageView) findViewById(profileImgId));
+        if(!Session.get(Constant.User.AVTAR).equalsIgnoreCase("")){
+            isUserHaveProfileImage = true;
+        }*/
 
 
     }
@@ -108,7 +112,9 @@ public class ManageProfile extends AppCompatActivity {
         firstName = firstNameET.getText().toString();
         lastName = lastNameET.getText().toString();
         email = emailET.getText().toString();
-        phone = Long.parseLong(phoneET.getText().toString());
+        oldEmail = Session.get(Constant.User.EMAIL);
+        phone = phoneET.getText().toString();
+        oldPhone = Session.get(Constant.User.PHONE);
 
         //validation start
 
@@ -130,7 +136,7 @@ public class ManageProfile extends AppCompatActivity {
             emailET.requestFocus();
             return;
         }
-        if(String.valueOf(phone).equalsIgnoreCase("") || String.valueOf(phone).length()<10){
+        if(phone.equalsIgnoreCase("") || String.valueOf(phone).length()<10){
             LangExpoAlertDialog alertDialog = new LangExpoAlertDialog(ManageProfile.this, ManageProfile.this);
             alertDialog.alertDialog("Error", "Phone number should not empty or less than 10 digit.");
             phoneET.requestFocus();
@@ -146,33 +152,34 @@ public class ManageProfile extends AppCompatActivity {
 
         //validation end
 
-        if(byteArray.length!=0) {
-            profileImageFileName = "profile"+String.valueOf(phone);
+        /*if(byteArray.length!=0) {
+            profileImageFileName = Utility.createProfileImageName(phone);
+            oldProfileImageFileName = Utility.createProfileImageName(oldPhone);
             url = UploadImageToCloud.uploadImage(ManageProfile.this, byteArray, Constant.IMAGE_FOLDER,
                     profileImageFileName, Constant.PNG);
-        }
+        }*/
 
         new ManageProfileAsyncTask(ManageProfile.this, firstName, lastName, email,
-                phone, url).execute();
+                phone).execute();
     }
 
-    public void changeProfileImg(View view){
+    /*public void changeProfileImg(View view){
         //UUID uuid = UUID.randomUUID();
         //imageFileName = "languageflag"+uuid.toString();
         checkPermission();
-    }
+    }*/
 
     private class ManageProfileAsyncTask extends AsyncTask<Void, Void, String> {
         private ProgressDialog progressBar;
         private String firstName;
         private String lastName;
         private String email;
-        private long phone;
+        private String phone;
 
         private String profileImageURL;
 
         public ManageProfileAsyncTask(Activity activity, String firstName, String lastName,
-                                      String email, long phone,  String profileImageURL){
+                                      String email, String phone){
             progressBar = new ProgressDialog(activity);
             this.firstName = firstName;
             this.lastName = lastName;
@@ -193,7 +200,7 @@ public class ManageProfile extends AppCompatActivity {
             BufferedReader reader = null;
             StringBuilder stringBuilder = new StringBuilder();
 
-            String methodName = "createProfile";
+            String methodName = "updateProfile";
             stringBuilder.append(Constant.PROTOCOL);
             stringBuilder.append(Constant.COLON);
             stringBuilder.append(Constant.FORWARD_SLASH);
@@ -212,25 +219,9 @@ public class ManageProfile extends AppCompatActivity {
 
 
             try {
-                String language = Session.get(Constant.Session.USER_SELECTED_LANGUAGE);
-                Set<String> userGoalSet = Session.getSet(Constant.Session.USER_SELECTED_GOALS);
-                String userLevels = Session.get(Constant.Session.USER_SELECTED_LEVEL_NAME);
-                int userGoalSetSize = userGoalSet.size();
-                List<String> userGoalList = new ArrayList<>(userGoalSetSize);
-                for (String x : userGoalSet)
-                    userGoalList.add(x);
 
-
-                StringBuilder userGoals = new StringBuilder();
-                for(int i = 0;i<userGoalSetSize;i++){
-                    userGoals.append(userGoalList.get(i));
-                    if(i<(userGoalSetSize-1)){
-                        userGoals.append(",");
-                    }
-                }
-                String urlParameters = "firstName="+firstName+"&lastName="+lastName+"&email="+email+
-                        "&phone="+phone+"&profileImageURL="+profileImageURL+"&language="+language+
-                        "&userGoals="+userGoals.toString()+"&userLevels="+userLevels+"&userId="+userId;
+                String urlParameters = "userId="+userId+"&firstName="+firstName+"&lastName="+lastName+
+                        "&email="+email+"&phone="+phone;
 
                 byte[] postData       = urlParameters.getBytes();
                 int    postDataLength = postData.length;
@@ -298,7 +289,7 @@ public class ManageProfile extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            System.out.println("addUpdateLanguage: "+result);
+            System.out.println("updateProfile: "+result);
             try {
                 JSONObject loginResponse = new JSONObject(result);
                 if(loginResponse.length()!=0 &&
@@ -311,10 +302,12 @@ public class ManageProfile extends AppCompatActivity {
                         }
                     }*/
                     Toast toast = Toast.makeText(com.langexpo.activity.ManageProfile.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
-                    Intent intent = new Intent(ManageProfile.this, MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+                    Session.set(Constant.User.USER_NAME, firstName+"_"+lastName);
+                    Session.set(Constant.User.EMAIL, email);
+                    Session.set(Constant.User.FIRST_NAME,firstName);
+                    Session.set(Constant.User.LAST_NAME,lastName);
+                    Session.set(Constant.User.PHONE,phone);
+                    Intent intent = new Intent(ManageProfile.this, Home.class);
                     startActivity(intent);
                     progressBar.dismiss();
                     toast.show();

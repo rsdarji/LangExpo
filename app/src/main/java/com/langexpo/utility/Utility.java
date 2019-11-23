@@ -81,4 +81,8 @@ public class Utility {
         }
         return questionList;
     }
+
+    public static String createProfileImageName(String phone){
+        return "profile"+phone;
+    }
 }

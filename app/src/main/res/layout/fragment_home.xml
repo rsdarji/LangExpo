@@ -72,7 +72,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Add Level"
+                                    android:text="Add Practice Lesson"
                                     android:textSize="16dp"
                                     android:layout_below="@+id/imageview3"
                                     android:layout_centerHorizontal="true"

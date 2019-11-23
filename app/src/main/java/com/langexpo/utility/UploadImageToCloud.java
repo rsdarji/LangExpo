@@ -32,7 +32,7 @@ public class UploadImageToCloud {
 
         firebaseStorage.getReference().child("temp").getDownloadUrl();
         mStorageRef = firebaseStorage.getReference(folder + "/" + fileName + "." + contentType);
-
+        //https://firebasestorage.googleapis.com/v0/b/langexpo.appspot.com/o/images%2Fprofile1234512345.png?alt=media
         Log.d("reference", mStorageRef.getPath());
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("https://firebasestorage.googleapis.com/v0/b/");

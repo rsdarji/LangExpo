@@ -17,11 +17,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.DisplayQuizQuestions"></activity>
+        <activity android:name=".activity.OTP">
+
+        </activity>
+        <activity android:name=".activity.SetNewPassword" />
+        <activity android:name=".activity.DisplayQuizQuestions"
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity android:name=".activity.UserQuizList" />
-        <activity android:name=".activity.DisplayLevelQuestions" />
+        <activity android:name=".activity.DisplayLevelQuestions"
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity android:name=".activity.ManageProfile" />
-        <activity android:name=".activity.UserProgressList"></activity>
+        <activity android:name=".activity.UserProgressList" />
         <activity android:name=".activity.UserLevelList" />
         <activity android:name=".activity.UserLectureList" />
         <activity android:name=".activity.DisplayLecture" />
@@ -59,13 +69,16 @@
             android:name=".activity.SplashScreen"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+
+        </activity>
+        <activity android:name=".activity.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity" /> <!-- uCrop cropping activity -->
+        <!-- uCrop cropping activity -->
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"

@@ -137,7 +137,7 @@ public class FragmentMultipleImageOption extends Fragment implements View.OnClic
                 verifyAnswerBT.setVisibility(View.GONE);
                 verifiedQuestionLayout.setVisibility(View.VISIBLE);
                 MediaPlayer mp;
-                if(checkedRadioButtonText.equalsIgnoreCase(questionModel.getAnswer())){
+                if(checkedRadioButtonText.toLowerCase().trim().equalsIgnoreCase(questionModel.getAnswer().toLowerCase().trim())){
                     mp = MediaPlayer.create(getContext(), R.raw.correct_answer);
                     mp.start();
 

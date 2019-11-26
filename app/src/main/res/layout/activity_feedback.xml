@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".activity.Feedback"
     android:background="#FFf"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/feedback_my_toolbar"
         android:layout_width="match_parent"
@@ -108,8 +108,7 @@
         android:paddingLeft="70dp"
         android:paddingRight="70dp"
         android:onClick="submit"
-        android:text="Submit"
-        />
+        android:text="Submit"/>
 
     </LinearLayout>
 

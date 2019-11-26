@@ -14,9 +14,11 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.langexpo.R;
+import com.langexpo.fragments.FragmentAudioQuestion;
 import com.langexpo.fragments.FragmentFillingTheBlanks;
 import com.langexpo.fragments.FragmentMultipleImageOption;
 import com.langexpo.fragments.FragmentMultipleOption;
+import com.langexpo.fragments.FragmentPictureQuestion;
 import com.langexpo.model.QuestionModel;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.LangExpoAlertDialog;
@@ -442,7 +444,8 @@ public class DisplayQuizQuestions extends AppCompatActivity {
                                 question.getString("questionOption"),
                                 question.getLong("questionType"),
                                 question.getLong("courseLevel"),
-                                question.getString("optionImages")));
+                                question.getString("optionImages"),
+                                question.getString("questionImages")));
                     }
 
                     if(questionList.size()!=0){
@@ -481,7 +484,13 @@ public class DisplayQuizQuestions extends AppCompatActivity {
                     new FragmentMultipleImageOption(questionModel, questionIdsList, quiz)).commit();
         }else if (q.getQuestionType() == 3) {
             getSupportFragmentManager().beginTransaction().replace(R.id.quiz_question_conainer,
-                    new FragmentFillingTheBlanks()).commit();
+                    new FragmentFillingTheBlanks(questionModel, questionIdsList, quiz)).commit();
+        }else if (q.getQuestionType() == 4) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.quiz_question_conainer,
+                    new FragmentAudioQuestion(questionModel, questionIdsList, quiz)).commit();
+        }else if (q.getQuestionType() == 5) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.quiz_question_conainer,
+                    new FragmentPictureQuestion(questionModel, questionIdsList, quiz)).commit();
         }
     }
 

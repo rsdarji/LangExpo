@@ -10,10 +10,11 @@ public class QuestionModel {
     private long questionType;
     private long courseLevel;
     private String optionImages;
+    private String questionImage;
 
     public QuestionModel(long questionId, String question, int audio,
                          String answer, String questionOption, long questionType,
-                         long courseLevel, String optionImages){
+                         long courseLevel, String optionImages, String questionImage){
         this.questionId = questionId;
         this.question = question;
         this.audio = audio;
@@ -22,6 +23,7 @@ public class QuestionModel {
         this.questionType = questionType;
         this.courseLevel = courseLevel;
         this.optionImages = optionImages;
+        this.questionImage = questionImage;
 
     }
 
@@ -87,5 +89,13 @@ public class QuestionModel {
 
     public void setOptionImages(String optionImages) {
         this.optionImages = optionImages;
+    }
+
+    public String getQuestionImage() {
+        return questionImage;
+    }
+
+    public void setQuestionImage(String questionImage) {
+        this.questionImage = questionImage;
     }
 }

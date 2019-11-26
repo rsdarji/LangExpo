@@ -1,6 +1,7 @@
 package com.langexpo.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +10,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.langexpo.R;
@@ -36,7 +39,7 @@ import java.util.List;
 
 public class FavoriteList extends AppCompatActivity {
 
-
+    FavoriteAdaptor adapter;
     SwipeRefreshLayout refreshLayout;
     RecyclerView recyclerView;
     List<Favorite> favoriteList;
@@ -74,6 +77,45 @@ public class FavoriteList extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
+        MenuItem mSearch = menu.findItem(R.id.action_search);
+        SearchView mSearchView = (SearchView) mSearch.getActionView();
+        mSearchView.setQueryHint("Search");
+
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if(!query.equalsIgnoreCase("")) {
+
+                    adapter.getFilter().filter(query);
+                }else{
+                    favoriteList = new ArrayList<>();
+                    new GetFavoristList(FavoriteList.this,
+                            Long.parseLong(Session.get(Constant.User.USER_ID))).execute();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(!newText.equalsIgnoreCase("")) {
+
+                    adapter.getFilter().filter(newText);
+                }else{
+                    favoriteList = new ArrayList<>();
+                    new GetFavoristList(FavoriteList.this,
+                            Long.parseLong(Session.get(Constant.User.USER_ID))).execute();
+                }
+                return true;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     private class GetFavoristList extends AsyncTask<Void, Void, String> {
@@ -191,7 +233,7 @@ public class FavoriteList extends AppCompatActivity {
                                 favorite.getString("resultWord")));
 
                     }
-                    FavoriteAdaptor adapter = new FavoriteAdaptor(FavoriteList.this, favoriteList);
+                    adapter = new FavoriteAdaptor(FavoriteList.this, favoriteList);
                     recyclerView.setAdapter(adapter);
                     progressBar.dismiss();
                     refreshLayout.setRefreshing(false);

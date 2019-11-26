@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -24,7 +25,10 @@ import com.langexpo.customfunction.CustomRadioGroupView;
 import com.langexpo.model.QuestionModel;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.LangExpoAlertDialog;
+import com.langexpo.utility.Session;
 import com.langexpo.utility.Utility;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +36,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentFillingTheBlanks extends Fragment implements View.OnClickListener{
-
+public class FragmentPictureQuestion extends Fragment implements View.OnClickListener {
 
     String checkedRadioButtonText = "";
     Button verifyAnswerBT, nextQuestionGreenBT, nextQuestionThemeBT;
@@ -41,15 +44,16 @@ public class FragmentFillingTheBlanks extends Fragment implements View.OnClickLi
     RadioButton optionOneRB, optionTwoRB, optionThreeRB, optionFourRB, optionFiveRB, optionSixRB;
     TextView question, questionVerificationResult, correctAnswerTV, correctAnswer;
     LinearLayout verifiedQuestionLayout;
+    ImageView questionImageIV;
     QuestionModel questionModel;
     List<Long> questionIdList = new ArrayList<Long>();
     boolean quiz = false;
 
-    public FragmentFillingTheBlanks() {
+    public FragmentPictureQuestion() {
         // Required empty public constructor
     }
 
-    public FragmentFillingTheBlanks(QuestionModel questionModel,
+    public FragmentPictureQuestion(QuestionModel questionModel,
                                   List<Long> questionIdList, boolean quiz) {
         // Required empty public constructor
         this.questionIdList = questionIdList;
@@ -63,12 +67,14 @@ public class FragmentFillingTheBlanks extends Fragment implements View.OnClickLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_filling_the_blanks, container, false);
+        View view = inflater.inflate(R.layout.fragment_picture_question, container, false);
+
         verifiedQuestionLayout = view.findViewById(R.id.verified_question_layout);
         verifiedQuestionLayout.setVisibility(View.GONE);
 
 
         question = view.findViewById(R.id.multiple_option_question);
+        questionImageIV = view.findViewById(R.id.picture_question_img);
         radioGroup = view.findViewById(R.id.multiple_question_radio_group);
         optionOneRB = view.findViewById(R.id.option_one_radio_button);
         optionTwoRB = view.findViewById(R.id.option_two_radio_button);
@@ -92,6 +98,10 @@ public class FragmentFillingTheBlanks extends Fragment implements View.OnClickLi
         options = (String[]) Utility.shuffleArrayValues(options);
 
         question.setText(questionModel.getQuestion());
+        Picasso.get()
+                .load(questionModel.getQuestionImage())
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .into(questionImageIV);
         for (int i = 0; i < options.length; i++) {
             availableOption[i].setVisibility(View.VISIBLE);
             availableOption[i].setText(options[i]);
@@ -176,6 +186,7 @@ public class FragmentFillingTheBlanks extends Fragment implements View.OnClickLi
                 next();
             }
         });
+
         return view;
     }
     public void next() {

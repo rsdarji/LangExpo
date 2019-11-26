@@ -80,7 +80,7 @@ public class Dictionary extends AppCompatActivity {
         {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Dictionary.this, "click listner", Toast.LENGTH_LONG).show();
+                //Toast.makeText(Dictionary.this, "click listner", Toast.LENGTH_LONG).show();
                 if(unfavourite.getDrawable().getConstantState() == getResources().getDrawable( R.drawable.ic_favorite).getConstantState()){
                     unfavourite.setImageResource(R.drawable.ic_favorite_filled);
                     if(!translatedTv.getText().toString().equalsIgnoreCase("No word found")) {

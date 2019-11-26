@@ -11,7 +11,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        app:title="Levels"
+        app:title="Practice Lesson"
         android:hapticFeedbackEnabled="true"
         app:titleTextColor="@color/colorWhite"
         android:theme="@style/ToolbarTheme"/>

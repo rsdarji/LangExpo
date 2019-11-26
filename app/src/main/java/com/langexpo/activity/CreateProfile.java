@@ -1,5 +1,6 @@
 package com.langexpo.activity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,14 +17,25 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskExecutors;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -61,16 +73,20 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class CreateProfile extends AppCompatActivity {
 
 
     ImageView profileImg;
-    EditText firstNameET, lastNameET, emailET, phoneET, passwordET, confirmPasswordET;
+    EditText firstNameET, lastNameET, emailET, phoneET, passwordET, confirmPasswordET, profileOTPET;
     TextView profileImgTV;
     Button registerBT, skipBT;
-    String firstName, lastName, email, password, confirmPassword, profileImageFileName, imageURL;
-    String phone;
+    String firstName, lastName, email, password, confirmPassword, profileImageFileName, imageURL, profileOTP;
+    String phone, verificationId;
+    private FirebaseAuth mAuth;
+    private ProgressDialog roundProgressBar;
+
     //Toolbar myToolbar;
     int profileImgId;
     byte[] byteArray;
@@ -80,12 +96,7 @@ public class CreateProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_profile);
 
-        /*myToolbar = (Toolbar) findViewById(R.id.user_create_profile_my_toolbar);
-        setSupportActionBar(myToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);*/
-
-
+        mAuth = FirebaseAuth.getInstance();
         profileImg = (ImageView) findViewById(R.id.img_create_profile_img);
         profileImgTV = (TextView) findViewById(R.id.profile_img_tv);
         firstNameET = (EditText) findViewById(R.id.profile_firstname_et);
@@ -94,11 +105,32 @@ public class CreateProfile extends AppCompatActivity {
         phoneET = (EditText) findViewById(R.id.profile_phone_et);
         passwordET = (EditText) findViewById(R.id.profile_password_et);
         confirmPasswordET = (EditText) findViewById(R.id.profile_confirm_password_et);
+        profileOTPET = (EditText) findViewById(R.id.profile_otp);
+        profileOTPET.setVisibility(View.GONE);
         profileImgId = R.id.img_create_profile_img;
         registerBT = (Button)findViewById(R.id.profile_register_bt);
-        skipBT = (Button)findViewById(R.id.profile_skip_bt);
+        //skipBT = (Button)findViewById(R.id.profile_skip_bt);
 
         firstNameET.setText(Session.get(Constant.User.FIRST_NAME));
+
+        profileOTPET.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                String code = profileOTPET.getText().toString();
+                if(code.length()==6){
+                    verifyCode(code);
+                }
+
+            }
+        });
     }
 
     /*@Override
@@ -111,9 +143,10 @@ public class CreateProfile extends AppCompatActivity {
         startActivity(new Intent(CreateProfile.this, Levels.class));
     }
 
-    public void skip(View view) {
+    /*public void skip(View view) {
 
-    }
+    }*/
+
 
     public void register(View view) {
         firstName = firstNameET.getText().toString();
@@ -168,16 +201,90 @@ public class CreateProfile extends AppCompatActivity {
             return;
         }
 
+        profileOTPET.setVisibility(View.VISIBLE);
+        String otpPhoneNumber = "+1"+phone;
+        sendVerificationCode(otpPhoneNumber);
+
         //validation end
-        if(byteArray!=null && byteArray.length!=0) {
+        /*if(byteArray!=null && byteArray.length!=0) {
             profileImageFileName = Utility.createProfileImageName(phone);
             imageURL = UploadImageToCloud.uploadImage(CreateProfile.this, byteArray, Constant.IMAGE_FOLDER,
                     profileImageFileName, Constant.PNG);
         }
 
         new CreateProfileAsyncTask(CreateProfile.this, firstName, lastName, email,
-                Long.parseLong(phone), password, imageURL).execute();
+                Long.parseLong(phone), password, imageURL).execute();*/
     }
+
+
+    //start firebase phone verification code
+    private void sendVerificationCode(String number){
+        roundProgressBar = new ProgressDialog(CreateProfile.this);
+        roundProgressBar.setMessage("Loading...");
+        roundProgressBar.show();
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                number,60, TimeUnit.SECONDS, TaskExecutors.MAIN_THREAD,mCallBank
+        );
+    }
+
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks
+            mCallBank = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+        @Override
+        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            super.onCodeSent(s, forceResendingToken);
+            verificationId = s;
+            roundProgressBar.dismiss();
+        }
+
+        @Override
+        public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+            String code = phoneAuthCredential.getSmsCode();
+            profileOTPET.setText(code);
+            if(code!=null){
+                verifyCode(code);
+
+            }
+        }
+
+        @Override
+        public void onVerificationFailed(FirebaseException e) {
+            roundProgressBar.dismiss();
+            Toast.makeText(CreateProfile.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    private void verifyCode(String code){
+        roundProgressBar.show();
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
+        signInWithCredential(credential);
+
+    }
+
+    private void signInWithCredential(PhoneAuthCredential credential){
+        mAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    /*Intent intent = new Intent(CreateProfile.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);*/
+                    roundProgressBar.dismiss();
+                    if(byteArray!=null && byteArray.length!=0) {
+                        profileImageFileName = Utility.createProfileImageName(phone);
+                        imageURL = UploadImageToCloud.uploadImage(CreateProfile.this, byteArray, Constant.IMAGE_FOLDER,
+                                profileImageFileName, Constant.PNG);
+                    }
+
+                    new CreateProfileAsyncTask(CreateProfile.this, firstName, lastName, email,
+                            Long.parseLong(phone), password, imageURL).execute();
+                }else{
+                    Toast.makeText(CreateProfile.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+    //end firebase phone verification code
 
     public void changeProfileImg(View view){
         //UUID uuid = UUID.randomUUID();

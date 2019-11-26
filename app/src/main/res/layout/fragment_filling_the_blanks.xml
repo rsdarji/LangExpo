@@ -1,15 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.FragmentFillingTheBlanks">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".fragments.FragmentFillingTheBlanks">
 
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginTop="15dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginBottom="75dp">
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="Filling the blanks" />
+        android:text="Multiple option Fragment" />-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp">
+        <TextView
+            android:id="@+id/multiple_option_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:text="Question"
+            android:gravity="center"/>
 
-</FrameLayout>
+        <com.langexpo.customfunction.CustomRadioGroupView
+            android:id="@+id/multiple_question_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:layout_below="@+id/multiple_option_question">
+
+            <RadioButton
+                android:id="@+id/option_one_radio_button"
+                android:layout_alignParentLeft="true"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_button_custom"
+                android:layout_marginRight="5dp"
+                android:padding="10dp"
+                android:text="Option1" />
+
+            <RadioButton
+                android:id="@+id/option_two_radio_button"
+                android:layout_toRightOf="@+id/option_one_radio_button"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_button_custom"
+                android:layout_marginLeft="5dp"
+                android:padding="10dp"
+                android:text="Option2" />
+
+            <RadioButton
+                android:id="@+id/option_three_radio_button"
+                android:layout_below="@id/option_one_radio_button"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_button_custom"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:padding="10dp"
+                android:text="Option3" />
+
+            <RadioButton
+                android:id="@+id/option_four_radio_button"
+                android:layout_below="@id/option_two_radio_button"
+                android:layout_toRightOf="@+id/option_three_radio_button"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_button_custom"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:padding="10dp"
+                android:text="Option4" />
+
+            <RadioButton
+                android:id="@+id/option_five_radio_button"
+                android:layout_below="@id/option_three_radio_button"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_button_custom"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:padding="10dp"
+                android:text="Option5" />
+
+            <RadioButton
+                android:id="@+id/option_six_radio_button"
+                android:layout_below="@id/option_three_radio_button"
+                android:layout_toRightOf="@+id/option_five_radio_button"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_button_custom"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:padding="10dp"
+                android:text="Option6" />
+
+        </com.langexpo.customfunction.CustomRadioGroupView>
+
+
+
+    </RelativeLayout>
+</ScrollView>
+
+<LinearLayout
+    android:id="@+id/verified_question_layout"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_alignParentBottom="true"
+    android:background="@color/colorGreenVeryLight">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp">
+        <TextView
+            android:id="@+id/question_verification_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="helllo"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/correct_answer_tv"
+            android:layout_below="@+id/question_verification_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Correct Answer is: "
+            android:textColor="@color/colorGreen"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/correct_answer"
+            android:layout_toRightOf="@+id/correct_answer_tv"
+            android:layout_below="@+id/question_verification_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/colorGreen"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <com.langexpo.customfunction.CustomButton
+            android:id="@+id/next_question_green_bt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:theme="@style/GreenButton"
+            android:text="Next"/>
+
+        <com.langexpo.customfunction.CustomButton
+            android:id="@+id/next_question_theme_bt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Next"/>
+
+    </RelativeLayout>
+</LinearLayout>
+<com.langexpo.customfunction.CustomButton
+    android:id="@+id/verify_answer_bt"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_margin="15dp"
+    android:text="Continue"/>
+
+</RelativeLayout>
+
+

@@ -8,15 +8,12 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.langexpo.R;
-import com.langexpo.admin.activity.Home;
 import com.langexpo.utility.Constant;
 import com.langexpo.utility.LangExpoAlertDialog;
 
@@ -32,26 +29,26 @@ import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 
-public class ForgotPassword extends AppCompatActivity {
-    EditText email;
+public class SetNewPassword extends AppCompatActivity {
+
     Toolbar myToolbar;
+    EditText passwordET, confirmPasswordET;
+    Button updatePasswordBT;
+    String email, password, confirmPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgot_password);
-        myToolbar = (Toolbar) findViewById(R.id.forgot_password_my_toolbar);
+        setContentView(R.layout.activity_set_new_password);
+
+        myToolbar = (Toolbar) findViewById(R.id.set_new_password_my_toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        email=(EditText)findViewById(R.id.edittext_email);
-
-
-
-    }
-    public void reset_password(View view){
-        String forgot_user_email=email.getText().toString();
-
+        passwordET = (EditText) findViewById(R.id.edittext_password);
+        confirmPasswordET = (EditText) findViewById(R.id.edittext_confirm_password);
+        updatePasswordBT = (Button) findViewById(R.id.button_update_password);
+        getIncomingIntent();
     }
 
     @Override
@@ -60,26 +57,53 @@ public class ForgotPassword extends AppCompatActivity {
         return true;
     }
 
-    public void verifyEmail(View view) {
-        if(email.getText().toString().equalsIgnoreCase("")){
-            LangExpoAlertDialog langExpoAlertDialog =
-                    new LangExpoAlertDialog(ForgotPassword.this, ForgotPassword.this);
-            langExpoAlertDialog.alertDialog("Error", "Please enter your email address.");
-            email.requestFocus();
-            return;
+    private void getIncomingIntent(){
+        if(getIntent().hasExtra(Constant.User.EMAIL)){
+            email = getIntent().getStringExtra(Constant.User.EMAIL);
         }
-        new VerifyEmailForgotPasswordAsyncTask(ForgotPassword.this, email.getText().toString()).execute();
     }
 
+    public void updatePassword(View view) {
+        password = passwordET.getText().toString();
+        confirmPassword = confirmPasswordET.getText().toString();
 
+        if(password.equalsIgnoreCase("")){
+            LangExpoAlertDialog langExpoAlertDialog =
+                    new LangExpoAlertDialog(SetNewPassword.this, SetNewPassword.this);
+            langExpoAlertDialog.alertDialog("Error", "Please enter password.");
+            passwordET.requestFocus();
+            return;
+        }
+        if(confirmPassword.equalsIgnoreCase("")){
+            LangExpoAlertDialog langExpoAlertDialog =
+                    new LangExpoAlertDialog(SetNewPassword.this, SetNewPassword.this);
+            langExpoAlertDialog.alertDialog("Error", "Please enter confirm password.");
+            confirmPasswordET.requestFocus();
+            return;
+        }
+        if(!password.equalsIgnoreCase(confirmPassword)){
+            LangExpoAlertDialog langExpoAlertDialog =
+                    new LangExpoAlertDialog(SetNewPassword.this, SetNewPassword.this);
+            langExpoAlertDialog.alertDialog("Error", "Password and Confirm password should be same.");
+            passwordET.setText("");
+            confirmPasswordET.setText("");
+            passwordET.requestFocus();
+            return;
+        }
+
+        new UpdatePasswordAsyncTask(SetNewPassword.this, email, password).execute();
+
+    }
     // start feedback assync task
-    private class VerifyEmailForgotPasswordAsyncTask extends AsyncTask<Void, Void, String> {
+    private class UpdatePasswordAsyncTask extends AsyncTask<Void, Void, String> {
         private ProgressDialog progressBar;
         private String email;
+        private String password;
 
-        public VerifyEmailForgotPasswordAsyncTask(Activity activity, String email){
+        public UpdatePasswordAsyncTask(Activity activity, String email, String password){
             progressBar = new ProgressDialog(activity);
             this.email = email;
+            this.password = password;
 
         }
 
@@ -94,7 +118,7 @@ public class ForgotPassword extends AppCompatActivity {
             BufferedReader reader = null;
             StringBuilder stringBuilder = new StringBuilder();
 
-            String methodName = "verifyEmailForgotPassword";
+            String methodName = "updatePassword";
             stringBuilder.append(Constant.PROTOCOL);
             stringBuilder.append(Constant.COLON);
             stringBuilder.append(Constant.FORWARD_SLASH);
@@ -113,7 +137,7 @@ public class ForgotPassword extends AppCompatActivity {
 
             try {
 
-                String urlParameters = "email="+email;
+                String urlParameters = "email="+email+"&password="+password;
 
                 byte[] postData       = urlParameters.getBytes();
                 int    postDataLength = postData.length;
@@ -151,13 +175,13 @@ public class ForgotPassword extends AppCompatActivity {
                 if(e instanceof ConnectException){
                     progressBar.dismiss();
                     LangExpoAlertDialog alertDialog =
-                            new LangExpoAlertDialog(ForgotPassword.this, ForgotPassword.this);
+                            new LangExpoAlertDialog(SetNewPassword.this, SetNewPassword.this);
                     alertDialog.alertDialog("Network issue", Constant.NO_INTERNET_ERROR_MESSAGE);
 
                 }else if(e instanceof SocketTimeoutException){
                     progressBar.dismiss();
                     LangExpoAlertDialog alertDialog =
-                            new LangExpoAlertDialog(ForgotPassword.this, ForgotPassword.this);
+                            new LangExpoAlertDialog(SetNewPassword.this, SetNewPassword.this);
                     alertDialog.alertDialog("Time out", "Please try again.");
                 }
 
@@ -184,24 +208,25 @@ public class ForgotPassword extends AppCompatActivity {
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            System.out.println("addUpdateFeedback: "+result);
+            System.out.println("updatePassword: "+result);
             try {
                 JSONObject loginResponse = new JSONObject(result);
                 if(loginResponse.length()!=0 &&
                         loginResponse.get("status").toString().equalsIgnoreCase("ok") ) {
 
-                    /*Toast toast = Toast
-                            .makeText(ForgotPassword.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);*/
+                    Toast toast = Toast
+                            .makeText(SetNewPassword.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
                     Intent intent =
-                            new Intent(ForgotPassword.this, SetNewPassword.class);
-                    intent.putExtra(Constant.User.EMAIL,loginResponse.getString("email"));
+                            new Intent(SetNewPassword.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     progressBar.dismiss();
-                    /*toast.show();*/
+                    toast.show();
                 }
                 else if(loginResponse.get("status").toString().equalsIgnoreCase("error")){
                     Toast toast = Toast
-                            .makeText(ForgotPassword.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
+                            .makeText(SetNewPassword.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
                     progressBar.dismiss();
                     toast.show();
                 }
@@ -210,6 +235,4 @@ public class ForgotPassword extends AppCompatActivity {
             }
         }
     }
-
-
 }

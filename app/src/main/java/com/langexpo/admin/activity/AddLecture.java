@@ -15,6 +15,7 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -50,7 +51,8 @@ public class AddLecture extends AppCompatActivity {
     Toolbar myToolbar;
     EditText lectureNameET, lectureContentET ,sequenceNumberET;
     Button addLectureBT;
-    TextView lectureContentPreview, previewText;
+    TextView  previewText;
+    WebView lectureContentPreview;
     Spinner languageSpinner, levelSpinner;
     ArrayAdapter languageSpinnerAdapter, levelSpinnerAdapter;
     String lectureNameValue, lectureContentValue, languageNameValue, levelNameValue;
@@ -79,7 +81,7 @@ public class AddLecture extends AppCompatActivity {
         sequenceNumberET = (EditText) findViewById(R.id.admin_add_lecture_sequence_et);
         languageSpinner = (Spinner) findViewById(R.id.admin_add_lecture_language_spinner);
         levelSpinner = (Spinner) findViewById(R.id.admin_add_lecture_level_spinner);
-        lectureContentPreview = (TextView) findViewById(R.id.admin_add_lecture_content_preview);
+        lectureContentPreview = (WebView) findViewById(R.id.admin_add_lecture_content_preview);
         previewText = (TextView) findViewById(R.id.admin_add_lecture_preview_tv);
         //previewBT = (Button) findViewById(R.id.button_preivew_lecture_content);
 
@@ -106,10 +108,7 @@ public class AddLecture extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
                 if(s.length() != 0)
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        lectureContentPreview.setText(Html.fromHtml(s.toString(), Html.FROM_HTML_MODE_LEGACY));
-                    } else
-                        lectureContentPreview.setText(Html.fromHtml(s.toString()));
+                    lectureContentPreview.loadDataWithBaseURL(null, s.toString(), "text/html", "utf-8", null);
             }
         });
 
@@ -179,11 +178,7 @@ public class AddLecture extends AppCompatActivity {
         sequenceNumberET.setText(String.valueOf(sequenceNumberValue));
         lectureContentET.setText(lectureContentValue);
         if(lectureContentValue.length() != 0) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                lectureContentPreview.setText(Html.fromHtml(lectureContentValue.toString(), Html.FROM_HTML_MODE_LEGACY));
-            } else {
-                lectureContentPreview.setText(Html.fromHtml(lectureContentValue.toString()));
-            }
+            lectureContentPreview.loadDataWithBaseURL(null, lectureContentValue, "text/html", "utf-8", null);
         }
         new GetLanguageList(AddLecture.this).execute();
         new GetLevelList(AddLecture.this).execute();

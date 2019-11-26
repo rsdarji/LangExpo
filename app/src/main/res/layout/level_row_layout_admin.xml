@@ -43,7 +43,6 @@
                 android:fontFamily=""
                 android:text="Level Name"
                 android:textStyle="bold"
-                android:textSize="20dp"
                 android:textColor="@color/colorPrimary"/>
 
             <com.elyeproj.loaderviewlibrary.LoaderTextView
@@ -54,7 +53,6 @@
                 android:fontFamily=""
                 android:text="User Level: "
                 android:textStyle="bold"
-                android:textSize="16dp"
                 android:layout_below="@+id/level_row_layout_admin_level_name"
                 android:textColor="@color/colorPrimary"/>
             <com.elyeproj.loaderviewlibrary.LoaderTextView
@@ -64,7 +62,6 @@
                 android:layout_marginLeft="5dp"
                 android:fontFamily=""
                 android:text=""
-                android:textSize="16dp"
                 android:layout_toRightOf="@+id/level_row_layout_admin_level_user_level_tv"
                 android:layout_below="@+id/level_row_layout_admin_level_name"
                 android:textColor="@color/colorPrimary"/>
@@ -77,7 +74,6 @@
                 android:fontFamily=""
                 android:text="Sequence Number: "
                 android:textStyle="bold"
-                android:textSize="16dp"
                 android:layout_below="@+id/level_row_layout_admin_level_user_level_tv"
                 android:textColor="@color/colorPrimary"/>
             <com.elyeproj.loaderviewlibrary.LoaderTextView
@@ -87,7 +83,6 @@
                 android:layout_marginLeft="5dp"
                 android:fontFamily=""
                 android:text=""
-                android:textSize="16dp"
                 android:layout_toRightOf="@+id/level_row_layout_admin_level_sequence_number_tv"
                 android:layout_below="@+id/level_row_layout_admin_level_user_level_tv"
                 android:textColor="@color/colorPrimary"/>
@@ -109,7 +104,6 @@
                 android:layout_marginLeft="5dp"
                 android:fontFamily=""
                 android:text=""
-                android:textSize="16dp"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/level_row_layout_admin_level_user_level_tv"
                 android:textColor="@color/colorPrimary"/>

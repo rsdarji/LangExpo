@@ -135,6 +135,18 @@
                 android:hint="Confirm Password"
                 android:gravity="center"
                 android:inputType="textPassword"/>
+
+            <EditText
+                android:id="@+id/profile_otp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_confirm_password_et"
+                android:layout_marginTop="5dp"
+                android:hint="OTP"
+                android:gravity="center"
+                android:inputType="number"/>
+
+
         </RelativeLayout>
     </ScrollView>
 
@@ -155,7 +167,7 @@
             android:onClick="register"
             android:textStyle="bold" />
 
-        <com.langexpo.customfunction.CustomButton
+        <!--<com.langexpo.customfunction.CustomButton
             android:id="@+id/profile_skip_bt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -163,7 +175,7 @@
             android:layout_marginLeft="5dp"
             android:text="Skip"
             android:onClick="skip"
-            android:textStyle="bold" />
+            android:textStyle="bold" />-->
     </LinearLayout>
 
 </RelativeLayout>

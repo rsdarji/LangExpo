@@ -142,15 +142,17 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
                 if(Session.get(Constant.User.ROLE).equalsIgnoreCase("1")){
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                             new FragmentUserHome()).commit();
+
                 }else {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                             new FragmentHome()).commit();
                 }
+                item.setChecked(true);
                 break;
             case R.id.nav_manage_profile:
                 intent = new Intent(NavigationDrawer.this, ManageProfile.class);
                 startActivity(intent);
-
+                item.setChecked(true);
                 break;
             /*case R.id.nav_notification:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
@@ -207,7 +209,8 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
 
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 //Toast.makeText(AddLanguage.this, "Yaay", Toast.LENGTH_SHORT).show();
-
+                                new DeactivateAccountAsyncTask(NavigationDrawer.this,
+                                        Long.parseLong(Session.get(Constant.User.USER_ID))).execute();
                             }})
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener(){
                             public void onClick(DialogInterface dialog, int whichButton) {
@@ -384,11 +387,11 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
                     Session.set(Constant.UPLOADED_ITEM_URL,url);
                     Log.d("method return url: ", url);
 
-                    if(Session.get(Constant.User.AVTAR).equalsIgnoreCase("")){
+                    /*if(Session.get(Constant.User.AVTAR).equalsIgnoreCase("")){*/
                         new updateUserProfileImage(NavigationDrawer.this,
                                 Long.parseLong(Session.get(Constant.User.USER_ID)),
                                 url).execute();
-                    }
+                    /*}*/
 
                     // loading profile image from local cache
                     ((ImageView) findViewById(imageId)).setImageBitmap(BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length));
@@ -632,7 +635,7 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
 
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            System.out.println("deleteLanguage: "+result);
+            System.out.println("deactivateAccount: "+result);
             try {
                 JSONObject loginResponse = new JSONObject(result);
                 if(loginResponse.length()!=0 &&
@@ -641,7 +644,9 @@ public class NavigationDrawer extends AppCompatActivity implements NavigationVie
                     //UploadImageToCloud.deleteStorageFile(Session.get(Constant.UPLOADED_ITEM_URL));
 
                     Toast toast = Toast.makeText(NavigationDrawer.this,loginResponse.get("message").toString(),Toast.LENGTH_LONG);
-                    Intent intent = new Intent(NavigationDrawer.this, LanguageList.class);
+                    Intent intent = new Intent(NavigationDrawer.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     progressBar.dismiss();
                     toast.show();

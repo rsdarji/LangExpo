@@ -262,8 +262,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     Toast toast = Toast
-                            .makeText(getApplicationContext(),
-                                    "Please enter correct credentials",
+                            .makeText(getApplicationContext(),loginResponse.get("message").toString()
+                                    ,
                                     Toast.LENGTH_LONG);
                     uname.setText("");
                     uname.requestFocus();
